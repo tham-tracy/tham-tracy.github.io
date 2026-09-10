@@ -1,0 +1,68 @@
+---
+layout: default
+---
+<article class="case-study">
+  <header class="cs-header wrap">
+    <p class="cs-kicker">Case study{% if page.org %} · {{ page.org }}{% endif %}</p>
+    <h1>{{ page.title }}</h1>
+    {%- if page.summary %}<p class="cs-standfirst">{{ page.summary }}</p>{% endif -%}
+    {%- if page.meta -%}
+    <dl class="cs-meta">
+      {%- for row in page.meta -%}
+        <div><dt>{{ row[0] }}</dt><dd>{{ row[1] }}</dd></div>
+      {%- endfor -%}
+    </dl>
+    {%- endif -%}
+  </header>
+
+  <div class="cs-body wrap">
+    <aside class="cs-toc" aria-label="On this page">
+      <p class="cs-toc-title">On this page</p>
+      <nav><ol id="toc"></ol></nav>
+    </aside>
+
+    <div class="cs-content" id="cs-content">
+      {{ content }}
+    </div>
+  </div>
+</article>
+
+<script>
+  // Build the section nav from the <h2> headings Kramdown emits, and
+  // highlight the section currently in view.
+  (function () {
+    var content = document.getElementById('cs-content');
+    var toc = document.getElementById('toc');
+    if (!content || !toc) return;
+
+    var headings = content.querySelectorAll('h2');
+    if (!headings.length) { toc.closest('.cs-toc').hidden = true; return; }
+
+    var links = [];
+    headings.forEach(function (h) {
+      if (!h.id) {
+        h.id = h.textContent.trim().toLowerCase()
+          .replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+      }
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      toc.appendChild(li);
+      links.push(a);
+    });
+
+    if (!('IntersectionObserver' in window)) return;
+    var seen = new Map();
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { seen.set(e.target.id, e.intersectionRatio); });
+      var top = null, best = 0;
+      seen.forEach(function (ratio, id) { if (ratio > best) { best = ratio; top = id; } });
+      links.forEach(function (a) {
+        a.classList.toggle('is-active', a.getAttribute('href') === '#' + top);
+      });
+    }, { rootMargin: '-10% 0px -70% 0px', threshold: [0, 0.25, 0.5, 1] });
+    headings.forEach(function (h) { obs.observe(h); });
+  })();
+</script>

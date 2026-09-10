@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- assign page_title = page.title | default: site.title -%}
+  <title>{% if page.title %}{{ page.title }} — {{ site.author }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ page.description | default: site.description | strip_newlines }}">
+  <meta name="author" content="{{ site.author }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ page.description | default: site.description | strip_newlines }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  {% include nav.html %}
+
+  <main id="main" class="{{ page.layout }}-main">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>{{ site.author }} — {{ site.tagline }}</p>
+      <p class="footer-links">
+        {%- if site.links.email %}<a href="mailto:{{ site.links.email }}">Email</a>{% endif -%}
+        {%- if site.links.linkedin and site.links.linkedin != "" %} · <a href="{{ site.links.linkedin }}">LinkedIn</a>{% endif -%}
+        {%- if site.links.github %} · <a href="{{ site.links.github }}">GitHub</a>{% endif -%}
+      </p>
+      <p class="footer-note">Case studies describe real work. Confidential metrics, internal system names, and proprietary rules have been generalised or omitted.</p>
+    </div>
+  </footer>
+</body>
+</html>

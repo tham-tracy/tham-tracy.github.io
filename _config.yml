@@ -1,0 +1,45 @@
+title: "Tracy Le — Product Portfolio"
+tagline: "Fintech product management"
+description: >-
+  Product management case studies in fintech and digital assets —
+  Aura wealth management platform and the TCBS loan management system.
+author: "Tracy Le"
+url: "https://tham-tracy.github.io"
+baseurl: ""
+lang: en
+
+# --- Build settings ---
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+permalink: pretty
+sass:
+  style: compressed
+
+# --- Contact / links surfaced in the footer and summary page ---
+links:
+  email: "thamle54.ftu@gmail.com"
+  github: "https://github.com/tham-tracy"
+  linkedin: ""   # add your LinkedIn URL
+
+# --- Top navigation (rendered by _includes/nav.html) ---
+nav:
+  - title: "Summary"
+    url: "/"
+  - title: "Aura"
+    url: "/work/aura/"
+  - title: "TCBS"
+    url: "/work/tcbs-loan-management/"
+
+# --- Exclude from the built site ---
+exclude:
+  - README.md
+  - CLAUDE.md
+  - claude.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .claude
+  - scratchpad
