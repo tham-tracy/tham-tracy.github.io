@@ -3,16 +3,18 @@ layout: case-study
 title: "Aura — wealth management platform"
 org: "Aura"
 permalink: /work/aura/
-description: "How Aura helps people grow digital-asset wealth — Earn products, on-ramp and off-ramp flows, and the Aura 1 to Aura 2 platform migration."
+description: "Hex Trust's digital-asset wealth platform for private-wealth clients across APAC and MENA — onboarding, funding, trading, yield products and withdrawals on regulated custody infrastructure. Product case study."
 summary: >-
-  A consumer platform for growing digital-asset wealth: Earn products for
-  putting idle balances to work, and the on-ramp and off-ramp flows that move
-  value between everyday money and the platform.
+  Hex Trust's digital-asset wealth platform for private-wealth clients across
+  APAC and the Middle East — onboarding, funding, trading, yield products and
+  withdrawals, run on the regulated custody infrastructure Hex Trust has
+  operated since 2018.
 meta:
-  - ["Role", "Product Manager"]
-  - ["Scope", "Earn, on-ramp, off-ramp, platform migration"]
-  - ["Timeframe", "— to —"]
-  - ["Team", "— "]
+  - ["Role", "Sole Product Manager"]
+  - ["Period", "May 2025 – present"]
+  - ["Platforms", "iOS, Android, web, ops admin"]
+  - ["Team", "3 engineering squads + Design, QA, Compliance, Ops"]
+  - ["Delivery", "Concept to production in under 9 months"]
 ---
 
 <div class="phone-gallery" aria-label="Aura mobile screens">
@@ -24,23 +26,70 @@ meta:
 </div>
 
 <div class="todo" markdown="1">
-**Draft skeleton.** Section order is locked; the prose is placeholder. We fill
-each section in the interview. Replace the five grey phone frames above with
-sanitised screenshots (drop files in `assets/img/aura/` and update the paths).
+**In progress.** Section 1 (Product snapshot) is drafted. Sections 2–10 are
+placeholder briefs pending the interview. The five grey phone frames await
+sanitised screenshots in `assets/img/aura/`.
 </div>
 
 <div class="overview" markdown="1">
-**What it is.** <!-- one line: Aura in plain terms -->
-**My role.** <!-- what you owned, team shape, dates -->
-**Outcome.** <!-- 2–3 headline results, sanitised -->
+**What it is.** Aura is Hex Trust's digital-asset wealth platform — onboard,
+fund an account, trade, invest in yield products and withdraw, on regulated
+custody infrastructure. Live on iOS, Android and web.
+
+**My role.** Sole product manager, May 2025 – present. Owned the client apps
+and the operational admin platform across three engineering squads, working
+with Design, QA, Compliance and Operations. Taken from concept to production
+in under nine months.
+
+**Outcome.** _Covered in "Product outcomes and lessons" below — drafted after
+the interview reaches that section._
 </div>
 
 ## Product snapshot
 
-<div class="note">What Aura is, who it serves, and the shape of the offering
-— a page the reader can absorb in under a minute. Positioning, the core value
-proposition, the customer's alternative today, and where Aura sits between a
-bank, a brokerage, and a wallet.</div>
+**Aura is Hex Trust's digital-asset wealth platform** — a mobile and web
+application that lets eligible private-wealth clients onboard, fund an account,
+trade digital assets, invest in yield products, and withdraw. It runs on the
+same regulated custody infrastructure Hex Trust has operated for institutions
+since 2018, so client assets sit in licensed cold storage rather than on an
+exchange.
+
+**Who it serves.** High-net-worth and private-wealth clients in supported
+markets across APAC and the Middle East. In practice they span a wide range —
+from crypto-native investors who want regulated custody and yield, to
+traditional wealth clients making their first allocation to digital assets. The
+product has to be credible to both without overwhelming either.
+
+**The alternative today.** Without Aura, a client assembles the same outcome
+from four or five separate providers:
+
+| Need | Typical standalone tool |
+|------|------------------------|
+| Trading | A centralised exchange |
+| Custody | A separate wallet or custodian |
+| Moving cash in and out | Bank transfers arranged privately |
+| Yield | Separate earn / staking providers |
+| Advice and service | A relationship manager outside the platform |
+
+Every hand-off between them is a point of friction, cost, and counterparty
+risk. Aura's proposition is to collapse that stack into one regulated platform
+with a single onboarding, one portfolio view, and a relationship manager
+attached.
+
+**Where it sits.** Between a private bank (trusted, serviced, regulated — but
+little native digital-asset capability), a brokerage (execution and order types
+— but no custody or advice), and a self-custody wallet (control — but no
+service, fiat rails, or yield). Aura takes the service model of the first, the
+trading surface of the second, and the asset coverage of the third.
+
+**Scope of this case study.** Onboarding and KYC; custody and portfolio; fiat
+and digital-asset deposits and withdrawals; on- and off-ramp; Convert; spot,
+limit and stop orders; recurring orders; Fixed Earn; Variable and Strategy
+Earn; and the operational admin platform behind them. Borrow &amp; Lend, Card
+and Statements are on the roadmap (shown "Coming Soon" in-app) and are not
+claimed as delivered. OTC and TWAP execution are out of scope by choice, and
+specific counterparties and internal operational rules are generalised
+throughout.
 
 ## Mobile application mockups
 

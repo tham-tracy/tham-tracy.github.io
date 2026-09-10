@@ -25,11 +25,12 @@ in during the interview, along with the two case-study recaps below.
 
 <div class="case-cards">
   <a class="case-card" href="{{ '/work/aura/' | relative_url }}">
-    <span class="eyebrow">Wealth management platform</span>
+    <span class="eyebrow">Digital-asset wealth platform · Hex Trust</span>
     <h3>Aura</h3>
-    <p>A consumer app for growing digital-asset wealth — Earn products, and
-    the on-ramp and off-ramp flows that move value in and out. Includes the
-    Aura&nbsp;1 to Aura&nbsp;2 platform migration.</p>
+    <p>Hex Trust's mobile and web platform for private-wealth clients across
+    APAC and MENA — onboarding, funding, trading, yield products and
+    withdrawals on regulated custody infrastructure. Sole PM, concept to
+    production in under nine months.</p>
     <span class="go">Read the case study →</span>
   </a>
   <a class="case-card" href="{{ '/work/tcbs-loan-management/' | relative_url }}">
