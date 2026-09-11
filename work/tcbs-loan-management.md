@@ -5,8 +5,8 @@ org: "Techcom Securities"
 permalink: /work/tcbs-loan-management/
 description: "A product case study on redesigning TCBS's core margin platform and coordinating a large-scale customer migration."
 summary: >-
-  Redesigning the core platform behind margin lending—from funding pools and
-  collateral to risk monitoring and loan servicing—while coordinating the
+  Redesigning the core platform behind margin lending - from funding pools and
+  collateral to risk monitoring and loan servicing - while coordinating the
   migration of approximately 900,000 customers across seven teams.
 meta:
   - ["Role", "Product Manager"]
@@ -28,7 +28,7 @@ meta:
 
 <div class="overview" markdown="1">
 **Product.** The core system used to configure, operate and monitor margin
-lending at Techcom Securities—from funding capacity and customer policies to
+lending at Techcom Securities - from funding capacity and customer policies to
 collateral, interest, repayment and reporting.
 
 **My role.** Product Manager responsible for analysing the existing system,
@@ -40,7 +40,7 @@ seven-team programme.
 
 ## Context and product problem
 
-During the volatile stock-market conditions of 2021–2022, increased activity
+During the volatile stock-market conditions of 2021-2022, increased activity
 exposed limitations in the existing margin platform. Its closed-source model
 created strong vendor dependency, made feature changes slow and limited the
 team's control over performance and future development.

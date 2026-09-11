@@ -1,6 +1,6 @@
 ---
 layout: case-study
-title: "Aura — digital-asset wealth platform"
+title: "Aura - digital-asset wealth platform"
 org: "Hex Trust"
 permalink: /work/aura/
 description: "A product case study covering Aura's custody, funding, trading and yield-product experience."
@@ -9,7 +9,7 @@ summary: >-
   to hold, fund, trade and earn on digital assets in one managed experience.
 meta:
   - ["Role", "Product Manager"]
-  - ["Team", "8–10"]
+  - ["Team", "8-10"]
   - ["Platforms", "Mobile, web & admin"]
   - ["Markets", "Asia, MENA & selected Europe"]
   - ["Delivery", "Concept to production in <9 months"]
@@ -33,7 +33,7 @@ digital-asset funding, trading and yield products in a single client
 experience.
 
 **Customer.** Private-wealth clients across Asia, MENA and selected European
-markets—from experienced digital-asset investors to traditional wealth
+markets - from experienced digital-asset investors to traditional wealth
 clients entering the category.
 
 **My scope.** Product direction and delivery across the customer experience
@@ -75,7 +75,7 @@ The product brings these journeys into one consistent interface. Portfolio
 value, available balance, transaction status and history remain visible as
 customers move between investing, trading and money movement.
 
-## Trade — simple when needed, advanced when wanted
+## Trade - simple when needed, advanced when wanted
 
 <div class="screen-pair">
   <figure>
@@ -105,7 +105,7 @@ estimated result, fees and order status legible. The design offers a simple
 entry point while allowing experienced clients to express more precise
 trading intent.
 
-## Earn — making yield products understandable
+## Earn - making yield products understandable
 
 <div class="screen-pair">
   <figure>

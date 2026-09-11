@@ -7,7 +7,7 @@ description: "Product case studies covering Aura, a digital-asset wealth platfor
 <section class="portfolio-hero">
   <p class="eyebrow">Fintech product portfolio</p>
   <h1>Products that move money,<br><span>and earn trust.</span></h1>
-  <p class="lede">Two product case studies spanning digital-asset wealth and large-scale financial infrastructure—from customer experience to the operational systems behind it.</p>
+  <p class="lede">Two product case studies spanning digital-asset wealth and large-scale financial infrastructure - from customer experience to the operational systems behind it.</p>
   <div class="hero-proof" aria-label="Portfolio highlights">
     <span><strong>02</strong> case studies</span>
     <span><strong>&lt;9 months</strong> concept to production</span>
@@ -43,7 +43,7 @@ description: "Product case studies covering Aura, a digital-asset wealth platfor
   </div>
   <div class="tcbs-card">
     <div>
-      <p class="case-tagline">The redesign of Techcom Securities' core margin platform—from funding pools and collateral to risk monitoring and loan servicing—plus a large-scale customer migration.</p>
+      <p class="case-tagline">The redesign of Techcom Securities' core margin platform - from funding pools and collateral to risk monitoring and loan servicing - plus a large-scale customer migration.</p>
       <a class="text-link" href="{{ '/work/tcbs-loan-management/' | relative_url }}">Read the TCBS case study <span aria-hidden="true">→</span></a>
     </div>
     <dl class="impact-grid">
