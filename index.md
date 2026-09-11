@@ -1,51 +1,60 @@
 ---
 layout: summary
-description: "Fintech product manager — case studies on the Aura wealth management platform and the TCBS loan management system."
+title: "Fintech product case studies"
+description: "Product case studies covering Aura, a digital-asset wealth platform, and the TCBS loan management system."
 ---
 
-# Product portfolio
+<section class="portfolio-hero">
+  <p class="eyebrow">Fintech product portfolio</p>
+  <h1>Products that move money,<br><span>and earn trust.</span></h1>
+  <p class="lede">Two product case studies spanning digital-asset wealth and large-scale financial infrastructure—from customer experience to the operational systems behind it.</p>
+  <div class="hero-proof" aria-label="Portfolio highlights">
+    <span><strong>02</strong> case studies</span>
+    <span><strong>&lt;9 months</strong> concept to production</span>
+    <span><strong>900K</strong> customers migrated</span>
+  </div>
+</section>
 
-<p class="lede">Fintech product manager working across traditional financial
-markets and digital assets — trading and investment products, ledgers and
-settlement, lending lifecycles, and large-scale platform migrations.</p>
+<section class="featured-case">
+  <div class="featured-copy">
+    <p class="eyebrow">Featured case · Hex Trust</p>
+    <h2>Aura</h2>
+    <p class="case-tagline">A live mobile and web wealth platform that brings custody, funding, trading and yield products into one private-wealth experience.</p>
+    <ul class="tag-list" aria-label="Aura capabilities">
+      <li>Custody &amp; portfolio</li>
+      <li>Trade</li>
+      <li>Earn</li>
+      <li>On / off-ramp</li>
+      <li>Platform migration</li>
+    </ul>
+    <a class="button-link" href="{{ '/work/aura/' | relative_url }}">Explore the Aura case study <span aria-hidden="true">↗</span></a>
+  </div>
+  <div class="featured-phones" aria-label="Aura product screens">
+    <figure class="device device-back"><img src="{{ '/assets/img/aura/earn-marketplace.webp' | relative_url }}" alt="Aura Earn marketplace screen" loading="eager"></figure>
+    <figure class="device device-front"><img src="{{ '/assets/img/aura/home.webp' | relative_url }}" alt="Aura portfolio home screen" loading="eager"></figure>
+    <figure class="device device-back"><img src="{{ '/assets/img/aura/spot.webp' | relative_url }}" alt="Aura spot trading screen" loading="eager"></figure>
+  </div>
+</section>
 
-<dl class="profile-facts">
-  <div><dt>Focus</dt><dd>Fintech &amp; digital assets</dd></div>
-  <div><dt>Experience</dt><dd><!-- e.g. 7 years --> —</dd></div>
-  <div><dt>Based in</dt><dd><!-- city --> —</dd></div>
-  <div><dt>Strengths</dt><dd>Discovery, platform, migrations</dd></div>
-</dl>
+<section class="portfolio-section">
+  <div class="section-heading">
+    <p class="eyebrow">Financial infrastructure</p>
+    <h2>TCBS loan management system</h2>
+  </div>
+  <div class="tcbs-card">
+    <div>
+      <p class="case-tagline">The core system supporting margin and loan management at Techcom Securities, including a high-risk migration delivered across seven cross-functional teams.</p>
+      <a class="text-link" href="{{ '/work/tcbs-loan-management/' | relative_url }}">Read the TCBS case study <span aria-hidden="true">→</span></a>
+    </div>
+    <dl class="impact-grid">
+      <div><dt>Customers migrated</dt><dd>900,000</dd></div>
+      <div><dt>Delivery model</dt><dd>7 teams</dd></div>
+      <div><dt>Product domain</dt><dd>Margin &amp; loans</dd></div>
+    </dl>
+  </div>
+</section>
 
-<div class="todo" markdown="1">
-**Draft** — the profile line and facts above are placeholders. We fill these
-in during the interview, along with the two case-study recaps below.
-</div>
-
-## Case studies
-
-<div class="case-cards">
-  <a class="case-card" href="{{ '/work/aura/' | relative_url }}">
-    <span class="eyebrow">Digital-asset wealth platform · Hex Trust</span>
-    <h3>Aura</h3>
-    <p>Hex Trust's mobile and web platform for private-wealth clients across
-    APAC and MENA — onboarding, funding, trading, yield products and
-    withdrawals on regulated custody infrastructure. Sole PM, concept to
-    production in under nine months.</p>
-    <span class="go">Read the case study →</span>
-  </a>
-  <a class="case-card" href="{{ '/work/tcbs-loan-management/' | relative_url }}">
-    <span class="eyebrow">Lending platform · TCBS</span>
-    <h3>Loan management system</h3>
-    <p>The platform behind the lending lifecycle at Techcom Securities —
-    origination through servicing — and the migration of roughly 900,000
-    customers, delivered across seven teams.</p>
-    <span class="go">Read the case study →</span>
-  </a>
-</div>
-
-## About this portfolio
-
-These case studies describe real work. Confidential metrics, internal system
-names, and proprietary business rules have been generalised or left out; what
-remains is the product reasoning — the problems, the options weighed, the
-trade-offs accepted, and what happened.
+<section class="portfolio-note">
+  <p class="eyebrow">A note on confidentiality</p>
+  <p>These case studies describe real product work. Sensitive customer data, counterparties, internal system names and proprietary rules are omitted; the focus remains on customer experience, product scope and verified outcomes.</p>
+</section>

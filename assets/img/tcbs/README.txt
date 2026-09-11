@@ -1,1 +1,2 @@
-Place sanitised TCBS diagrams here (PNG, WebP, or SVG). Reference them from work/tcbs-loan-management.md.
+The TCBS case study uses an HTML/CSS product lifecycle visual rather than a
+product screenshot.

@@ -1,82 +1,116 @@
 ---
 layout: case-study
 title: "TCBS loan management system"
-org: "Techcom Securities (TCBS)"
+org: "Techcom Securities"
 permalink: /work/tcbs-loan-management/
-description: "The platform behind the lending lifecycle at Techcom Securities — origination through servicing — and a migration of roughly 900,000 customers delivered across seven teams."
+description: "A product case study on TCBS's core margin and loan management system and a large-scale customer migration."
 summary: >-
-  The platform behind the lending lifecycle at Techcom Securities:
-  origination, underwriting, disbursement and servicing — rebuilt and migrated
-  for roughly 900,000 customers across a seven-team delivery programme.
+  The core system supporting margin and loan management at Techcom
+  Securities, including the coordinated migration of approximately 900,000
+  customers across seven cross-functional teams.
 meta:
   - ["Role", "Product Manager"]
-  - ["Scope", "Loan lifecycle platform, migration"]
-  - ["Timeframe", "— to —"]
-  - ["Delivery", "Seven teams"]
+  - ["Domain", "Margin & loan management"]
+  - ["Scale", "≈900,000 customers"]
+  - ["Delivery", "7 cross-functional teams"]
 ---
 
-<div class="todo" markdown="1">
-**Draft skeleton.** Section order is locked; the prose is placeholder. We fill
-each section in the interview. **Sanitisation check:** confirm the 900,000
-figure is publicly disclosable; "Core platform architecture" and "Business and
-risk rules" will describe patterns and reasoning, not the real system topology
-or real rule values.
+<div class="case-visual case-visual-tcbs">
+  <div>
+    <p class="eyebrow">Financial infrastructure</p>
+    <p class="display-title">One lending lifecycle.<br>Seven teams.<br>900,000 customers.</p>
+  </div>
+  <div class="system-orbit" aria-label="Loan lifecycle overview">
+    <span>Eligibility</span><span>Limit</span><span>Utilisation</span>
+    <span>Interest</span><span>Repayment</span><strong>Loan<br>record</strong>
+  </div>
 </div>
 
 <div class="overview" markdown="1">
-**What it is.** <!-- the loan management system in plain terms -->
-**My role.** <!-- what you owned across the seven teams, dates -->
-**Outcome.** <!-- 2–3 headline results, sanitised -->
+**Product.** A core system for margin and lending products at Techcom
+Securities, supporting customer loan information throughout the product
+lifecycle.
+
+**My role.** Product Manager working across a seven-team programme—aligning
+the customer journey, product requirements, dependencies and delivery goals.
+
+**Scale.** Approximately 900,000 customers moved to the new platform.
 </div>
 
-## Loan-management product overview
+## Product model
 
-<div class="note">What the system does, which lending products it supports,
-and who uses it — customers, relationship managers, credit, operations,
-finance. The one-minute picture before the detail.</div>
+The loan-management system gives customers and service teams a consistent
+view of each loan: available limit, utilised amount, balance, interest,
+repayment information and current status.
 
-## Lending lifecycle
+<ol class="journey journey-five">
+  <li><span>01</span><strong>Eligibility</strong><small>Customer and product criteria</small></li>
+  <li><span>02</span><strong>Limit</strong><small>Available loan capacity</small></li>
+  <li><span>03</span><strong>Utilisation</strong><small>Amount used</small></li>
+  <li><span>04</span><strong>Monitor</strong><small>Balance and interest</small></li>
+  <li><span>05</span><strong>Repay / close</strong><small>Complete the lifecycle</small></li>
+</ol>
 
-<div class="note">Origination &rarr; application &rarr; underwriting &rarr;
-approval &rarr; disbursement &rarr; servicing &rarr; repayment &rarr; closure
-(and the unhappy paths: decline, delinquency, restructure, write-off). Where
-the state lives and what moves it forward.</div>
+The core product challenge was making complex financial information
+consistent across customer channels and internal servicing tools. Each
+customer-facing value needed a clear definition that could be understood by
+product, engineering, operations and support.
 
-## Main capabilities
+## Customer migration
 
-<div class="note">The core capability set — application intake, decisioning,
-limit and collateral management, schedule generation, statements, collections
-support. What each is for, kept tight.</div>
+Approximately 900,000 customers were moved to the new platform. From a
+product perspective, the priority was continuity: customers should retain
+access to the correct loan information and be able to continue their normal
+journeys after the transition.
 
-## Business and risk rules
+<div class="migration-grid migration-grid-public">
+  <article><span>01</span><h3>Customer continuity</h3><p>Keep essential loan information and product access consistent through the change.</p></article>
+  <article><span>02</span><h3>Shared readiness</h3><p>Align seven teams around the same customer journeys, release scope and quality expectations.</p></article>
+  <article><span>03</span><h3>Clear communication</h3><p>Give customer-facing and support teams a common view of what was changing.</p></article>
+  <article><span>04</span><h3>Post-release focus</h3><p>Prioritise the journeys that mattered most to customers immediately after launch.</p></article>
+</div>
 
-<div class="note">The rule categories that govern lending decisions and
-servicing — eligibility, exposure and limits, pricing, collateral, past-due
-handling — described as patterns and the reasoning behind them. No real
-thresholds or proprietary criteria.</div>
+The detailed migration method, technical architecture and control procedures
+are intentionally excluded from this public portfolio.
 
-## Core platform architecture
+## Seven-team delivery
 
-<div class="note">The shape of the platform at a conceptual level: the
-services and their responsibilities, the source of truth for balances and
-statuses, how money movement and data movement are kept consistent, and how
-retries, duplicates and partial failures are handled. Illustrative, not the
-real topology.</div>
+At this scale, coordination became part of the product work. Customer
+channels, core services, quality, operations and control functions each owned
+a different part of the experience, while the release still needed to feel
+like one coherent product to the customer.
 
-## 900,000-customer migration
+<div class="delivery-grid">
+  <article><h3>Common definitions</h3><p>Shared product language reduced ambiguity between teams working on different parts of the journey.</p></article>
+  <article><h3>Clear ownership</h3><p>Each product area and cross-team dependency had an accountable owner.</p></article>
+  <article><h3>Journey-led planning</h3><p>Planning centred on complete customer journeys rather than disconnected team outputs.</p></article>
+  <article><h3>Consistent readiness</h3><p>Teams worked toward common acceptance criteria for the customer release.</p></article>
+</div>
 
-<div class="note">Moving the existing loan book onto the new platform:
-sequencing, data mapping and reconciliation, dual-running, cutover, rollback
-planning, and how customer impact was kept to a minimum.</div>
+My responsibility was to connect local team decisions to the overall outcome:
+a correct, understandable and supportable loan experience for customers.
 
-## Seven-team delivery model
+## Broader product impact
 
-<div class="note">How the programme was organised — team boundaries,
-ownership, dependencies and interfaces, the planning cadence, and the PM's
-role in keeping seven teams pointed at one outcome.</div>
+Alongside the core platform work, iSave and iSavePlus reached 30,000 users in
+six months and improved retention by 15%. The common theme was translating
+complex financial products into experiences customers could understand and
+use confidently.
 
 ## Outcomes and lessons
 
-<div class="note">Sanitised results against the programme goals, what the
-delivery model got right, the hardest trade-offs, and what you'd carry into
-the next platform migration.</div>
+The programme moved approximately 900,000 customers through a release
+coordinated across seven teams. Three lessons carried forward:
+
+1. **Define financial concepts clearly.** Customers and delivery teams need
+   one meaning for limits, balances, interest and status.
+2. **Treat migration as a customer experience.** Continuity and clarity
+   matter as much as delivering the new platform.
+3. **Plan around complete journeys.** Cross-team programmes are easier to
+   understand when progress is measured through customer outcomes.
+
+<div class="confidentiality">
+  Portfolio-level outcomes are shown here. Internal architecture, migration
+  procedures, commercial terms, rule thresholds and customer information are
+  omitted.
+</div>
