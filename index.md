@@ -39,11 +39,11 @@ description: "Product case studies covering Aura, a digital-asset wealth platfor
 <section class="portfolio-section">
   <div class="section-heading">
     <p class="eyebrow">Financial infrastructure</p>
-    <h2>TCBS loan management system</h2>
+    <h2>TCBS margin &amp; loan management system</h2>
   </div>
   <div class="tcbs-card">
     <div>
-      <p class="case-tagline">The core system supporting margin and loan management at Techcom Securities, including a high-risk migration delivered across seven cross-functional teams.</p>
+      <p class="case-tagline">The redesign of Techcom Securities' core margin platform—from funding pools and collateral to risk monitoring and loan servicing—plus a large-scale customer migration.</p>
       <a class="text-link" href="{{ '/work/tcbs-loan-management/' | relative_url }}">Read the TCBS case study <span aria-hidden="true">→</span></a>
     </div>
     <dl class="impact-grid">
