@@ -1,5 +1,5 @@
-title: "Tracy Le — Product Portfolio"
-tagline: "Fintech product management"
+title: "Fintech Product Portfolio — Tracy Le"
+tagline: "Fintech product cases"
 description: >-
   Product management case studies in fintech and digital assets —
   Aura wealth management platform and the TCBS loan management system.
@@ -26,7 +26,7 @@ links:
 
 # --- Top navigation (rendered by _includes/nav.html) ---
 nav:
-  - title: "Summary"
+  - title: "Portfolio"
     url: "/"
   - title: "Aura"
     url: "/work/aura/"

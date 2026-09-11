@@ -31,10 +31,10 @@ Then open <http://localhost:4000>.
 
 ## Editing content
 
-Case-study section order is fixed. Each `## ` heading becomes an entry in the
-on-page navigation automatically. Replace the placeholder phone frames in
-`work/aura.md` with real images once sanitised screenshots are added to
-`assets/img/aura/`.
+Each `## ` heading in a case study becomes an entry in the on-page
+navigation automatically. Aura's portfolio, Trade, Earn and fiat-rail screens
+are stored in `assets/img/aura/`; bank identifiers in the on-ramp image use
+demonstration values.
 
 ## A note on confidentiality
 
