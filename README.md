@@ -10,7 +10,7 @@ native build (no Actions workflow).
 |------|---------|
 | `index.md` | Portfolio summary — the page to link from a resume or LinkedIn. Prints to a clean PDF. |
 | `work/aura.md` | Case study: Aura wealth management platform. |
-| `work/tcbs-loan-management.md` | Case study: TCBS loan management system. |
+| `work/tcbs-loan-management.md` | Case study: TCBS margin and loan management system. |
 | `_layouts/` | `default`, `summary`, `case-study` templates. |
 | `_includes/nav.html` | Top navigation. |
 | `assets/style.css` | The entire stylesheet — hand-written, no framework. |
