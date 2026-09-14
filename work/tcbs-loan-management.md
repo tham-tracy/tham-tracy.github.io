@@ -64,7 +64,7 @@ how the modules work together.
 
 I began by analysing the existing margin system, documenting its strengths
 and limitations, researching industry approaches and comparing alternative
-solutions. I then decomposed the domain into modules so requirements could be
+solutions. I then decomposed the domain into eight modules so requirements could be
 owned and delivered without losing the end-to-end lending journey.
 
 <div class="feature-grid">
@@ -137,7 +137,7 @@ customer or loan and compare key information. The detail view then presented
 the selected loan's policy, terms, current state and available actions.
 
 <div class="delivery-grid">
-  <article><h3>List view</h3><p>Search, filter and scan essential loan information across the portfolio.</p></article>
+  <article><h3>List view</h3><p>Search, filter and triage loans across the portfolio using essential loan information.</p></article>
   <article><h3>Detail view</h3><p>Understand one loan's terms, policy, balance, status and relevant actions.</p></article>
 </div>
 
