@@ -12,7 +12,7 @@ meta:
   - ["Team", "8-10"]
   - ["Platforms", "Mobile, web & admin"]
   - ["Markets", "Asia, MENA & selected Europe"]
-  - ["Delivery", "Concept to production in <9 months"]
+  - ["Initial launch", "4 months on a white-label core"]
 ---
 
 <div class="case-visual case-visual-aura">
@@ -37,7 +37,8 @@ markets - from experienced digital-asset investors to traditional wealth
 clients entering the category.
 
 **My scope.** Product direction and delivery across the customer experience
-and the supporting product-management tools.
+and admin tools, from the initial white-label launch through production
+operations, the in-house rebuild and live-client migration.
 </div>
 
 ## Product position
@@ -88,8 +89,9 @@ customers move between investing, trading and money movement.
   </figure>
 </div>
 
-The Trade experience supports different levels of intent without forcing
-every client into a professional trading interface.
+The trading experience serves two audiences: clients who want a simple,
+single-quote Convert flow and clients who need more control through limit,
+stop-market, stop-limit and recurring orders.
 
 <div class="feature-grid">
   <article><h3>Convert</h3><p>A direct asset-to-asset quote with a simple confirmation.</p></article>
@@ -169,11 +171,20 @@ request to completion.
 
 ## Platform evolution
 
-Aura was delivered from concept to production in under nine months and
-included moving customers from an earlier product experience to the rebuilt
-platform. The customer-facing goal was continuity: preserve access to
-portfolio information and active products while introducing the new mobile,
-web and admin experiences.
+Aura went live in four months on a white-label core. That version ran in
+production for seven months, while the team planned and built its in-house
+replacement in parallel. The replacement took one month of planning and
+three months of development, followed by migration of live clients.
+
+<div class="delivery-grid">
+  <article><h3>Initial launch</h3><p>Four months to take Aura live on a white-label core.</p></article>
+  <article><h3>Live operations</h3><p>Seven months running the initial platform in production.</p></article>
+  <article><h3>Parallel rebuild</h3><p>One month of planning and three months of development during the live-production period.</p></article>
+  <article><h3>Client transition</h3><p>Live clients migrated to the in-house replacement after it was built.</p></article>
+</div>
+
+The customer-facing goal was continuity: preserve access to portfolio
+information and active products while moving to the in-house platform.
 
 The internal migration design, control procedures and system implementation
 are intentionally omitted from this public case study.
