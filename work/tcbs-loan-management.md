@@ -93,7 +93,7 @@ This gave business teams more control over product configuration without changin
 
 ### 1. Turn layered lending rules into one usable purchasing-power figure
 
-Purchasing power is where the complexity of margin lending becomes visible to the customer: it answers a simple question — **how much can I buy now?**
+Purchasing power is where the complexity of margin lending becomes visible to the customer: it answers a simple question - **how much can I buy now?**
 
 The answer depended on several layers of capacity and policy:
 
@@ -158,6 +158,22 @@ I created prototypes for the internal debt-management experience. The tool separ
   <article><h3>Detail view</h3><p>Show loan status first, then principal, interest and fees split into original, paid and remaining amounts, followed by dates, pricing and servicing actions.</p></article>
 </div>
 
+<div class="tcbs-wireframes">
+  <p class="tcbs-wireframes-note">English mockups with illustrative customer, loan and pricing data. Select a screen to open the full-size image in a new tab.</p>
+  <figure>
+    <a href="{{ '/assets/img/tcbs/loan-management-list-view.png' | relative_url }}" target="_blank" rel="noopener" aria-label="Open loan list mockup at full size in a new tab">
+      <img src="{{ '/assets/img/tcbs/loan-management-list-view.png' | relative_url }}" width="2048" height="739" loading="lazy" alt="Loan management list mockup with search filters, loan balances, statuses and actions for details, extension, collection, rate adjustment and action history">
+    </a>
+    <figcaption><strong>List view - search and triage.</strong> Filters narrow the loan portfolio, the highlighted overdue row draws attention, and loan actions are available alongside the selected record.</figcaption>
+  </figure>
+  <figure>
+    <a href="{{ '/assets/img/tcbs/loan-management-detail-view.png' | relative_url }}" target="_blank" rel="noopener" aria-label="Open loan detail mockup at full size in a new tab">
+      <img src="{{ '/assets/img/tcbs/loan-management-detail-view.png' | relative_url }}" width="2048" height="1414" loading="lazy" alt="Loan detail mockup showing overdue status, principal and interest paid and remaining, dates, tiered pricing, fees and servicing actions">
+    </a>
+    <figcaption><strong>Detail view - explain and act.</strong> Status and servicing actions appear at the top. Paid and remaining balances, dates, pricing tiers and fees help service teams explain the loan and choose the next action.</figcaption>
+  </figure>
+</div>
+
 Three decisions made the experience useful for daily operations:
 
 1. **Status first.** Service users need to identify which loans need attention before reading every field.
@@ -201,5 +217,5 @@ The project strengthened four principles I still use when working on financial p
 4. **Measure platform change through customer continuity.** Architecture and scalability matter, but migration succeeds only when customers can continue using the product with correct financial information and essential journeys intact.
 
 <div class="confidentiality">
-  This case study is based on my margin-system product requirements and project experience. Product and capability descriptions are generalised. Company-specific thresholds, pricing values, allocation formulas, proprietary decision rules, internal architecture, detailed migration procedures and customer information are omitted.
+  This case study is based on my margin-system product requirements and project experience. The English mockups illustrate the product design using demonstration customer, loan and pricing data. Product and capability descriptions are generalised. Actual company-specific thresholds, pricing values, allocation formulas, proprietary decision rules, internal architecture, detailed migration procedures and customer information are omitted.
 </div>
