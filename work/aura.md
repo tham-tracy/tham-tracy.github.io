@@ -105,7 +105,7 @@ estimated result, fees and order status legible. The design offers a simple
 entry point while allowing experienced clients to express more precise
 trading intent.
 
-## Earn - making yield products understandable
+## Earn: Designing yield products clients can understand and trust
 
 <div class="screen-pair">
   <figure>
@@ -169,37 +169,28 @@ request to completion.
 
 ## Platform evolution
 
-Aura went live in four months on a white-label core. That version ran in
-production for seven months, while the team planned and built its in-house
-replacement in parallel. The replacement took one month of planning and
-three months of development, followed by migration of live clients.
+Aura launched in four months on a white-label core to reach market quickly. As the business grew, it needed more flexibility and faster delivery than the third-party core allowed, so we rebuilt the platform in-house while the live product kept running.
 
 <div class="delivery-grid">
-  <article><h3>Initial launch</h3><p>Four months to take Aura live on a white-label core.</p></article>
-  <article><h3>Live operations</h3><p>Seven months running the initial platform in production.</p></article>
-  <article><h3>Parallel rebuild</h3><p>One month of planning and three months of development during the live-production period.</p></article>
-  <article><h3>Client transition</h3><p>Live clients migrated to the in-house replacement after it was built.</p></article>
+  <article><h3>Launch</h3><p>4 months to go live on a white-label core</p></article>
+  <article><h3>Live operations</h3><p>7 months in production</p></article>
+  <article><h3>Parallel rebuild</h3><p>1 month of planning and 3 months of development, alongside live operations</p></article>
+  <article><h3>Client migration</h3><p>live clients moved to the in-house platform smoothly</p></article>
 </div>
 
-The customer-facing goal was continuity: preserve access to portfolio
-information and active products while moving to the in-house platform.
+For clients, the priority was continuity. Their portfolio information and active products carried over, and they only needed to set a new password and 2FA on the new platform.
 
-The internal migration design, control procedures and system implementation
-are intentionally omitted from this public case study.
+---
 
 ## Outcomes and lessons
 
-Aura brought custody, funding, trading and yield products into one product
-experience across mobile and web. Three product principles shaped the work:
+Aura brought custody, funding, trading and yield into one experience across mobile and web, and moved live clients from a white-label core to an in-house platform without disrupting their access to assets or products.
 
-1. **Make complexity progressive.** Convert and Fixed Earn provide clear
-   entry points; advanced orders and market-linked products remain available
-   when clients want more control.
-2. **Keep financial information explainable.** Rates, terms, balances,
-   expected outcomes and statuses should be visible at the moment they affect
-   a decision.
-3. **Design trust into money movement.** Clear instructions, confirmation
-   details and trackable status matter more than visual novelty.
+Three principles shaped the work:
+
+1. **Make complexity progressive.** Convert and Fixed Earn are simple entry points; advanced orders and market-linked products are there when clients want more control.
+2. **Keep financial information explainable.** Rates, terms, balances and statuses appear at the moment they affect a decision. For example, Earn shows the subscription cutoff time and when a redemption will settle before the client confirms.
+3. **Design trust into money movement.** Clear instructions, confirmation details and trackable status matter more than visual novelty. For example, deposits show exact bank details and a status the client can follow until funds arrive.
 
 <div class="confidentiality">
   Screens show the real product experience. Banking identifiers were replaced
