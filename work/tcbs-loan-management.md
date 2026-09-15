@@ -35,6 +35,24 @@ meta:
 **My ownership.** Product model and margin logic, customer and service journeys, product decisions, cross-team integration requirements, and migration readiness for the margin domain.
 </div>
 
+## Loan management mockups
+
+<div class="tcbs-wireframes">
+  <p class="tcbs-wireframes-note">English mockups with illustrative customer, loan and pricing data. Select a screen to open the full-size image in a new tab.</p>
+  <figure>
+    <a href="{{ '/assets/img/tcbs/loan-management-list-view.png' | relative_url }}" target="_blank" rel="noopener" aria-label="Open loan list mockup at full size in a new tab">
+      <img src="{{ '/assets/img/tcbs/loan-management-list-view.png' | relative_url }}" width="2048" height="739" loading="eager" alt="Loan management list mockup with search filters, loan balances, statuses and actions for details, extension, collection, rate adjustment and action history">
+    </a>
+    <figcaption><strong>List view - search and triage.</strong> Filters narrow the loan portfolio, the highlighted overdue row draws attention, and loan actions are available alongside the selected record.</figcaption>
+  </figure>
+  <figure>
+    <a href="{{ '/assets/img/tcbs/loan-management-detail-view.png' | relative_url }}" target="_blank" rel="noopener" aria-label="Open loan detail mockup at full size in a new tab">
+      <img src="{{ '/assets/img/tcbs/loan-management-detail-view.png' | relative_url }}" width="2048" height="1414" loading="eager" alt="Loan detail mockup showing overdue status, principal and interest paid and remaining, dates, tiered pricing, fees and servicing actions">
+    </a>
+    <figcaption><strong>Detail view - explain and act.</strong> Status and servicing actions appear at the top. Paid and remaining balances, dates, pricing tiers and fees help service teams explain the loan and choose the next action.</figcaption>
+  </figure>
+</div>
+
 ## Context and product problem
 
 During the volatile stock-market conditions of 2021-2022, increased activity exposed limitations in the existing margin platform. Its closed-source model created strong vendor dependency, slowed feature changes and limited the team's control over performance and future development.
@@ -158,21 +176,7 @@ I created prototypes for the internal debt-management experience. The tool separ
   <article><h3>Detail view</h3><p>Show loan status first, then principal, interest and fees split into original, paid and remaining amounts, followed by dates, pricing and servicing actions.</p></article>
 </div>
 
-<div class="tcbs-wireframes">
-  <p class="tcbs-wireframes-note">English mockups with illustrative customer, loan and pricing data. Select a screen to open the full-size image in a new tab.</p>
-  <figure>
-    <a href="{{ '/assets/img/tcbs/loan-management-list-view.png' | relative_url }}" target="_blank" rel="noopener" aria-label="Open loan list mockup at full size in a new tab">
-      <img src="{{ '/assets/img/tcbs/loan-management-list-view.png' | relative_url }}" width="2048" height="739" loading="lazy" alt="Loan management list mockup with search filters, loan balances, statuses and actions for details, extension, collection, rate adjustment and action history">
-    </a>
-    <figcaption><strong>List view - search and triage.</strong> Filters narrow the loan portfolio, the highlighted overdue row draws attention, and loan actions are available alongside the selected record.</figcaption>
-  </figure>
-  <figure>
-    <a href="{{ '/assets/img/tcbs/loan-management-detail-view.png' | relative_url }}" target="_blank" rel="noopener" aria-label="Open loan detail mockup at full size in a new tab">
-      <img src="{{ '/assets/img/tcbs/loan-management-detail-view.png' | relative_url }}" width="2048" height="1414" loading="lazy" alt="Loan detail mockup showing overdue status, principal and interest paid and remaining, dates, tiered pricing, fees and servicing actions">
-    </a>
-    <figcaption><strong>Detail view - explain and act.</strong> Status and servicing actions appear at the top. Paid and remaining balances, dates, pricing tiers and fees help service teams explain the loan and choose the next action.</figcaption>
-  </figure>
-</div>
+<p><a href="#loan-management-mockups">View the loan list and detail mockups above.</a></p>
 
 Three decisions made the experience useful for daily operations:
 
