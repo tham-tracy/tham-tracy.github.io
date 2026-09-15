@@ -158,14 +158,21 @@ A major part of the redesign was the internal debt-management experience. Servic
   <article><h3>Traceable actions</h3><p>Extensions, collections and rate changes remain accessible from the loan, with history showing what changed.</p></article>
 </div>
 
-The principle was simple: internal tools are part of the customer experience. If a service user can understand a loan quickly, they can give the customer a clearer and more reliable answer.
+Two servicing actions needed flexibility without losing control:
+
+<div class="delivery-grid">
+  <article><h3>Extension pricing</h3><p>Customers could extend a loan instead of closing it. The product policy and extension count were shown together, so the resulting price could be explained from the loan's actual state.</p></article>
+  <article><h3>Rate adjustment with approval</h3><p>Wealth managers could request a customer-specific rate and effective date. The change required approval and was recorded in the loan's action history.</p></article>
+</div>
+
+Internal tools are part of the customer experience: if a service user understands a loan quickly, the customer gets a clearer answer.
 
 ## Purchasing power - turn layered controls into one usable number
 
-For the customer, margin complexity becomes visible as one number: **how much can I buy now?** Behind that figure, the platform had to apply several layers of funding capacity and policy consistently.
+For the customer, margin complexity becomes visible as one number: **how much can I buy now?** The figure starts from the customer's cash and eligible securities, then applies four layers of capacity and policy.
 
 <div class="migration-grid">
-  <article><span>01 · Source</span><h3>Funding pool</h3><p>Available lending capacity and the commercial terms attached to a funding source.</p></article>
+  <article><span>01 · Source</span><h3>Lending pool</h3><p>Available lending capacity and the commercial terms attached to a funding source.</p></article>
   <article><span>02 · Market</span><h3>Stock capacity</h3><p>How much financing is available for an eligible security.</p></article>
   <article><span>03 · Segment</span><h3>Customer group</h3><p>The allocation and lending policy applied to a defined customer segment.</p></article>
   <article><span>04 · Customer</span><h3>Individual limit</h3><p>The customer's available capacity after the relevant policies and limits are applied.</p></article>
@@ -188,8 +195,6 @@ Two product decisions shaped forced liquidation:
 - **Sell only what is needed to restore the required position.** Address the shortfall without liquidating more of the customer's portfolio than necessary.
 - **Prioritise more liquid assets.** Favour assets that are easier to execute, reducing the risk that the recovery action itself fails or creates unnecessary market impact.
 
-The wider principle was explainability: a margin ratio should not appear as an isolated number. Customers and service teams need to understand the account value, outstanding obligations, current status and available action together.
-
 ## Repayment - keep cash movement and loan state consistent
 
 Repayment crossed the loan-management capability owned by my team, money movement owned by another team and the core system.
@@ -205,17 +210,6 @@ Repayment crossed the loan-management capability owned by my team, money movemen
 **The loan was reduced only after the cash deduction was confirmed.** This prevented the lending system from showing a repayment that had not actually moved money and kept the loan balance, account balance and repayment status aligned.
 
 Payments followed an explicit allocation order: fees and penalties first, then interest, then principal. Making the order visible also made the remaining debt easier for service teams to explain.
-
-## Pricing and servicing controls
-
-The platform needed enough flexibility to handle real customer cases without turning individual loans into unmanaged exceptions.
-
-<div class="delivery-grid">
-  <article><h3>Extension pricing</h3><p>Customers could extend a loan instead of closing it. The applicable product policy and extension count were shown together so the resulting pricing could be explained from the actual loan state.</p></article>
-  <article><h3>Rate adjustment with approval</h3><p>Wealth managers could request a customer-specific rate and effective date, but the change required approval and remained recorded in the loan's action history.</p></article>
-</div>
-
-The product principle was to allow controlled flexibility while keeping every material change explainable and auditable.
 
 ## Cross-team integration
 
