@@ -21,10 +21,19 @@ meta:
     <p class="eyebrow">Financial infrastructure</p>
     <p class="display-title">From vendor dependency<br>to product control.</p>
   </div>
-  <div class="system-orbit" aria-label="Margin system capability overview">
-    <span>Funding pools</span><span>Stock limits</span><span>Risk</span>
-    <span>Products</span><span>Customers</span><strong>Margin<br>system</strong>
-  </div>
+  <figure class="orbit-wrap">
+    <div class="system-orbit" role="img" aria-label="Margin system: my team owned purchasing power, product policy, risk and margin calls, and loan servicing, connected to account, balance and money-movement services owned by other teams">
+      <span class="orbit-link" style="--x:0;--y:-1">Accounts</span>
+      <span class="orbit-own" style="--x:.7818;--y:-.6235">Product policy</span>
+      <span class="orbit-own" style="--x:.9749;--y:.2225">Purchasing power</span>
+      <span class="orbit-link" style="--x:.4339;--y:.901">Balances</span>
+      <span class="orbit-own" style="--x:-.4339;--y:.901">Loan servicing</span>
+      <span class="orbit-link" style="--x:-.9749;--y:.2225">Money movement</span>
+      <span class="orbit-own" style="--x:-.7818;--y:-.6235">Risk &amp; margin calls</span>
+      <strong>Margin<br>system</strong>
+    </div>
+    <figcaption class="orbit-legend"><i class="key-own" aria-hidden="true"></i>My team's scope <i class="key-link" aria-hidden="true"></i>Connected services</figcaption>
+  </figure>
 </div>
 
 <div class="overview" markdown="1">
