@@ -3,11 +3,11 @@ layout: case-study
 title: "TCBS margin lending platform redesign"
 org: "Techcom Securities"
 permalink: /work/tcbs-loan-management/
-description: "Redesigning margin lending across purchasing power, risk, loan servicing and service tools, with approximately 900,000 customers migrated across seven teams."
+description: "Product ownership of a margin lending redesign covering purchasing power, risk controls, loan servicing and internal service tools, with approximately 900,000 customers migrated across seven teams."
 summary: >-
-  A seven-month redesign of margin lending, from purchasing power and risk
-  controls to loan servicing and service-team tools. Approximately 900,000
-  customers migrated across seven teams, with no rollback required.
+  Product ownership of a seven-month redesign of margin lending, from purchasing
+  power and risk controls to loan servicing and service-team tools. Approximately
+  900,000 customers migrated across seven teams in one cutover, with no rollback required.
 meta:
   - ["Role", "Product Owner"]
   - ["Duration", "7 months"]
@@ -22,158 +22,110 @@ meta:
     <p class="display-title">From vendor dependency<br>to product control.</p>
   </div>
   <div class="system-orbit" aria-label="Margin system capability overview">
-    <span>Funding pools</span><span>Stock loans</span><span>Risk</span>
+    <span>Funding pools</span><span>Stock limits</span><span>Risk</span>
     <span>Products</span><span>Customers</span><strong>Margin<br>system</strong>
   </div>
 </div>
 
 <div class="overview" markdown="1">
-**Product.** The core margin lending platform at Techcom Securities, connecting
-purchasing power, funding limits, collateral, repayment and loan servicing.
+**Product.** The core margin lending platform at Techcom Securities, connecting purchasing power, lending capacity, collateral risk, repayment and loan servicing.
 
-**Users.** Customers trading with margin, service teams managing loans, and
-business teams configuring products and pricing.
+**Users.** Customers trading with margin, service teams managing loans, and business teams configuring products, limits and pricing.
 
-**My scope.** Margin logic, customer and service flows, product decisions, and
-integration planning with the teams responsible for connected services.
+**My ownership.** Product model and margin logic, customer and service journeys, product decisions, cross-team integration requirements, and migration readiness for the margin domain.
 </div>
 
 ## Context and product problem
 
-During the volatile stock-market conditions of 2021-2022, increased activity
-exposed limitations in the existing margin platform. Its closed-source model
-created vendor dependency, slowed feature changes and limited the team's
-control over performance and future development.
+During the volatile stock-market conditions of 2021-2022, increased activity exposed limitations in the existing margin platform. Its closed-source model created strong vendor dependency, slowed feature changes and limited the team's control over performance and future development.
 
-The redesign needed to address six connected product needs:
+The redesign was therefore more than a technology migration. The product needed to become easier to change, easier to operate and able to scale without breaking the customer journey.
 
 <div class="feature-grid">
-  <article><h3>Responsive experience</h3><p>Support customers reliably during periods of higher market activity.</p></article>
-  <article><h3>Faster change</h3><p>Reduce the time required to introduce or adjust margin capabilities.</p></article>
-  <article><h3>Scalability</h3><p>Serve a growing customer base without degrading the experience.</p></article>
-  <article><h3>Product control</h3><p>Give internal teams greater ownership of development and maintenance.</p></article>
-  <article><h3>Operational clarity</h3><p>Make lending information easier for service and business teams to manage.</p></article>
-  <article><h3>Customer continuity</h3><p>Move to the new platform without disrupting existing customer journeys.</p></article>
+  <article><h3>Scale reliably</h3><p>Support a growing customer base and periods of higher market activity without degrading the experience.</p></article>
+  <article><h3>Change faster</h3><p>Reduce the effort required to introduce or adjust lending products, policies and controls.</p></article>
+  <article><h3>Own the product</h3><p>Move critical margin logic into capabilities the internal teams could develop and maintain.</p></article>
+  <article><h3>Operate clearly</h3><p>Give service and business teams clearer visibility into loans, pricing, limits and customer status.</p></article>
 </div>
 
-This reframed the work from a technical replacement into a product-system
-redesign: define what the platform must enable, who needs each capability and
-how the modules work together.
+For me, success meant preserving the financial behaviour customers already depended on while redesigning the domain into clearer product capabilities that multiple teams could own and evolve.
 
-## My role
+## My role as Product Owner
 
-I was the Product Owner for margin lending. I owned the margin logic, the
-flows and the product decisions behind them. Within the new microservices
-platform, my team's scope covered purchasing power, loan servicing, margin
-calls and forced liquidation.
+I was the Product Owner for margin lending. I owned the margin logic, the end-to-end flows and the product decisions behind them. My team's scope included purchasing power, loan servicing, margin calls and forced liquidation, while connected services such as accounts, balances and money movement were owned by other teams.
 
-A central part of my work was defining what each margin journey needed from
-other teams' services and agreeing on integration responsibilities and the
-delivery plan.
+A large part of my work was turning a tightly coupled legacy system into a shared product model that seven teams could build against.
+
+<div class="delivery-grid">
+  <article><h3>Product model</h3><p>Decompose the margin domain, define capability boundaries and make the relationship between products, policies, limits and active loans explicit.</p></article>
+  <article><h3>Journey design</h3><p>Define customer and service flows for purchasing power, repayment, extension, risk handling and loan servicing.</p></article>
+  <article><h3>Cross-team integration</h3><p>Specify what the margin journey needed from account, balance and money-movement services, including ownership and confirmation points.</p></article>
+  <article><h3>Delivery and migration</h3><p>Align requirements across teams, protect critical journeys during cutover and help define the readiness and rollback approach.</p></article>
+</div>
 
 ## Discovery and system decomposition
 
-I analysed the existing system, documented its strengths and limitations,
-researched industry approaches and compared alternative solutions. I then
-decomposed the margin domain into eight modules, giving teams clear ownership
-while preserving the end-to-end lending journey.
+I started by analysing the existing margin system, documenting its strengths and limitations, researching industry approaches and comparing alternative solutions. I then decomposed the domain into eight modules so requirements could be owned independently without losing the end-to-end lending journey.
 
 <div class="feature-grid">
-  <article><h3>Lending pools</h3><p>Funding-source capacity, configurable limits, pricing terms and utilisation monitoring.</p></article>
-  <article><h3>Stock loans</h3><p>Stock-specific pools, customer-group allocation and lending portfolios.</p></article>
-  <article><h3>Collateral &amp; risk</h3><p>Portfolio valuation, margin ratios, thresholds and customer alerts.</p></article>
-  <article><h3>Product configuration</h3><p>Margin-product terms, interest rates, fees, limits and risk parameters.</p></article>
+  <article><h3>Lending pools</h3><p>Funding-source capacity, configurable limits, commercial terms and utilisation.</p></article>
+  <article><h3>Stock capacity</h3><p>Security-level financing availability, allocation and lending portfolios.</p></article>
+  <article><h3>Collateral &amp; risk</h3><p>Portfolio valuation, margin ratios, thresholds, customer warnings and recovery actions.</p></article>
+  <article><h3>Product configuration</h3><p>Terms, interest rates, fees, limits and risk parameters for each lending product.</p></article>
   <article><h3>Customer policies</h3><p>Customer groups, assigned policies, credit limits and trading permissions.</p></article>
-  <article><h3>Loan operations</h3><p>Loan creation, interest, payments, term changes, overdue handling and collection.</p></article>
+  <article><h3>Loan operations</h3><p>Loan creation, interest, repayment, term changes, overdue handling and collection.</p></article>
   <article><h3>Reporting</h3><p>Operational activity, portfolio exposure, business performance and compliance reporting.</p></article>
-  <article><h3>Service tooling</h3><p>Searchable loan information and clear detail views for customer-support teams.</p></article>
+  <article><h3>Service tooling</h3><p>Search, loan detail, servicing actions and action history for internal teams.</p></article>
 </div>
 
-**The key design decision was separating product policy from loan state.**
+### A key modelling decision: product policy vs. loan state
+
+One of the most important design decisions was separating the rules of a product from the state of an individual customer's loan.
 
 <div class="delivery-grid">
-  <article><h3>Product policy</h3><p>Defines rates, terms, limits and extension pricing for a margin product.</p></article>
-  <article><h3>Loan state</h3><p>Records one customer's balances, accrued interest, extension count and current status.</p></article>
+  <article><h3>Product policy</h3><p>Defines how the product behaves: rates, terms, limits, fees, extension rules and other configurable conditions.</p></article>
+  <article><h3>Loan state</h3><p>Records what is happening to one loan: principal, accrued interest, payments, extension count, dates and current status.</p></article>
 </div>
 
-This separated product configuration from the record of each active loan.
-Service teams could see both the applicable policy and the customer's current
-obligations, making the resulting charges easier to explain.
+This gave business teams more control over product configuration without changing individual loans, while service teams could still see the exact policy and loan state behind what a customer was being charged.
 
-## How margin fits into the platform
+## Key product decisions
 
-Margin lending depended on capabilities owned by other teams. I planned
-integrations around the customer action each dependency needed to support.
+### 1. Turn layered lending rules into one usable purchasing-power figure
 
-| Connected capability | What the margin journey needed |
-|---|---|
-| Account registration | Open a margin account for an eligible customer. |
-| Balance information | Read cash and asset balances as inputs to purchasing power. |
-| Money movement | Deduct cash for repayment and confirm that the movement was reflected in the core system. |
+Purchasing power is where the complexity of margin lending becomes visible to the customer: it answers a simple question — **how much can I buy now?**
 
-My team owned the margin-specific decisions built on those inputs: how much
-a customer could buy, how a loan was serviced and when risk actions were needed.
-The integration plan made responsibilities and confirmation points explicit.
-
-## Purchasing power
-
-Purchasing power is where margin lending becomes visible to the customer:
-it tells them how much they can buy. It uses cash balances and the lending
-value of eligible assets, subject to the customer's margin policy and
-applicable limits.
-
-Accuracy matters in both directions. Understating purchasing power can block
-a trade the customer is entitled to make. Overstating it can allow exposure
-beyond the account's permitted capacity. This made balance inputs, asset
-eligibility and policy application central to the product design.
-
-## Funding, stock and customer limits
-
-Lending capacity operates at several levels. The platform needed to connect
-funding-source capacity with stock availability, customer-group allocations
-and individual limits.
+The answer depended on several layers of capacity and policy:
 
 <div class="migration-grid">
-  <article><span>01 · Source</span><h3>Funding pool</h3><p>Define available capacity and the commercial terms attached to a funding source.</p></article>
-  <article><span>02 · Market</span><h3>Stock pool</h3><p>Control how much financing is available for an eligible security.</p></article>
-  <article><span>03 · Segment</span><h3>Customer group</h3><p>Apply group-level allocation and policy consistently to a defined segment.</p></article>
-  <article><span>04 · Customer</span><h3>Individual limit</h3><p>Expose the correct available capacity after the relevant policies are applied.</p></article>
+  <article><span>01 · Source</span><h3>Funding pool</h3><p>How much lending capacity is available from a funding source and under what commercial terms.</p></article>
+  <article><span>02 · Market</span><h3>Stock capacity</h3><p>How much financing is available for an eligible security.</p></article>
+  <article><span>03 · Segment</span><h3>Customer group</h3><p>Which allocation and lending policy applies to a defined customer segment.</p></article>
+  <article><span>04 · Customer</span><h3>Individual limit</h3><p>The customer's available capacity after the relevant policies and limits are applied.</p></article>
 </div>
 
-Each level constrains what is available to the customer. The product challenge
-was to expose a usable purchasing-power figure while keeping the underlying
-allocation and policy understandable to business teams.
+The product challenge was to keep those controls explicit for business teams while exposing a single, reliable purchasing-power figure to the customer. Understating it could incorrectly block a trade; overstating it could allow exposure beyond the customer's permitted capacity.
 
-## Margin calls and forced liquidation
+### 2. Make risk actions explainable before they become restrictive
 
-The risk model connected outstanding debt with changes in collateral value.
-It covered initial margin, maintenance requirements and liquidation conditions.
-Customer and service views needed to explain the account's ratio, status and
-available action together.
+The risk flow connected outstanding debt with changes in collateral value. The system continuously evaluated the customer's margin position and moved through three stages when risk increased.
 
 <div class="feature-grid">
-  <article><h3>Monitor</h3><p>Recalculate the account's margin position as asset values change.</p></article>
-  <article><h3>Notify</h3><p>Use in-app and SMS reminders to explain when the customer needs to add cash or reduce exposure.</p></article>
-  <article><h3>Restore</h3><p>Apply forced liquidation when the account remains below the required level and the applicable conditions are met.</p></article>
+  <article><h3>Monitor</h3><p>Recalculate the account's margin position as collateral values and outstanding obligations change.</p></article>
+  <article><h3>Notify</h3><p>Use customer alerts to explain that action is required and what the customer can do next.</p></article>
+  <article><h3>Restore</h3><p>Apply forced liquidation only when the account remains outside the required risk conditions.</p></article>
 </div>
 
-Two product decisions shaped forced liquidation:
+Two decisions shaped forced liquidation:
 
-- **Target the amount needed to restore the required ratio.** The design aimed
-  to retain as much of the customer's portfolio as possible while addressing
-  the account's shortfall.
-- **Prioritise liquid assets.** The selection approach favoured assets that
-  were easier to sell. Execution still depended on market conditions and
-  available liquidity.
+- **Sell only what is needed to restore the required position.** The objective was to address the shortfall without liquidating more of the customer's portfolio than necessary.
+- **Prioritise more liquid assets.** Assets that were easier to execute reduced the risk of the recovery action itself failing or creating additional market impact.
 
-Clear warnings and visible next steps helped customers understand the
-consequences before a forced action. Company-specific thresholds, timing
-rules and liquidation logic are omitted from this public case study.
+The wider principle was explainability: a ratio should not appear as an isolated number. Customers and service teams need to understand the account value, outstanding obligations, current status and available action together.
 
-## Loan servicing and repayment
+### 3. Change the loan only after money movement is confirmed
 
-Repayment crossed the loan-management capability owned by my team,
-money movement owned by another team, and the core system.
+Repayment crossed three responsibilities: the loan-management capability owned by my team, money movement owned by another team, and the core system.
 
 <ol class="journey journey-five">
   <li><span>01</span><strong>Request</strong><small>Customer submits a repayment</small></li>
@@ -183,97 +135,71 @@ money movement owned by another team, and the core system.
   <li><span>05</span><strong>Notify</strong><small>Show the customer the result</small></li>
 </ol>
 
-**The key decision was to reduce the loan only after the cash deduction was
-confirmed.** This addressed the risk of showing a loan as repaid before the
-money had left the account. The intended outcome was consistent loan balances,
-account balances and repayment status.
+**The key decision was to reduce the loan only after the cash deduction was confirmed.** This prevented the lending system from showing a repayment that had not actually moved money. After a successful repayment, the loan balance, account balance and repayment status could remain consistent.
 
-In the product model, payments were allocated to fees and penalties first,
-then interest, then principal. An explicit allocation order made it possible
-to show which obligations a payment settled and what remained outstanding.
+Payments were allocated in a fixed order: fees and penalties first, then interest, then principal. Making that order explicit also made the remaining debt easier for service teams to explain.
 
-### Extension pricing
+### 4. Allow commercial flexibility without losing control
 
-Customers could extend a loan instead of fully repaying and closing it.
-The product used tiered extension pricing, with successive extensions
-applying a higher rate to unpaid interest.
+The platform needed to support real servicing cases without turning individual loans into unmanaged exceptions.
 
-The design made the applicable pricing policy and extension count visible
-together. Service teams could explain the cost of another extension using
-the customer's actual loan state. Specific rates and pricing formulas are
-not included here.
+**Extension pricing.** Customers could extend a loan instead of closing it. The applicable product policy and the loan's extension count were visible together so service teams could explain the pricing based on the customer's actual loan state.
 
-### Rate adjustments with approval
+**Rate adjustment with approval.** Wealth managers could request an interest-rate adjustment for an individual loan and choose the effective date. Because the change affected what a customer paid, it required approval before taking effect and was recorded in the loan's action history.
 
-Wealth managers could request an interest-rate adjustment for an individual
-loan and choose its effective date. Each adjustment required approval before
-taking effect and was recorded in the loan's action history.
+The design principle was simple: allow controlled exceptions, but make every material change explainable and auditable.
 
-This supported client-specific pricing decisions while making the approved
-change, its timing and its effect on the loan traceable.
+## Designing for service teams, not only customers
 
-## Debt-management experience
-
-I created prototypes for service teams managing loans. The experience
-separated portfolio-wide search and triage from the detail needed to resolve
-one customer's case.
+I created prototypes for the internal debt-management experience. The tool separated portfolio-wide triage from the detail required to resolve an individual customer's case.
 
 <div class="delivery-grid">
-  <article><h3>List view</h3><p>Filter by loan ID, account, product, pricing policy, status and dates. Identify overdue, due, current and closed loans, then open details or relevant actions.</p></article>
-  <article><h3>Detail view</h3><p>See status first, followed by principal, interest and fees split into original, paid and remaining amounts. Review dates, remaining term, pricing policy and available actions.</p></article>
+  <article><h3>List view</h3><p>Search and filter by loan ID, account, product, pricing policy, status and dates. Status is the primary signal so loans requiring attention are visible first.</p></article>
+  <article><h3>Detail view</h3><p>Show loan status first, then principal, interest and fees split into original, paid and remaining amounts, followed by dates, pricing and servicing actions.</p></article>
 </div>
 
-Three decisions made the tool useful for daily servicing:
+Three decisions made the experience useful for daily operations:
 
-1. **Put status first.** Service teams need to identify which loans require
-   attention before inspecting every field.
-2. **Show paid and remaining amounts.** Separate principal, interest and fees
-   so users can explain what a customer still owes without manual calculation.
-3. **Keep actions traceable.** Place rate adjustment, extension and collection
-   actions within reach, with an action history for reviewing changes.
+1. **Status first.** Service users need to identify which loans need attention before reading every field.
+2. **Paid vs. remaining amounts.** Principal, interest and fees are separated so a service user can answer "what does this customer still owe, and why?" without manual calculation.
+3. **Traceable actions.** Rate adjustments, extensions and collections remain accessible from the loan while action history records what changed.
 
-These were product experiences for an internal audience whose work directly
-affected the customer's understanding of their loan.
+This work reinforced that internal tools are part of the customer experience: the quality of the service team's information directly affects the quality of the explanation a customer receives.
+
+## Cross-team integration model
+
+Margin lending depended on capabilities owned by other teams. I planned each integration around the customer action the margin journey needed to complete.
+
+| Connected capability | What the margin journey needed |
+|---|---|
+| Account registration | Open a margin account for an eligible customer. |
+| Balance information | Read cash and asset balances as inputs to purchasing power. |
+| Money movement | Deduct cash for repayment and confirm that the movement was reflected in the core system. |
+
+My team owned the margin-specific decisions built on those inputs: how much a customer could buy, how a loan was serviced and when risk actions were required. Making ownership and confirmation points explicit helped seven teams work from the same end-to-end journey rather than isolated service requirements.
 
 ## Migration and seven-team delivery
 
-Approximately 900,000 customers moved to the new platform in a single
-cutover. The objective was to preserve correct margin and loan information
-and access to essential actions from the first trading session on the new
-platform.
+Approximately 900,000 customers moved to the new platform in a single cutover. For customers, the objective was continuity: correct margin and loan information and access to essential actions from the first trading session on the new platform.
 
 <div class="delivery-grid">
-  <article><h3>Market-aware cutover</h3><p>Schedule the transition outside trading hours, with a weekend verification window before trading resumed.</p></article>
-  <article><h3>Rollback readiness</h3><p>Prepare a rollback plan in advance. The migration completed without using it.</p></article>
-  <article><h3>Shared product model</h3><p>Use common module and loan-state definitions to align seven delivery teams.</p></article>
-  <article><h3>Explicit integration ownership</h3><p>Work through complete journeys, agree on dependencies and assign an owner to each capability.</p></article>
+  <article><h3>Market-aware cutover</h3><p>Schedule the transition outside trading hours and use the weekend verification window before trading resumed.</p></article>
+  <article><h3>Rollback readiness</h3><p>Prepare the rollback approach before migration. The cutover completed without needing to use it.</p></article>
+  <article><h3>Shared capability model</h3><p>Use common module, policy and loan-state definitions so seven teams worked with the same product language.</p></article>
+  <article><h3>Journey-led planning</h3><p>Validate dependencies through complete journeys such as account registration, purchasing power and repayment rather than service-by-service delivery alone.</p></article>
 </div>
 
-The public case study describes the delivery approach and outcome at a high
-level. Detailed cutover procedures and recovery mechanisms are omitted.
+## Outcome and what I learned
 
-## Outcomes and lessons
+In seven months, the programme redesigned the margin lending domain within a microservices platform and migrated approximately 900,000 customers across seven teams in one cutover, without rollback.
 
-In seven months, the programme redesigned the margin domain within a
-microservices platform and migrated approximately 900,000 customers across
-seven teams in a single cutover. No rollback was required.
+The project strengthened four principles I still use when working on financial products:
 
-The work reinforced four product lessons:
-
-1. **Start with the capability model.** Clear boundaries between funding,
-   product policy, customer rules, risk and loan state make a complex platform
-   easier to plan and deliver.
-2. **Make risk explainable.** Pair ratios and warnings with the reason for
-   the change and the action available to the user.
-3. **Treat service teams as product users.** Search, triage, loan details and
-   action history shape how well teams can support customers.
-4. **Define success through customer continuity.** A platform transition
-   needs correct financial information and usable customer journeys as well
-   as technical completion.
+1. **Start with the product model.** Complex platforms become easier to plan when product policy, customer rules, limits, risk and transaction state have clear boundaries.
+2. **Turn financial logic into understandable decisions.** A customer or service user should be able to understand not only the result, but why the system reached it and what action is available next.
+3. **Design internal operations as product experiences.** Search, triage, loan detail and action history directly affect how effectively a financial product can be serviced.
+4. **Measure platform change through customer continuity.** Architecture and scalability matter, but migration succeeds only when customers can continue using the product with correct financial information and essential journeys intact.
 
 <div class="confidentiality">
-  This case study is based on my margin-system product requirements and project
-  experience. Capability descriptions are generalised. Company-specific
-  thresholds, pricing values, allocation formulas, internal architecture,
-  detailed migration procedures and customer information are omitted.
+  This case study is based on my margin-system product requirements and project experience. Product and capability descriptions are generalised. Company-specific thresholds, pricing values, allocation formulas, proprietary decision rules, internal architecture, detailed migration procedures and customer information are omitted.
 </div>
