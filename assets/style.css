@@ -274,6 +274,17 @@ td { background: var(--white); color: var(--ink-2); font-size: .94rem; }
 .footer-links { text-align: right; }
 .footer-note { max-width: 40rem; grid-column: 1 / -1; margin-top: .6rem !important; font-size: .72rem !important; }
 
+
+/* TCBS desktop mockups */
+.tcbs-wireframes { max-width: 64rem; margin: 2.5rem 0; }
+.tcbs-wireframes-note { max-width: var(--prose); color: var(--muted); font-size: .9rem; }
+.tcbs-wireframes figure { margin: 1.5rem 0 2.5rem; }
+.tcbs-wireframes a { display: block; border: 1px solid var(--line); border-radius: .75rem; overflow: hidden; background: var(--white); }
+.tcbs-wireframes a:focus-visible { outline: 3px solid var(--aqua-deep); outline-offset: 4px; }
+.tcbs-wireframes img { width: 100%; height: auto; }
+.tcbs-wireframes figcaption { max-width: var(--prose); margin-top: .85rem; color: var(--muted); font-size: .9rem; line-height: 1.55; }
+.tcbs-wireframes figcaption strong { color: var(--ink); }
+
 @media (max-width: 64rem) {
   .featured-case, .case-visual-aura, .case-visual-tcbs { grid-template-columns: 1fr; }
   .featured-copy { z-index: 2; }
