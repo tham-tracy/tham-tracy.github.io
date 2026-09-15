@@ -9,7 +9,7 @@ summary: >-
   collateral to risk monitoring and loan servicing - while coordinating the
   migration of approximately 900,000 customers across seven teams.
 meta:
-  - ["Role", "Product Manager"]
+  - ["Role", "Product Owner"]
   - ["Scope", "Core margin platform"]
   - ["Scale", "≈900,000 customers"]
   - ["Delivery", "7 cross-functional teams"]
@@ -31,7 +31,7 @@ meta:
 lending at Techcom Securities - from funding capacity and customer policies to
 collateral, interest, repayment and reporting.
 
-**My role.** Product Manager responsible for analysing the existing system,
+**My role.** Product Owner responsible for analysing the existing system,
 defining the target capability model and aligning requirements across a
 seven-team programme.
 
