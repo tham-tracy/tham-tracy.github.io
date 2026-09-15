@@ -36,9 +36,7 @@ experience.
 markets - from experienced digital-asset investors to traditional wealth
 clients entering the category.
 
-**My scope.** Product direction and delivery across the customer experience
-and admin tools, from the initial white-label launch through production
-operations, the in-house rebuild and live-client migration.
+**My scope.** Product direction and delivery for both the client-facing app and the internal admin tools, across the full product lifecycle: white-label launch, live operations, in-house rebuild, and migration of live clients to the new platform.
 </div>
 
 ## Product position
@@ -98,7 +96,7 @@ stop-market, stop-limit and recurring orders.
   <article><h3>Market order</h3><p>Place an order at the best available market price.</p></article>
   <article><h3>Limit order</h3><p>Set the highest buy or lowest sell price accepted.</p></article>
   <article><h3>Stop Market</h3><p>Trigger a market order when a chosen stop price is reached.</p></article>
-  <article><h3>Stop Limit</h3><p>Use separate trigger and limit prices for greater control.</p></article>
+  <article><h3>Stop Limit</h3><p>When the market reaches your trigger price, a limit order is placed at your limit price.</p></article>
   <article><h3>Recurring orders</h3><p>Schedule repeat purchases to build a position over time.</p></article>
 </div>
 
