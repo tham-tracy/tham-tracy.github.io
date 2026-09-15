@@ -153,18 +153,35 @@ conditions apply before they subscribe.
 <div class="screen-pair screen-pair-wide">
   <figure>
     <div class="device"><img src="{{ '/assets/img/aura/on-ramp-sanitised.webp' | relative_url }}" alt="Aura fiat deposit instructions with demonstration bank details" loading="lazy"></div>
-    <figcaption><strong>On-ramp.</strong> Clear bank instructions help the client complete a fiat deposit correctly.</figcaption>
+    <figcaption><strong>On-ramp.</strong> Review the USD-to-USDT rate and bank details before submitting a deposit request and sending USD.</figcaption>
   </figure>
   <figure>
     <div class="device"><img src="{{ '/assets/img/aura/off-ramp.webp' | relative_url }}" alt="Aura fiat withdrawal screen with bank account and amount controls" loading="lazy"></div>
-    <figcaption><strong>Off-ramp.</strong> Choose a verified bank account, enter an amount and confirm securely.</figcaption>
+    <figcaption><strong>Off-ramp.</strong> Withdraw USD from a USDT or USDC balance to a verified bank account.</figcaption>
   </figure>
 </div>
 
-Fiat funding gives the client clear transfer instructions, supported
-currencies, limits and a reference for the payment. Withdrawal presents the
-destination account, available balance and amount before secure confirmation.
-Both journeys use visible statuses so the client can follow the movement from
+### On-ramp - deposit USD, receive USDT
+
+Clients fund their Aura account by sending USD to the bank account shown in
+the app. Before submitting a deposit request, they can review the bank
+details and the displayed USD-to-USDT conversion rate.
+
+The client submits the request and completes the USD bank transfer. Once
+Aura confirms receipt of the wire, the system credits the corresponding
+USDT amount to the client's USDT wallet within Aura.
+
+### Off-ramp - use USDT or USDC to withdraw USD
+
+Clients can withdraw USD using their USDT or USDC balance. They first add
+a bank account with all required details and have it verified in Aura.
+
+Before submitting the withdrawal request, the client selects their verified
+bank account and reviews the amount and displayed conversion rate. Aura
+then transfers the USD from its bank account to the client's verified bank
+account.
+
+Both journeys show transaction statuses so clients can track progress from
 request to completion.
 
 ## Platform evolution
