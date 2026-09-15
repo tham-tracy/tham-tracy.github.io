@@ -104,7 +104,7 @@ meta:
 **My scope.** Product Owner for margin lending, responsible for the product model, lending and risk logic, customer and service journeys, cross-team integration requirements and migration readiness.
 </div>
 
-## Discovery — redesigning the margin domain
+## Discovery - redesigning the margin domain
 
 During the volatile stock-market conditions of 2021-2022, higher activity exposed limitations in the existing platform. Feature changes were slow, operational visibility was limited and critical margin behaviour depended heavily on a closed-source vendor system.
 
@@ -132,7 +132,7 @@ One of the most important modelling decisions was separating the rules of a lend
 
 This gave business teams more control over product configuration while keeping each customer's active loan understandable and traceable for service teams.
 
-## Loan management — make every loan explainable
+## Loan management - make every loan explainable
 
 A major part of the redesign was the internal debt-management experience. Service teams needed to find the right loan quickly, understand what the customer owed and take the next action without reconstructing the account from multiple systems.
 
@@ -142,13 +142,13 @@ A major part of the redesign was the internal debt-management experience. Servic
     <a href="{{ '/assets/img/tcbs/loan-management-list-view.png' | relative_url }}" target="_blank" rel="noopener" aria-label="Open loan list mockup at full size in a new tab">
       <img src="{{ '/assets/img/tcbs/loan-management-list-view.png' | relative_url }}" width="2048" height="739" loading="eager" alt="Loan management list mockup with search filters, loan balances, statuses and servicing actions">
     </a>
-    <figcaption><strong>List view — search and triage.</strong> Filters narrow the portfolio, status surfaces the loans that need attention and actions stay close to the selected record.</figcaption>
+    <figcaption><strong>List view - search and triage.</strong> Filters narrow the portfolio, status surfaces the loans that need attention and actions stay close to the selected record.</figcaption>
   </figure>
   <figure>
     <a href="{{ '/assets/img/tcbs/loan-management-detail-view.png' | relative_url }}" target="_blank" rel="noopener" aria-label="Open loan detail mockup at full size in a new tab">
       <img src="{{ '/assets/img/tcbs/loan-management-detail-view.png' | relative_url }}" width="2048" height="1414" loading="lazy" alt="Loan detail mockup showing loan status, principal and interest paid and remaining, dates, pricing and servicing actions">
     </a>
-    <figcaption><strong>Detail view — explain and act.</strong> Status and servicing actions come first; balances, dates, pricing and fees provide the context needed to explain the loan.</figcaption>
+    <figcaption><strong>Detail view - explain and act.</strong> Status and servicing actions come first; balances, dates, pricing and fees provide the context needed to explain the loan.</figcaption>
   </figure>
 </div>
 
@@ -160,7 +160,7 @@ A major part of the redesign was the internal debt-management experience. Servic
 
 The principle was simple: internal tools are part of the customer experience. If a service user can understand a loan quickly, they can give the customer a clearer and more reliable answer.
 
-## Purchasing power — turn layered controls into one usable number
+## Purchasing power - turn layered controls into one usable number
 
 For the customer, margin complexity becomes visible as one number: **how much can I buy now?** Behind that figure, the platform had to apply several layers of funding capacity and policy consistently.
 
@@ -173,7 +173,7 @@ For the customer, margin complexity becomes visible as one number: **how much ca
 
 The design challenge was to keep those controls explicit for business teams while exposing one reliable figure to the customer. Understating purchasing power could incorrectly block a trade; overstating it could allow exposure beyond the permitted capacity.
 
-## Risk — intervene progressively before forced liquidation
+## Risk - intervene progressively before forced liquidation
 
 The risk flow connected outstanding debt with changing collateral value. Rather than treating liquidation as a single event, the product moved through a progression of monitoring, warning and recovery.
 
@@ -190,7 +190,7 @@ Two product decisions shaped forced liquidation:
 
 The wider principle was explainability: a margin ratio should not appear as an isolated number. Customers and service teams need to understand the account value, outstanding obligations, current status and available action together.
 
-## Repayment — keep cash movement and loan state consistent
+## Repayment - keep cash movement and loan state consistent
 
 Repayment crossed the loan-management capability owned by my team, money movement owned by another team and the core system.
 
