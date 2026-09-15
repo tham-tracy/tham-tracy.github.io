@@ -16,23 +16,85 @@ meta:
   - ["Migration", "No rollback required"]
 ---
 
+<style>
+.case-visual-tcbs .orbit-wrap {
+  container-type: inline-size;
+  width: 100%;
+  max-width: 30rem;
+  min-width: 0;
+  justify-self: center;
+  margin: 0;
+}
+.case-visual-tcbs .system-orbit {
+  --rx: clamp(5.8rem, 36cqi, 10.4rem);
+  --ry: var(--rx);
+  --core: clamp(4rem, 24cqi, 7.5rem);
+  height: calc(var(--ry) * 2 + 3.5rem);
+  position: relative;
+}
+.case-visual-tcbs .system-orbit::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--rx) * 2);
+  height: calc(var(--ry) * 2);
+  border: 1px solid rgba(57,230,203,.34);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  content: "";
+}
+.case-visual-tcbs .system-orbit::after { display: none; }
+.case-visual-tcbs .system-orbit strong {
+  width: var(--core);
+}
+.case-visual-tcbs .system-orbit span {
+  left: calc(50% + var(--rx) * var(--x));
+  top: calc(50% + var(--ry) * var(--y));
+  width: max-content;
+  max-width: 9rem;
+  padding: .42rem .7rem;
+  border: 1px solid rgba(57,230,203,.55);
+  color: #eafffb;
+  background: #12403f;
+  font-size: .72rem;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: center;
+}
+.case-module-grid { grid-template-columns: repeat(4, 1fr); }
+@container (max-width: 25rem) {
+  .case-visual-tcbs .system-orbit { --ry: calc(var(--rx) * 1.45); }
+  .case-visual-tcbs .system-orbit strong { font-size: .85rem; }
+  .case-visual-tcbs .system-orbit span { max-width: 5.4rem; padding: .3rem .5rem; font-size: .62rem; }
+}
+@container (max-width: 19rem) {
+  .case-visual-tcbs .system-orbit span { max-width: 4.8rem; font-size: .58rem; }
+}
+@media (max-width: 64rem) {
+  .case-module-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 42rem) {
+  .case-module-grid { grid-template-columns: 1fr; }
+}
+</style>
+
 <div class="case-visual case-visual-tcbs">
   <div>
     <p class="eyebrow">Financial infrastructure</p>
     <p class="display-title">From vendor dependency<br>to product control.</p>
   </div>
   <figure class="orbit-wrap">
-    <div class="system-orbit" role="img" aria-label="Margin system: my team owned purchasing power, product policy, risk and margin calls, and loan servicing, connected to account, balance and money-movement services owned by other teams">
-      <span class="orbit-link" style="--x:0;--y:-1">Accounts</span>
-      <span class="orbit-own" style="--x:.7818;--y:-.6235">Product policy</span>
-      <span class="orbit-own" style="--x:.9749;--y:.2225">Purchasing power</span>
-      <span class="orbit-link" style="--x:.4339;--y:.901">Balances</span>
-      <span class="orbit-own" style="--x:-.4339;--y:.901">Loan servicing</span>
-      <span class="orbit-link" style="--x:-.9749;--y:.2225">Money movement</span>
-      <span class="orbit-own" style="--x:-.7818;--y:-.6235">Risk &amp; margin calls</span>
+    <div class="system-orbit" role="img" aria-label="Margin system modules: lending pools, stock capacity, customer groups, product configuration, asset management, risk and margin calls, loan management and reporting">
+      <span style="--x:0;--y:-1">Lending pools</span>
+      <span style="--x:0.7071;--y:-0.7071">Stock capacity</span>
+      <span style="--x:1;--y:0">Customer groups</span>
+      <span style="--x:0.7071;--y:0.7071">Product configuration</span>
+      <span style="--x:0;--y:1">Asset management</span>
+      <span style="--x:-0.7071;--y:0.7071">Risk &amp; margin calls</span>
+      <span style="--x:-1;--y:0">Loan management</span>
+      <span style="--x:-0.7071;--y:-0.7071">Reporting</span>
       <strong>Margin<br>system</strong>
     </div>
-    <figcaption class="orbit-legend"><i class="key-own" aria-hidden="true"></i>My team's scope <i class="key-link" aria-hidden="true"></i>Connected services</figcaption>
   </figure>
 </div>
 
@@ -94,15 +156,15 @@ A large part of my work was turning a tightly coupled legacy system into a share
 
 I started by analysing the existing margin system, documenting its strengths and limitations, researching industry approaches and comparing alternative solutions. I then decomposed the domain into eight modules so requirements could be owned independently without losing the end-to-end lending journey.
 
-<div class="feature-grid">
+<div class="feature-grid case-module-grid">
   <article><h3>Lending pools</h3><p>Funding-source capacity, configurable limits, commercial terms and utilisation.</p></article>
   <article><h3>Stock capacity</h3><p>Security-level financing availability, allocation and lending portfolios.</p></article>
-  <article><h3>Collateral &amp; risk</h3><p>Portfolio valuation, margin ratios, thresholds, customer warnings and recovery actions.</p></article>
+  <article><h3>Customer groups</h3><p>Customer tiers with assigned policies, credit limits and trading permissions.</p></article>
   <article><h3>Product configuration</h3><p>Terms, interest rates, fees, limits and risk parameters for each lending product.</p></article>
-  <article><h3>Customer policies</h3><p>Customer groups, assigned policies, credit limits and trading permissions.</p></article>
-  <article><h3>Loan operations</h3><p>Loan creation, interest, repayment, term changes, overdue handling and collection.</p></article>
+  <article><h3>Asset management</h3><p>Cash and securities, valued as collateral and used to calculate purchasing power.</p></article>
+  <article><h3>Risk &amp; margin calls</h3><p>Margin ratios, thresholds, customer warnings and recovery actions.</p></article>
+  <article><h3>Loan management</h3><p>The loan lifecycle from creation to collection, plus search and servicing tools for internal teams.</p></article>
   <article><h3>Reporting</h3><p>Operational activity, portfolio exposure, business performance and compliance reporting.</p></article>
-  <article><h3>Service tooling</h3><p>Search, loan detail, servicing actions and action history for internal teams.</p></article>
 </div>
 
 ### A key modelling decision: product policy vs. loan state
