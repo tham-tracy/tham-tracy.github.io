@@ -44,7 +44,7 @@ description: "Product case studies covering Aura, a digital-asset wealth platfor
   </div>
   <div class="tcbs-card">
     <div>
-      <p class="case-tagline">The redesign of Techcom Securities' core margin platform - from funding pools and collateral to risk monitoring and loan servicing - plus a large-scale customer migration.</p>
+      <p class="case-tagline">A seven-month redesign of Techcom Securities' margin lending platform, covering purchasing power, risk, repayment and service-team tools. Approximately 900,000 customers migrated across seven teams, with no rollback required.</p>
       <a class="text-link" href="{{ '/work/tcbs-loan-management/' | relative_url }}">Read the TCBS case study <span aria-hidden="true">→</span></a>
     </div>
     <dl class="impact-grid">
