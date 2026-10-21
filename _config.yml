@@ -45,6 +45,12 @@ collections:
     output: true
     permalink: /notes/:name/
 
+defaults:
+  - scope:
+      type: notes
+    values:
+      layout: note
+
 # --- Exclude from the built site ---
 exclude:
   - README.md

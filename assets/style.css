@@ -412,3 +412,22 @@ td { background: var(--white); color: var(--ink-2); font-size: .94rem; }
   .method-strip span { margin: 0; }
   .method-step dl div, .story-steps div { grid-template-columns: 1fr; gap: .2rem; }
 }
+
+/* Domain notes */
+.note-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 64rem; }
+.note-card { display: flex; flex-direction: column; padding: clamp(1.2rem, 3vw, 1.8rem); border: 1px solid var(--line); border-radius: 1.2rem; background: var(--white); color: var(--ink); text-decoration: none; transition: border-color .15s; }
+.note-card:hover { border-color: var(--aqua-deep); }
+.note-card h2 { margin: .6rem 0 .7rem; font-size: clamp(1.25rem, 2.4vw, 1.6rem); }
+.note-card p { color: var(--ink-2); font-size: .94rem; line-height: 1.55; }
+.note-card-meta { display: flex; align-items: center; color: var(--muted); font-size: .78rem; }
+.note-card-cta { margin-top: auto; color: var(--aqua-deep); font-weight: 720; }
+.note-header { padding-top: clamp(3.5rem, 8vw, 6.5rem); padding-bottom: 1.5rem; }
+.note-header h1 { max-width: 52rem; font-size: clamp(2.4rem, 6vw, 4.6rem); }
+.note-body { max-width: var(--prose); padding-bottom: 2rem; }
+.note-body h2 { margin-top: 3rem; margin-bottom: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: clamp(1.5rem, 3vw, 2.1rem); }
+.note-body p, .note-body li { color: var(--ink-2); line-height: 1.65; }
+.note-body a { color: var(--aqua-deep); }
+.note-back { padding-bottom: 4rem; }
+@media (max-width: 42rem) {
+  .note-grid { grid-template-columns: 1fr; }
+}
