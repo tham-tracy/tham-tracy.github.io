@@ -1,8 +1,8 @@
-title: "Fintech Product Portfolio — Tracy Le"
-tagline: "Fintech product cases"
+title: "Tracy Le · Fintech Product Manager"
+tagline: "Fintech product manager"
 description: >-
-  Product management case studies in fintech and digital assets —
-  Aura wealth management platform and the TCBS loan management system.
+  Tracy Le, product manager for wealth, investment and digital-asset
+  products. Case studies, research method and domain notes.
 author: "Tracy Le"
 url: "https://tham-tracy.github.io"
 baseurl: ""
@@ -22,16 +22,34 @@ sass:
 links:
   email: "thamle54.ftu@gmail.com"
   github: "https://github.com/tham-tracy"
-  linkedin: ""   # add your LinkedIn URL
+  linkedin: "https://www.linkedin.com/in/tracyleth/"
 
 # --- Top navigation (rendered by _includes/nav.html) ---
 nav:
-  - title: "Portfolio"
+  - title: "Home"
     url: "/"
+  - title: "About"
+    url: "/about/"
   - title: "Aura"
     url: "/work/aura/"
   - title: "TCBS"
     url: "/work/tcbs-loan-management/"
+  - title: "How I research"
+    url: "/research/"
+  - title: "Domain notes"
+    url: "/notes/"
+
+# --- Domain notes (one Markdown file per note in _notes/) ---
+collections:
+  notes:
+    output: true
+    permalink: /notes/:name/
+
+defaults:
+  - scope:
+      type: notes
+    values:
+      layout: note
 
 # --- Exclude from the built site ---
 exclude:
@@ -43,3 +61,4 @@ exclude:
   - vendor
   - .claude
   - scratchpad
+  - docs

@@ -352,3 +352,87 @@ td { background: var(--white); color: var(--ink-2); font-size: .94rem; }
   .case-visual { break-inside: avoid; }
   .device { box-shadow: none; }
 }
+
+/* Navigation - six entries wrap on narrow screens */
+.site-nav ul { flex-wrap: wrap; justify-content: flex-end; row-gap: .5rem; }
+@media (max-width: 42rem) {
+  .site-nav .wrap { flex-direction: column; align-items: flex-start; gap: .55rem; padding-block: .75rem; }
+  .site-nav ul { justify-content: flex-start; column-gap: .95rem; }
+}
+
+/* About */
+.about-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.6rem; margin-top: 2.2rem; }
+.about-actions .text-link { margin-top: 0; }
+.feature-grid.two-up { grid-template-columns: repeat(2, 1fr); }
+.feature-grid article .text-link { margin-top: .9rem; font-size: .88rem; }
+.timeline { max-width: 52rem; margin: 0; padding: 0; list-style: none; border-left: 2px solid var(--line); }
+.timeline li { position: relative; padding: 0 0 2.6rem 1.8rem; }
+.timeline li:last-child { padding-bottom: 0; }
+.timeline li::before { position: absolute; top: .3rem; left: -.45rem; width: .8rem; height: .8rem; border: 2px solid var(--aqua-deep); border-radius: 50%; background: var(--paper); content: ""; }
+.timeline li:last-child::before { background: var(--aqua-deep); }
+.timeline h3 { margin: .35rem 0 .7rem; font-size: clamp(1.15rem, 2.2vw, 1.45rem); }
+.timeline p { color: var(--ink-2); line-height: 1.6; }
+.timeline-org { margin: 0; color: var(--muted); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.timeline-badge { margin-left: .5rem; padding: .15rem .5rem; border-radius: 999px; background: var(--aqua-soft); color: var(--aqua-deep); font-size: .68rem; }
+.timeline-outcome { padding-left: .8rem; border-left: 3px solid var(--aqua); font-weight: 600; }
+.timeline .text-link { margin-top: 0; }
+.about-looking { max-width: 47rem; color: var(--ink-2); font-size: 1.08rem; line-height: 1.6; }
+.about-contact a { color: var(--aqua-deep); font-weight: 700; }
+@media (max-width: 42rem) {
+  .feature-grid.two-up { grid-template-columns: 1fr; }
+  .about-hero .hero-proof span:last-child { grid-column: 1 / -1; }
+}
+
+/* How I research */
+.method-strip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; margin: 0 0 3rem; padding: 0; overflow: hidden; list-style: none; border: 1px solid var(--line); border-radius: 1rem; background: var(--line); }
+.method-strip a { display: block; height: 100%; padding: 1.1rem; background: var(--white); color: var(--ink); font-weight: 720; text-decoration: none; }
+.method-strip a:hover { background: var(--aqua-soft); }
+.method-strip span { display: block; margin-bottom: .4rem; color: var(--aqua-deep); font-family: var(--mono); font-size: .72rem; }
+.method-steps { display: grid; gap: 1rem; }
+.method-step, .story-card { max-width: 64rem; padding: clamp(1.2rem, 3vw, 2rem); border: 1px solid var(--line); border-radius: 1.2rem; background: var(--white); }
+.method-step h3, .story-card h3 { margin: .2rem 0 1rem; font-size: clamp(1.15rem, 2.2vw, 1.45rem); }
+.method-step dl, .story-steps, .customer-grid dl { display: grid; gap: .8rem; margin: 0; }
+.method-step dl div, .story-steps div { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1rem; }
+.method-step dt, .story-steps dt, .customer-grid dt { color: var(--muted); font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.method-step dd, .story-steps dd, .customer-grid dd { margin: 0; color: var(--ink-2); font-size: .94rem; line-height: 1.55; }
+.step-callout { margin: 1.2rem 0 0; padding: .9rem 1rem; border-left: 3px solid var(--aqua); border-radius: 0 .6rem .6rem 0; background: var(--aqua-soft); color: var(--ink-2); font-size: .92rem; line-height: 1.55; }
+.tag { display: inline-block; margin-right: .5rem; padding: .1rem .5rem; border-radius: 999px; background: var(--navy); color: var(--aqua); font-size: .68rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+.story-card + .story-card { margin-top: 1rem; }
+.story-steps dt { color: var(--aqua-deep); }
+.customer-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; max-width: 64rem; }
+.customer-grid article { padding: 1.2rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--white); }
+.customer-grid h3 { margin-bottom: .2rem; }
+.customer-where { margin-bottom: 1rem; color: var(--aqua-deep); font-size: .8rem; font-weight: 700; }
+@media (max-width: 64rem) {
+  .customer-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 42rem) {
+  .method-strip { grid-template-columns: 1fr; }
+  .method-strip a { display: flex; gap: .8rem; align-items: baseline; padding: .8rem 1rem; }
+  .method-strip span { margin: 0; }
+  .method-step dl div, .story-steps div { grid-template-columns: 1fr; gap: .2rem; }
+}
+
+/* Domain notes */
+.note-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 64rem; }
+.note-card { display: flex; flex-direction: column; padding: clamp(1.2rem, 3vw, 1.8rem); border: 1px solid var(--line); border-radius: 1.2rem; background: var(--white); color: var(--ink); text-decoration: none; transition: border-color .15s; }
+.note-card:hover { border-color: var(--aqua-deep); }
+.note-card h2 { margin: .6rem 0 .7rem; font-size: clamp(1.25rem, 2.4vw, 1.6rem); }
+.note-card p { color: var(--ink-2); font-size: .94rem; line-height: 1.55; }
+.note-card-meta { display: flex; align-items: center; color: var(--muted); font-size: .78rem; }
+.note-card-cta { margin-top: auto; color: var(--aqua-deep); font-weight: 720; }
+.note-header { padding-top: clamp(3.5rem, 8vw, 6.5rem); padding-bottom: 1.5rem; }
+.note-header h1 { max-width: 52rem; font-size: clamp(2.4rem, 6vw, 4.6rem); }
+.note-body { max-width: var(--prose); padding-bottom: 2rem; }
+.note-body h2 { margin-top: 3rem; margin-bottom: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: clamp(1.5rem, 3vw, 2.1rem); }
+.note-body p, .note-body li { color: var(--ink-2); line-height: 1.65; }
+.note-body a { color: var(--aqua-deep); }
+.note-back { padding-bottom: 4rem; }
+@media (max-width: 42rem) {
+  .note-grid { grid-template-columns: 1fr; }
+}
+
+/* Home additions */
+.work-intro { padding-bottom: 0; }
+.work-intro .section-heading { margin-bottom: 0; }
+.trueprofit-card .impact-grid dd { font-size: 1.15rem; }
