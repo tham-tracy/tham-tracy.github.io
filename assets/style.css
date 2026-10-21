@@ -352,3 +352,10 @@ td { background: var(--white); color: var(--ink-2); font-size: .94rem; }
   .case-visual { break-inside: avoid; }
   .device { box-shadow: none; }
 }
+
+/* Navigation - six entries wrap on narrow screens */
+.site-nav ul { flex-wrap: wrap; justify-content: flex-end; row-gap: .5rem; }
+@media (max-width: 42rem) {
+  .site-nav .wrap { flex-direction: column; align-items: flex-start; gap: .55rem; padding-block: .75rem; }
+  .site-nav ul { justify-content: flex-start; column-gap: .95rem; }
+}

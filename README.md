@@ -11,7 +11,11 @@ native build (no Actions workflow).
 | `index.md` | Portfolio summary — the page to link from a resume or LinkedIn. Prints to a clean PDF. |
 | `work/aura.md` | Case study: Aura wealth management platform. |
 | `work/tcbs-loan-management.md` | Case study: TCBS margin and loan management system. |
-| `_layouts/` | `default`, `summary`, `case-study` templates. |
+| `about.md` | About page - career path, strengths, how I work, contact. |
+| `research.md` | How I research - method and research stories. |
+| `notes/index.md` | Domain notes index. |
+| `_notes/` | One Markdown file per domain note (Jekyll collection). |
+| `_layouts/` | `default`, `summary`, `case-study`, `note` templates. |
 | `_includes/nav.html` | Top navigation. |
 | `assets/style.css` | The entire stylesheet — hand-written, no framework. |
 | `assets/img/` | Sanitised screenshots and diagrams. |
