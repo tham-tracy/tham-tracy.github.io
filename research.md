@@ -77,7 +77,7 @@ description: "How Tracy Le finds and validates customer problems before building
         <div><dt>Methods</dt><dd>Prototype tests, staged rollouts, adoption and support-volume metrics, follow-up interviews.</dd></div>
         <div><dt>Pitfalls</dt><dd>Measuring output (features shipped) instead of outcome (problems solved).</dd></div>
       </dl>
-      <p class="step-callout"><span class="tag">TrueProfit</span> [confirm: how the TikTok Shop app or chatbot was validated - e.g. beta sellers, adoption metric]</p>
+      <p class="step-callout"><span class="tag">TrueProfit</span> We launched the TikTok Shop app in one and a half months and tracked adoption: 200 customers within two months.</p>
     </article>
   </div>
 </section>
@@ -92,10 +92,10 @@ description: "How Tracy Le finds and validates customer problems before building
     <p class="eyebrow">FireGroup · TrueProfit</p>
     <h3>Bringing net-profit reporting to TikTok Shop sellers</h3>
     <dl class="story-steps">
-      <div><dt>Signal</dt><dd>TrueProfit helped Shopify store owners see their real net profit. [confirm: what showed sellers needed the same for TikTok Shop - requests, market growth, churn?]</dd></div>
-      <div><dt>Research</dt><dd>[confirm: who you talked to - TikTok Shop sellers, existing Shopify customers selling on both - and what data you looked at]</dd></div>
-      <div><dt>Insight</dt><dd>[confirm: the key difference you found between TikTok Shop and Shopify sellers - e.g. fees, settlement, data access]</dd></div>
-      <div><dt>Decision</dt><dd>Build a dedicated TrueProfit app for TikTok Shop sellers. [confirm: what was in and out of the first version]</dd></div>
+      <div><dt>Signal</dt><dd>TrueProfit helped Shopify store owners see their real net profit, and some of those sellers were expanding their business to TikTok Shop.</dd></div>
+      <div><dt>Research</dt><dd>I interviewed current TrueProfit customers who were expanding from Shopify to TikTok Shop. I also reached out to TikTok Shop sellers we knew in the market, offering free use of the product in return for an interview.</dd></div>
+      <div><dt>Insight</dt><dd>TikTok Shop's app marketplace was new, and a TikTok Shop seller's business model can differ from a Shopify seller's, so we couldn't simply copy the Shopify app.</dd></div>
+      <div><dt>Decision</dt><dd>Build a TrueProfit app for TikTok Shop from scratch. The first version focused on Shopify sellers expanding to TikTok Shop, or shifting their business there to do dropshipping.</dd></div>
       <div><dt>Result</dt><dd>Launched in one and a half months, and reached 200 customers within two months.</dd></div>
     </dl>
   </article>
@@ -104,10 +104,10 @@ description: "How Tracy Le finds and validates customer problems before building
     <p class="eyebrow">FireGroup · TrueProfit</p>
     <h3>Building an AI chatbot for profit questions</h3>
     <dl class="story-steps">
-      <div><dt>Signal</dt><dd>[confirm: what prompted the chatbot - support questions, users struggling to read reports?]</dd></div>
+      <div><dt>Signal</dt><dd>Getting a quick answer meant going to the reporting section and reading a report, and new sellers also had to work through set-up. [confirm: what prompted the chatbot - support questions, user feedback?]</dd></div>
       <div><dt>Research</dt><dd>[confirm: how you learned what sellers would ask it]</dd></div>
       <div><dt>Insight</dt><dd>[confirm: the core insight about what sellers needed from the chatbot]</dd></div>
-      <div><dt>Decision</dt><dd>[confirm: scope of the first version and how you kept answers trustworthy]</dd></div>
+      <div><dt>Decision</dt><dd>Build an interactive chatbot that helps sellers with set-up and answers reporting questions directly. A seller can ask "What is my profit trend over the week?" and get the report in the chat, instead of going to the reporting section.</dd></div>
       <div><dt>Result</dt><dd>[confirm: outcome]</dd></div>
     </dl>
   </article>
