@@ -85,7 +85,7 @@ description: "Tracy Le, product manager for wealth, investment and digital-asset
   </div>
   <div class="about-looking">
     <p>Wealth management, investment, brokerage and digital-asset products - especially where customer trust, money movement and operational complexity meet.</p>
-    <p>Based in Ho Chi Minh City. [confirm: open to remote / relocation?]</p>
+    <p>Based in Ho Chi Minh City. Open to remote work and relocation.</p>
   </div>
 </section>
 
