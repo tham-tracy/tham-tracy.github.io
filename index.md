@@ -1,19 +1,30 @@
 ---
 layout: summary
-title: "Fintech product case studies"
-description: "Product case studies covering Aura, a digital-asset wealth platform, and the TCBS loan management system."
+title: "Tracy Le · Fintech Product Manager"
+description: "Tracy Le, fintech product manager: case studies from Aura, TCBS and TrueProfit, a research method and digital-asset domain notes."
 ---
 
 <section class="portfolio-hero">
-  <p class="eyebrow">Fintech product portfolio</p>
+  <p class="eyebrow">Tracy Le · Product Manager</p>
   <h1>Products that move money,<br><span>and earn trust.</span></h1>
-  <p class="lede">Two product case studies spanning digital-asset wealth and large-scale financial infrastructure - from customer experience to the operational systems behind it.</p>
+  <p class="lede">I build wealth, investment and digital-asset products - from the customer experience to the operational systems behind it. Here is the work, how I research it, and what I know about the domain.</p>
   <div class="hero-proof" aria-label="Portfolio highlights">
-    <span><strong>02</strong> case studies</span>
+    <span><strong>3</strong> companies</span>
     <span><strong>4 months</strong> Aura initial launch</span>
     <span><strong>≈900K</strong> TCBS customers migrated</span>
   </div>
+  <div class="about-actions">
+    <a class="button-link" href="{{ '/about/' | relative_url }}">About me <span aria-hidden="true">→</span></a>
+    <a class="text-link" href="#work">See my work <span aria-hidden="true">↓</span></a>
+  </div>
 </section>
+
+<div class="portfolio-section work-intro" id="work">
+  <div class="section-heading">
+    <p class="eyebrow">Selected work</p>
+    <h2>Case studies</h2>
+  </div>
+</div>
 
 <section class="featured-case">
   <div class="featured-copy">
@@ -57,14 +68,44 @@ description: "Product case studies covering Aura, a digital-asset wealth platfor
 
 <section class="portfolio-section">
   <div class="section-heading">
+    <p class="eyebrow">E-commerce analytics · FireGroup</p>
+    <h2>TrueProfit</h2>
+  </div>
+  <div class="tcbs-card trueprofit-card">
+    <div>
+      <p class="case-tagline">Net-profit analytics for Shopify &amp; TikTok Shop sellers, plus an AI assistant. I improved the existing Shopify app, built a TrueProfit app for TikTok Shop sellers and built an AI chatbot.</p>
+      <a class="text-link" href="{{ '/research/' | relative_url }}#trueprofit-tiktok">Read the TrueProfit research stories <span aria-hidden="true">→</span></a>
+    </div>
+    <dl class="impact-grid">
+      <div><dt>Customers</dt><dd>SMB sellers</dd></div>
+      <div><dt>Channels</dt><dd>Shopify, TikTok Shop</dd></div>
+      <div><dt>New products</dt><dd>TikTok Shop app &amp; AI chatbot</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="portfolio-section">
+  <div class="section-heading">
+    <p class="eyebrow">How I work</p>
+    <h2>Behind the case studies</h2>
+  </div>
+  <div class="feature-grid two-up">
+    <article><h3>How I research</h3><p>A five-step method from signal to validated decision, with real stories from TrueProfit, Aura and TCBS.</p><a class="text-link" href="{{ '/research/' | relative_url }}">See the method <span aria-hidden="true">→</span></a></article>
+    <article><h3>Domain notes</h3><p>Custody, on/off-ramps, stablecoins and yield products - explained from a product angle.</p><a class="text-link" href="{{ '/notes/' | relative_url }}">Read the notes <span aria-hidden="true">→</span></a></article>
+  </div>
+</section>
+
+<section class="portfolio-section">
+  <div class="section-heading">
     <p class="eyebrow">What these cases show</p>
     <h2>Product principles in practice</h2>
   </div>
   <div class="feature-grid">
-    <article><h3>Progressive complexity</h3><p>Simple entry points alongside advanced capabilities: Convert with conditional orders, fixed yield with market-linked products.</p></article>
-    <article><h3>Explainable finance</h3><p>Rates, ratios, balances, fees and statuses appear when they affect a decision, with the context needed to understand them.</p></article>
-    <article><h3>Service teams are users</h3><p>Search, triage and loan-detail views are designed as product experiences for the teams supporting customers.</p></article>
+    <article><h3>Progressive complexity</h3><p>Simple entry points alongside advanced capabilities.</p></article>
+    <article><h3>Explainable finance</h3><p>Rates, ratios, fees and statuses appear when they affect a decision.</p></article>
+    <article><h3>Service teams are users</h3><p>Internal tools are designed as product experiences.</p></article>
   </div>
+  <a class="text-link" href="{{ '/about/' | relative_url }}#principles">More on how I work <span aria-hidden="true">→</span></a>
 </section>
 
 <section class="portfolio-note">

@@ -431,3 +431,8 @@ td { background: var(--white); color: var(--ink-2); font-size: .94rem; }
 @media (max-width: 42rem) {
   .note-grid { grid-template-columns: 1fr; }
 }
+
+/* Home additions */
+.work-intro { padding-bottom: 0; }
+.work-intro .section-heading { margin-bottom: 0; }
+.trueprofit-card .impact-grid dd { font-size: 1.15rem; }
