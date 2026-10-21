@@ -9,7 +9,7 @@ order: 3
 ## TL;DR
 
 - A stablecoin is a token designed to track a reference asset, usually the US dollar.
-- Fiat-backed stablecoins such as USDT and USDC hold reserves of cash and short-term government debt; others use crypto collateral or algorithms.
+- Fiat-backed stablecoins such as USDT and USDC hold reserves of mostly cash equivalents and short-term government debt (Tether also holds other assets such as gold, bitcoin and secured loans); others use crypto collateral or algorithms.
 - For products, they are the bridge between banks and blockchains - but "stable" is a design goal, not a guarantee.
 
 ## How it works

@@ -17,7 +17,8 @@ order: 1
 A blockchain records which addresses hold which assets. Whoever can sign a transaction with an address's **private key** can move those assets - there is no bank to reverse a mistake. A custodian's job is to keep keys safe while still letting authorised transactions through.
 
 - **Hot wallets** keep keys on internet-connected systems. Transactions can be signed in seconds, but the attack surface is larger, so balances are usually kept small.
-- **Cold storage** keeps keys offline, for example in hardware security modules or air-gapped devices. Much safer, but moving funds needs manual, multi-person procedures that can take hours.
+- **Cold storage** keeps keys offline, for example on air-gapped devices. Much safer, but moving funds needs manual, multi-person procedures that can take hours.
+- **HSMs (hardware security modules)** are tamper-resistant hardware that protects keys and performs signing. They can run online or offline and are common in institutional set-ups.
 - **MPC (multi-party computation)** splits signing between several parties so no single device ever holds the whole key. Shares can sit with different people, machines or organisations, and a quorum must cooperate to sign. It allows policy-based approvals without one point of failure.
 
 Most institutional custodians combine these: a small hot balance for day-to-day flows, the bulk in cold or MPC-controlled storage, and policy engines that decide which path a transaction takes.
@@ -43,4 +44,4 @@ At Hex Trust, custody sat underneath Aura's **Hold** experience: portfolio value
 
 - [Cryptocurrency wallet - Wikipedia](https://en.wikipedia.org/wiki/Cryptocurrency_wallet): hot vs cold wallets and key management basics.
 - [Secure multi-party computation - Wikipedia](https://en.wikipedia.org/wiki/Secure_multi-party_computation): the cryptography behind MPC signing.
-- [Hardware security module - Wikipedia](https://en.wikipedia.org/wiki/Hardware_security_module): the devices commonly used to protect offline keys.
+- [Hardware security module - Wikipedia](https://en.wikipedia.org/wiki/Hardware_security_module): hardware that protects keys and performs signing.

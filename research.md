@@ -44,7 +44,7 @@ description: "How Tracy Le finds and validates customer problems before building
         <div><dt>Methods</dt><dd>Interviews with customers and service teams, shadowing real workflows, analysing the existing product and its data, reviewing competitor journeys.</dd></div>
         <div><dt>Pitfalls</dt><dd>Only talking to end customers when internal teams carry most of the pain; asking people what they want instead of what they do.</dd></div>
       </dl>
-      <p class="step-callout"><span class="tag">TCBS</span> I analysed the existing product and mapped the margin domain into capabilities teams could own, alongside the service teams who explain loans to customers.</p>
+      <p class="step-callout"><span class="tag">TCBS</span> I analysed the existing product and mapped the margin domain into capabilities teams could own independently. [confirm: did you also work directly with service teams?]</p>
     </article>
 
     <article class="method-step" id="insight">
@@ -117,7 +117,7 @@ description: "How Tracy Le finds and validates customer problems before building
     <h3>Yield products private-wealth clients can understand and trust</h3>
     <dl class="story-steps">
       <div><dt>Signal</dt><dd>Aura served private-wealth clients who wanted yield on digital assets. [confirm: what showed they found crypto yield hard to evaluate - RM feedback, client questions?]</dd></div>
-      <div><dt>Research</dt><dd>Compared how an investment bank's wealth platform, a centralised exchange and a private-wealth provider each present yield. [confirm: client or relationship-manager conversations]</dd></div>
+      <div><dt>Research</dt><dd>Aura sat between an investment bank's wealth platform, a centralised exchange and a private-wealth provider. [confirm: did you benchmark how those alternatives present yield, and talk to clients or relationship managers?]</dd></div>
       <div><dt>Insight</dt><dd>Clients need to know which values are promised, which are estimates, when funds are available and what conditions apply before they subscribe.</dd></div>
       <div><dt>Decision</dt><dd>Present Fixed Earn like a term deposit - fixed APY, defined term, clear maturity conditions - and keep market-linked Variable and Strategy products visibly separate, with exit terms shown before confirmation.</dd></div>
       <div><dt>Result</dt><dd>Earn is live in Aura: before confirming, clients see the subscription cutoff time and when a redemption will settle.</dd></div>
@@ -150,7 +150,7 @@ description: "How Tracy Le finds and validates customer problems before building
       <p class="customer-where">TrueProfit</p>
       <dl>
         <div><dt>They care about</dt><dd>Knowing their real profit after fees, ads and costs - quickly, without spreadsheets.</dd></div>
-        <div><dt>Research them by</dt><dd>Short calls and in-app feedback; they are busy owners, so respect their time and look at their actual data.</dd></div>
+        <div><dt>Good ways to research them</dt><dd>Short calls and in-app feedback; they are busy owners, so respect their time and look at their actual data.</dd></div>
       </dl>
     </article>
     <article>
@@ -158,7 +158,7 @@ description: "How Tracy Le finds and validates customer problems before building
       <p class="customer-where">Aura</p>
       <dl>
         <div><dt>They care about</dt><dd>Safety of assets, clarity of terms and a service experience that matches their bank.</dd></div>
-        <div><dt>Research them by</dt><dd>Working through relationship managers, and testing how clearly terms, rates and settlement times read.</dd></div>
+        <div><dt>Good ways to research them</dt><dd>Working through relationship managers, and testing how clearly terms, rates and settlement times read.</dd></div>
       </dl>
     </article>
     <article>
@@ -166,7 +166,7 @@ description: "How Tracy Le finds and validates customer problems before building
       <p class="customer-where">TCBS</p>
       <dl>
         <div><dt>They care about</dt><dd>Investors: purchasing power and loan status they can trust. Ops: finding the right case and acting on it fast.</dd></div>
-        <div><dt>Research them by</dt><dd>Sitting with service teams, tracing real cases end to end, and treating internal tools as product.</dd></div>
+        <div><dt>Good ways to research them</dt><dd>Sitting with service teams, tracing real cases end to end, and treating internal tools as product.</dd></div>
       </dl>
     </article>
   </div>
