@@ -14,7 +14,7 @@ order: 4
 
 ## How it works
 
-**Staking.** Proof-of-stake blockchains reward holders who lock tokens to help validate the network. Rewards vary with network conditions, and unstaking can involve a waiting period.
+**Staking.** Proof-of-stake blockchains reward holders who lock tokens to help validate the network. Rewards vary with network conditions, and unstaking can involve a waiting period. Validators that misbehave can be **slashed**, losing part of the staked tokens.
 
 **Lending.** Assets are lent to borrowers - trading firms, or on-chain lending protocols - who pay interest. Rates move with demand, and the lender takes on the risk that a borrower or protocol fails.
 
@@ -26,7 +26,7 @@ Platforms package these into products with a term (flexible or fixed), a display
 
 - **Return:** what will I actually earn, and is it guaranteed?
 - **Access:** when can I get my money back, and what does it cost to exit early?
-- **Risk:** what happens to my principal if markets fall or a counterparty fails?
+- **Risk:** what happens to my principal if markets fall, a counterparty fails, a validator is slashed, or a smart-contract bug or exploit hits the protocol?
 
 ## Product implications
 
@@ -42,5 +42,5 @@ Aura's Earn offered Fixed Earn, presented like a term deposit, alongside market-
 ## Further reading
 
 - [Ethereum staking - ethereum.org](https://ethereum.org/en/staking/): how staking works on the largest proof-of-stake network.
-- [Proof of stake - Wikipedia](https://en.wikipedia.org/wiki/Proof_of_stake): where staking rewards come from.
-- [Decentralized finance - Wikipedia](https://en.wikipedia.org/wiki/Decentralized_finance): on-chain lending and its risks.
+- [Proof-of-stake rewards and penalties - ethereum.org](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/rewards-and-penalties/): where staking rewards come from, and how slashing works.
+- [DeFi risks and the decentralisation illusion - BIS](https://www.bis.org/publ/qtrpdf/r_qt2112b.htm): a central-bank analysis of on-chain lending and its risks.

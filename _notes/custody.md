@@ -42,6 +42,6 @@ At Hex Trust, custody sat underneath Aura's **Hold** experience: portfolio value
 
 ## Further reading
 
-- [Cryptocurrency wallet - Wikipedia](https://en.wikipedia.org/wiki/Cryptocurrency_wallet): hot vs cold wallets and key management basics.
-- [Secure multi-party computation - Wikipedia](https://en.wikipedia.org/wiki/Secure_multi-party_computation): the cryptography behind MPC signing.
-- [Hardware security module - Wikipedia](https://en.wikipedia.org/wiki/Hardware_security_module): hardware that protects keys and performs signing.
+- [Securing your wallet - bitcoin.org](https://bitcoin.org/en/secure-your-wallet): online vs offline key storage, backups and multi-signature.
+- [Multi-Party Threshold Cryptography - NIST](https://csrc.nist.gov/projects/threshold-cryptography): NIST's project on the threshold schemes behind MPC signing.
+- [FIPS 140-3 - NIST](https://csrc.nist.gov/pubs/fips/140-3/final): the security standard HSMs and other cryptographic modules are certified against.
