@@ -42,7 +42,7 @@ Aura used stablecoins as the bridge for fiat: clients deposit USD and receive US
 
 ## Further reading
 
-- [Stablecoin - Wikipedia](https://en.wikipedia.org/wiki/Stablecoin): overview of designs and notable depeg events.
+- [MAS finalises stablecoin regulatory framework](https://www.mas.gov.sg/news/media-releases/2023/mas-finalises-stablecoin-regulatory-framework): Singapore's rules on reserve backing, redemption and disclosure for single-currency stablecoins.
 - [Circle - USDC transparency](https://www.circle.com/transparency): an issuer's reserve reporting.
 - [Tether - transparency](https://tether.to/en/transparency/): an issuer's reserve reporting.
 - [BIS Annual Economic Report 2025, chapter III](https://www.bis.org/publ/arpdf/ar2025e3.htm): a central-bank view of stablecoins' role in the monetary system.

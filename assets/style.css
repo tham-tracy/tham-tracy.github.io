@@ -436,3 +436,8 @@ td { background: var(--white); color: var(--ink-2); font-size: .94rem; }
 .work-intro { padding-bottom: 0; }
 .work-intro .section-heading { margin-bottom: 0; }
 .trueprofit-card .impact-grid dd { font-size: 1.15rem; }
+
+/* Phone: stacked sticky nav is taller, so in-page anchors need more offset */
+@media (max-width: 42rem) {
+  html { scroll-padding-top: 8rem; }
+}

@@ -12,7 +12,7 @@ description: "Tracy Le, product manager for wealth, investment and digital-asset
   <div class="hero-proof" aria-label="At a glance">
     <span><strong>≈900K</strong> customers migrated</span>
     <span><strong>4 months</strong> to launch Aura</span>
-    <span><strong>3</strong> fintech products</span>
+    <span><strong>3</strong> products</span>
     <span><strong>B2C · B2B · internal</strong> users</span>
   </div>
   <div class="about-actions">

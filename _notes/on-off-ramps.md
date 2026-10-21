@@ -43,6 +43,5 @@ Aura's on-ramp lets clients deposit USD and receive USDT; its off-ramp lets them
 
 ## Further reading
 
-- [Know your customer - Wikipedia](https://en.wikipedia.org/wiki/Know_your_customer): the identity checks behind every regulated ramp.
-- [Wire transfer - Wikipedia](https://en.wikipedia.org/wiki/Wire_transfer): how the bank rails under most ramps work.
-- [Cryptocurrency exchange - Wikipedia](https://en.wikipedia.org/wiki/Cryptocurrency_exchange): where ramps sit in the wider market.
+- [FinCEN guidance on convertible virtual currency business models](https://www.fincen.gov/resources/statutes-regulations/guidance/application-fincens-regulations-certain-business-models): how US money-transmission and AML rules apply to platforms that exchange fiat and digital assets.
+- [Fedwire Funds Service - Federal Reserve](https://www.federalreserve.gov/paymentsystems/fedfunds_about.htm): the US wire system behind many USD deposits and withdrawals, including its operating hours.
