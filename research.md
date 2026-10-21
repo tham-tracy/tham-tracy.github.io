@@ -44,7 +44,7 @@ description: "How Tracy Le finds and validates customer problems before building
         <div><dt>Methods</dt><dd>Interviews with customers and service teams, shadowing real workflows, analysing the existing product and its data, reviewing competitor journeys.</dd></div>
         <div><dt>Pitfalls</dt><dd>Only talking to end customers when internal teams carry most of the pain; asking people what they want instead of what they do.</dd></div>
       </dl>
-      <p class="step-callout"><span class="tag">TCBS</span> I analysed the existing product and mapped the margin domain into capabilities teams could own independently. [confirm: did you also work directly with service teams?]</p>
+      <p class="step-callout"><span class="tag">TCBS</span> I analysed the existing product, mapped the margin domain into capabilities teams could own independently, and sat with service teams to collect their feedback.</p>
     </article>
 
     <article class="method-step" id="insight">
@@ -104,11 +104,11 @@ description: "How Tracy Le finds and validates customer problems before building
     <p class="eyebrow">FireGroup · TrueProfit</p>
     <h3>Building an AI chatbot for profit questions</h3>
     <dl class="story-steps">
-      <div><dt>Signal</dt><dd>Getting a quick answer meant going to the reporting section and reading a report, and new sellers also had to work through set-up. [confirm: what prompted the chatbot - support questions, user feedback?]</dd></div>
-      <div><dt>Research</dt><dd>[confirm: how you learned what sellers would ask it]</dd></div>
+      <div><dt>Signal</dt><dd>Getting a quick answer meant going to the reporting section and reading a report, and new sellers also had to work through set-up.</dd></div>
+      <div><dt>Research</dt><dd>We gathered what sellers actually ask: our customer-success chat history with users since launch, plus the use cases we expected sellers to bring to the app.</dd></div>
       <div><dt>Insight</dt><dd>Sellers wanted to grab their numbers quickly, without navigating the reporting section to find them.</dd></div>
-      <div><dt>Decision</dt><dd>Build an interactive chatbot that helps sellers with set-up and answers reporting questions directly. A seller can ask "What is my profit trend over the week?" and get the report in the chat, instead of going to the reporting section.</dd></div>
-      <div><dt>Result</dt><dd>[confirm: outcome]</dd></div>
+      <div><dt>Decision</dt><dd>Build an interactive chatbot that helps sellers with set-up and answers reporting questions directly. A seller can ask "What is my profit trend over the week?" and get the report in the chat, instead of going to the reporting section. We built it as a RAG (retrieval-augmented generation) model over our app knowledge and customer-success chat history.</dd></div>
+      <div><dt>Result</dt><dd>We wrote about 100 use-case chats and tested 30 of them, with a 90% accuracy bar before release. We then A/B tested, launched to active users and kept improving it from their feedback.</dd></div>
     </dl>
   </article>
 
@@ -116,8 +116,8 @@ description: "How Tracy Le finds and validates customer problems before building
     <p class="eyebrow">Hex Trust · Aura</p>
     <h3>Yield products private-wealth clients can understand and trust</h3>
     <dl class="story-steps">
-      <div><dt>Signal</dt><dd>Aura served private-wealth clients who wanted yield on digital assets. [confirm: what showed they found crypto yield hard to evaluate - RM feedback, client questions?]</dd></div>
-      <div><dt>Research</dt><dd>Aura sat between an investment bank's wealth platform, a centralised exchange and a private-wealth provider. [confirm: did you benchmark how those alternatives present yield, and talk to clients or relationship managers?]</dd></div>
+      <div><dt>Signal</dt><dd>Aura showed Fixed and Variable Earn products side by side, each with a different yield. Even when the variable product offered a quite competitive yield, clients still chose fixed.</dd></div>
+      <div><dt>Research</dt><dd>I researched how other platforms present earn products, from straightforward ones to very complicated ones. Relationship managers sat with us every week to share how introducing yield products felt and how clients talked about them.</dd></div>
       <div><dt>Insight</dt><dd>Clients need to know which values are promised, which are estimates, when funds are available and what conditions apply before they subscribe.</dd></div>
       <div><dt>Decision</dt><dd>Present Fixed Earn like a term deposit - fixed APY, defined term, clear maturity conditions - and keep market-linked Variable and Strategy products visibly separate, with exit terms shown before confirmation.</dd></div>
       <div><dt>Result</dt><dd>Earn is live in Aura: before confirming, clients see the subscription cutoff time and when a redemption will settle.</dd></div>
@@ -130,7 +130,7 @@ description: "How Tracy Le finds and validates customer problems before building
     <h3>Service teams are users too</h3>
     <dl class="story-steps">
       <div><dt>Signal</dt><dd>Higher market activity exposed slow product changes and limited operational visibility in the margin lending system.</dd></div>
-      <div><dt>Research</dt><dd>Analysed the existing product and how service teams found loans, worked out what customers owed and took the next action. [confirm: interviews or shadowing sessions with service teams]</dd></div>
+      <div><dt>Research</dt><dd>Analysed the existing product, then sat and worked directly with service teams to collect their feedback on how they found loans, worked out what customers owed and took the next action. We then aligned with them on what to deliver.</dd></div>
       <div><dt>Insight</dt><dd>Service teams were piecing information together across systems to answer a single customer question - so customers got slow, unclear answers.</dd></div>
       <div><dt>Decision</dt><dd>Design loan search, triage and detail views as a product: status first, paid vs. remaining, and traceable actions in one place.</dd></div>
       <div><dt>Result</dt><dd>Part of a seven-month redesign that migrated approximately 900,000 customers across seven teams, without rollback.</dd></div>
