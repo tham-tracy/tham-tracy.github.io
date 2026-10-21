@@ -96,7 +96,7 @@ description: "How Tracy Le finds and validates customer problems before building
       <div><dt>Research</dt><dd>[confirm: who you talked to - TikTok Shop sellers, existing Shopify customers selling on both - and what data you looked at]</dd></div>
       <div><dt>Insight</dt><dd>[confirm: the key difference you found between TikTok Shop and Shopify sellers - e.g. fees, settlement, data access]</dd></div>
       <div><dt>Decision</dt><dd>Build a dedicated TrueProfit app for TikTok Shop sellers. [confirm: what was in and out of the first version]</dd></div>
-      <div><dt>Result</dt><dd>[confirm: outcome - launch, adoption, feedback]</dd></div>
+      <div><dt>Result</dt><dd>Launched in one and a half months, and reached 200 customers within two months.</dd></div>
     </dl>
   </article>
 
