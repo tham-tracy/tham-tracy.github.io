@@ -77,7 +77,7 @@ description: "How Tracy Le finds and validates customer problems before building
         <div><dt>Methods</dt><dd>Prototype tests, staged rollouts, adoption and support-volume metrics, follow-up interviews.</dd></div>
         <div><dt>Pitfalls</dt><dd>Measuring output (features shipped) instead of outcome (problems solved).</dd></div>
       </dl>
-      <p class="step-callout"><span class="tag">TrueProfit</span> We launched the TikTok Shop app in one and a half months and tracked adoption: 200 customers within two months.</p>
+      <p class="step-callout"><span class="tag">TrueProfit</span> We launched the TikTok Shop app in one and a half months and tracked adoption: 200 customers within two months of launch.</p>
     </article>
   </div>
 </section>
@@ -96,7 +96,7 @@ description: "How Tracy Le finds and validates customer problems before building
       <div><dt>Research</dt><dd>I interviewed current TrueProfit customers who were expanding from Shopify to TikTok Shop. I also reached out to TikTok Shop sellers we knew in the market, offering free use of the product in return for an interview.</dd></div>
       <div><dt>Insight</dt><dd>TikTok Shop's app marketplace was new, and a TikTok Shop seller's business model can differ from a Shopify seller's, so we couldn't simply copy the Shopify app.</dd></div>
       <div><dt>Decision</dt><dd>Build a TrueProfit app for TikTok Shop from scratch. The first version focused on Shopify sellers expanding to TikTok Shop, or shifting their business there to do dropshipping.</dd></div>
-      <div><dt>Result</dt><dd>Launched in one and a half months, and reached 200 customers within two months.</dd></div>
+      <div><dt>Result</dt><dd>Launched in one and a half months, and reached 200 customers within two months of launch.</dd></div>
     </dl>
   </article>
 

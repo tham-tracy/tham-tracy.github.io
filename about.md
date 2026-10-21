@@ -39,7 +39,7 @@ description: "Tracy Le, product manager for wealth, investment and digital-asset
       <p class="timeline-org">FireGroup · TrueProfit</p>
       <h3>Product Manager - profit analytics for e-commerce sellers</h3>
       <p>Improved TrueProfit, which collects business data for Shopify store owners and turns it into a net-profit report. Built a TrueProfit app for TikTok Shop sellers and an AI chatbot that helps sellers with set-up and answers reporting questions, such as their profit trend over the week.</p>
-      <p class="timeline-outcome">Launched the TikTok Shop app in one and a half months, and reached 200 customers within two months.</p>
+      <p class="timeline-outcome">Launched the TikTok Shop app in one and a half months, and reached 200 customers within two months of launch.</p>
       <a class="text-link" href="{{ '/research/' | relative_url }}#trueprofit-tiktok">Read the TrueProfit research stories <span aria-hidden="true">→</span></a>
     </li>
     <li>
