@@ -106,7 +106,7 @@ description: "How Tracy Le finds and validates customer problems before building
     <dl class="story-steps">
       <div><dt>Signal</dt><dd>Getting a quick answer meant going to the reporting section and reading a report, and new sellers also had to work through set-up. [confirm: what prompted the chatbot - support questions, user feedback?]</dd></div>
       <div><dt>Research</dt><dd>[confirm: how you learned what sellers would ask it]</dd></div>
-      <div><dt>Insight</dt><dd>[confirm: the core insight about what sellers needed from the chatbot]</dd></div>
+      <div><dt>Insight</dt><dd>Sellers wanted to grab their numbers quickly, without navigating the reporting section to find them.</dd></div>
       <div><dt>Decision</dt><dd>Build an interactive chatbot that helps sellers with set-up and answers reporting questions directly. A seller can ask "What is my profit trend over the week?" and get the report in the chat, instead of going to the reporting section.</dd></div>
       <div><dt>Result</dt><dd>[confirm: outcome]</dd></div>
     </dl>
