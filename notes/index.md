@@ -2,13 +2,13 @@
 layout: summary
 title: "Domain notes"
 permalink: /notes/
-description: "Short notes on how digital-asset infrastructure shapes product decisions - custody, on/off-ramps, stablecoins and yield."
+description: "Short notes on how digital-asset infrastructure shapes product decisions - custody, on/off-ramps, stablecoins, yield and trading APIs."
 ---
 
 <section class="portfolio-hero">
   <p class="eyebrow">Domain notes</p>
   <h1>Digital-asset infrastructure,<br><span>from a product angle.</span></h1>
-  <p class="lede">Notes I keep on how the plumbing of digital assets - custody, fiat rails, stablecoins and yield - shapes what customers experience and the product decisions behind it.</p>
+  <p class="lede">Notes I keep on how the plumbing of digital assets - custody, fiat rails, stablecoins, yield and trading APIs - shapes what customers experience and the product decisions behind it.</p>
 </section>
 
 <section class="portfolio-section">
