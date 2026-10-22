@@ -61,7 +61,7 @@ description: "Tracy Le, product manager for wealth, investment and digital-asset
     <article><h3>Finding the real problem</h3><p>I start from customer and operational signals before writing a requirement - private-wealth clients, retail investors, merchants and the teams who serve them.</p><a class="text-link" href="{{ '/research/' | relative_url }}">How I research <span aria-hidden="true">→</span></a></article>
     <article><h3>Explainable financial UX</h3><p>Rates, ratios, balances, fees and settlement times appear when they affect a decision, with the context needed to trust them.</p><a class="text-link" href="{{ '/work/aura/' | relative_url }}">See it in Aura <span aria-hidden="true">→</span></a></article>
     <article><h3>Complex platform delivery</h3><p>Domain modelling, cross-team integration and migration planning - treating a cutover as a product outcome, not just a release.</p><a class="text-link" href="{{ '/work/tcbs-loan-management/' | relative_url }}">See it in TCBS <span aria-hidden="true">→</span></a></article>
-    <article><h3>Digital-asset domain depth</h3><p>Custody, fiat on/off-ramps, stablecoins and yield products, understood at the level of the product decisions they drive.</p><a class="text-link" href="{{ '/notes/' | relative_url }}">Read my domain notes <span aria-hidden="true">→</span></a></article>
+    <article><h3>Digital-asset domain depth</h3><p>Custody, fiat on/off-ramps, stablecoins, yield products and trading APIs, understood at the level of the product decisions they drive.</p><a class="text-link" href="{{ '/notes/' | relative_url }}">Read my domain notes <span aria-hidden="true">→</span></a></article>
   </div>
 </section>
 
