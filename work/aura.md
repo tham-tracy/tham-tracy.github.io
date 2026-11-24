@@ -39,6 +39,8 @@ clients entering the category.
 **My scope.** Product direction and delivery for both the client-facing app and the internal admin tools, across the full product lifecycle: white-label launch, live operations, in-house rebuild, and migration of live clients to the new platform.
 </div>
 
+<p class="prototype-cta"><a class="button-link" href="{{ '/prototypes/aura/' | relative_url }}">Try the clickable prototype <span aria-hidden="true">↗</span></a> <small>Earn, Convert, Spot and the USD on/off-ramp, with demo data.</small></p>
+
 ## Product position
 
 Aura sits between three familiar alternatives: an investment bank's wealth

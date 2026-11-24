@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrueProfit prototype · Tracy Le</title>
+<meta name="description" content="Clickable prototype of TrueProfit for TikTok Shop: onboarding, net-profit dashboard, ads, shipping and product costs, settings and the AI assistant. Demo data.">
+<meta property="og:title" content="TrueProfit prototype · Tracy Le">
+<meta property="og:description" content="Clickable prototype of TrueProfit for TikTok Shop: onboarding, net-profit dashboard and AI assistant. Demo data.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0b1113;--ink-2:#243033;--muted:#617073;--line:#dce5e3;--paper:#f7f8f3;--white:#fff;
+  --aqua:#39e6cb;--aqua-deep:#008f7a;--aqua-soft:#dffaf4;--navy:#071b22;
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  /* app tokens */
+  --t-bg:#f5f6fa;--t-card:#fff;--t-line:#e6e8ef;--t-ink:#1b1f2a;--t-muted:#6b7280;
+  --t-brand:#4f46e5;--t-brand-soft:#eef0ff;--t-pos:#16a34a;--t-pos-soft:#e8f7ee;--t-neg:#dc2626;--t-neg-soft:#fdecec;--t-warn:#b45309;--t-warn-soft:#fff6e5;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+td.n,.kpi .v,.wf .amt,.costin,.dp-btn{font-variant-numeric:tabular-nums}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit;text-underline-offset:.2em}
+
+/* Page shell */
+.top{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem clamp(1rem,4vw,2.4rem);border-bottom:1px solid var(--line);background:rgba(247,248,243,.9);position:sticky;top:0;z-index:20;backdrop-filter:blur(14px)}
+.top a{text-decoration:none;font-weight:600}
+.top .back{color:var(--aqua-deep)}
+.top .other{font-size:.9rem;color:var(--muted)}
+.stage{display:grid;grid-template-columns:300px minmax(0,1fr);gap:clamp(1.5rem,3vw,3rem);max-width:92rem;margin:0 auto;padding:2rem clamp(1rem,4vw,2.4rem) 4rem;align-items:start}
+.panel{position:sticky;top:5.5rem}
+.eyebrow{margin:0 0 .8rem;color:var(--aqua-deep);font-size:.74rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,2.6rem);line-height:1.05;letter-spacing:-.03em;font-weight:700}
+.lede{color:var(--ink-2);margin:0 0 1.2rem}
+.flows{list-style:none;padding:0;margin:0 0 1.2rem;display:grid;gap:.4rem}
+.flows button{width:100%;text-align:left;display:flex;gap:.8rem;align-items:baseline;padding:.55rem .9rem;border:1px solid var(--line);border-radius:10px;background:var(--white)}
+.flows button span{font-family:var(--mono);font-size:.72rem;color:var(--aqua-deep)}
+.flows button b{font-weight:600;font-size:.94rem}
+.flows button small{display:block;color:var(--muted);font-size:.8rem;font-weight:400}
+.flows button[aria-current="true"]{border-color:var(--aqua-deep);box-shadow:0 0 0 1px var(--aqua-deep);background:var(--aqua-soft)}
+.note{border-left:3px solid var(--aqua);background:var(--white);padding:1rem 1.2rem;border-radius:0 12px 12px 0;min-height:7rem}
+.note h2{font-size:1rem;margin:0 0 .4rem;letter-spacing:-.01em;font-weight:650}
+.note p{margin:0;color:var(--ink-2);font-size:.92rem}
+.disclaimer{margin-top:1.2rem;font-size:.8rem;color:var(--muted)}
+
+/* Browser frame */
+.browser{border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 30px 70px -30px rgba(7,27,34,.4);border:1px solid #d9dde3}
+.chrome{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#eceef1;border-bottom:1px solid #d9dde3}
+.dots{display:flex;gap:6px}.dots i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
+.url{flex:1;background:#fff;border-radius:8px;padding:4px 12px;font-size:12.5px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app{position:relative;display:grid;grid-template-columns:212px minmax(0,1fr);height:min(800px, calc(100vh - 8rem));min-height:640px;background:var(--t-bg);color:var(--t-ink);font-size:13.5px;overflow:hidden}
+.app.bare{grid-template-columns:1fr}
+
+/* App sidebar */
+.side{background:#fff;border-right:1px solid var(--t-line);padding:16px 12px;display:flex;flex-direction:column;gap:2px;overflow-y:auto}
+.logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15.5px;padding:4px 8px 16px;letter-spacing:-.01em}
+.logo i{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--t-brand),#22c3a6);display:grid;place-items:center;color:#fff;font-style:normal;font-size:12px;font-weight:700}
+.logo small{display:block;font-weight:500;font-size:11px;color:var(--t-muted)}
+.side .grp{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9ca3af;padding:12px 10px 4px}
+.side button{border:0;background:none;text-align:left;padding:8px 10px;border-radius:8px;display:flex;align-items:center;gap:10px;color:#374151;font-weight:500}
+.side button svg{width:17px;height:17px;flex:none}
+.side button:hover{background:#f6f7fb}
+.side button[aria-current="true"]{background:var(--t-brand-soft);color:var(--t-brand);font-weight:600}
+.side .spacer{flex:1;min-height:12px}
+.side .ai-cta{background:linear-gradient(135deg,var(--t-brand),#7c3aed);color:#fff;font-weight:600;justify-content:center}
+.side .ai-cta:hover{background:linear-gradient(135deg,#4338ca,#6d28d9)}
+.main{overflow-y:auto;padding:22px 26px 30px;min-width:0}
+.mhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.mhead h2{margin:0;font-size:19px;letter-spacing:-.015em;font-weight:650}
+.mhead p{margin:2px 0 0;color:var(--t-muted);font-size:12.5px}
+.card{background:var(--t-card);border:1px solid var(--t-line);border-radius:12px;padding:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.kpi .l{font-size:12px;color:var(--t-muted);font-weight:500}
+.kpi .v{font-size:22px;font-weight:700;letter-spacing:-.02em;margin:4px 0 2px}
+.kpi .d{font-size:11.5px}
+.kpi.hero{border-color:var(--t-brand);box-shadow:0 0 0 1px var(--t-brand) inset}
+.pos{color:var(--t-pos)}.neg{color:var(--t-neg)}.muted{color:var(--t-muted)}
+.grid2{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:14px;margin-bottom:14px}
+.card h3{margin:0 0 12px;font-size:14px;font-weight:650}
+.wf{display:grid;gap:7px}
+.wf .r{display:grid;grid-template-columns:130px minmax(0,1fr) 84px;align-items:center;gap:10px;font-size:12.5px}
+.wf .bar{height:14px;border-radius:4px;background:#f0f1f5;position:relative;overflow:hidden}
+.wf .bar i{position:absolute;top:0;bottom:0;border-radius:4px}
+.wf .amt{text-align:right}
+.wf .total{font-weight:650;border-top:1px solid var(--t-line);padding-top:8px}
+.banner{display:flex;gap:12px;align-items:center;justify-content:space-between;background:var(--t-warn-soft);color:var(--t-warn);border:1px solid #f6d9a8;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:13px}
+.btn{border:0;border-radius:9px;padding:9px 16px;font-weight:600;background:var(--t-brand);color:#fff}
+.btn.sec{background:#fff;color:var(--t-ink);border:1px solid var(--t-line)}
+.btn.sm{padding:6px 12px;font-size:12.5px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;font-weight:600;color:var(--t-muted);font-size:11.5px;padding:8px 10px;border-bottom:1px solid var(--t-line);background:#fafbfc;white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid var(--t-line)}
+td.n,th.n{text-align:right}
+.tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.tag.ok{background:var(--t-pos-soft);color:var(--t-pos)}.tag.warn{background:var(--t-warn-soft);color:var(--t-warn)}.tag.off{background:#f1f2f4;color:#6b7280}
+.costin,.txt{border:1px solid var(--t-line);border-radius:7px;padding:5px 8px;background:#fff}
+.costin{width:88px;text-align:right}
+.costin.missing{border-color:#f0b860;background:var(--t-warn-soft)}
+.tablewrap{overflow-x:auto}
+.form{display:grid;gap:14px}
+.frow{display:grid;grid-template-columns:200px minmax(0,1fr);gap:12px;align-items:start}
+.frow > label,.frow > span:first-child{font-weight:550;font-size:13px;padding-top:6px}
+.frow small{display:block;color:var(--t-muted);font-weight:400;font-size:11.5px}
+.radio{display:grid;gap:8px}
+.radio label{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--t-line);border-radius:10px;padding:10px 12px;cursor:pointer}
+.radio label.on{border-color:var(--t-brand);background:var(--t-brand-soft)}
+.radio input{accent-color:var(--t-brand);margin-top:3px}
+.radio b{font-weight:600}
+.switch{appearance:none;width:34px;height:20px;border-radius:20px;background:#d1d5db;position:relative;cursor:pointer;flex:none;transition:background .15s}
+.switch::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .15s}
+.switch:checked{background:var(--t-brand)}.switch:checked::after{left:16px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--t-muted);margin-bottom:6px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+
+/* Date filter */
+.dp{position:relative}
+.dp-btn{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--t-line);border-radius:9px;padding:7px 12px;font-size:13px}
+.dp-btn b{font-weight:600}
+.dp-btn svg{width:15px;height:15px;color:var(--t-muted)}
+.dp-pop{position:absolute;right:0;top:calc(100% + 6px);z-index:4;background:#fff;border:1px solid var(--t-line);border-radius:12px;box-shadow:0 18px 40px -16px rgba(0,0,0,.25);display:grid;grid-template-columns:150px 230px;overflow:hidden}
+.dp-pop[hidden]{display:none}
+.dp-pre{border-right:1px solid var(--t-line);padding:6px;display:grid;align-content:start}
+.dp-pre button{border:0;background:none;text-align:left;padding:7px 10px;border-radius:7px;font-size:13px}
+.dp-pre button:hover{background:#f6f7fb}
+.dp-pre button[aria-pressed="true"]{background:var(--t-brand-soft);color:var(--t-brand);font-weight:600}
+.dp-cus{padding:14px;display:grid;gap:10px;align-content:start;font-size:12.5px}
+.dp-cus label{display:grid;gap:4px;color:var(--t-muted)}
+.dp-cus input{border:1px solid var(--t-line);border-radius:7px;padding:6px 8px;color:var(--t-ink)}
+.dp-cus .err{color:var(--t-neg);min-height:1em;margin:0}
+
+/* Onboarding */
+.onb{display:grid;place-items:center;padding:30px 20px;overflow-y:auto}
+.onb-card{background:#fff;border:1px solid var(--t-line);border-radius:16px;padding:28px;width:min(560px,100%)}
+.steps{display:flex;gap:8px;margin-bottom:22px}
+.steps div{flex:1;height:5px;border-radius:3px;background:#e5e7eb}
+.steps div.on{background:var(--t-brand)}
+.onb-card h2{margin:0 0 6px;font-size:21px;letter-spacing:-.02em;font-weight:650}
+.prog{height:10px;border-radius:6px;background:#eef0f4;overflow:hidden;margin:18px 0 8px}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--t-brand),#22c3a6);width:0;transition:width .3s}
+.checks{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px;font-size:13.5px}
+.checks li::before{content:"○ ";color:#9ca3af}
+.checks li.done::before{content:"✓ ";color:var(--t-pos);font-weight:700}
+.shop{display:flex;gap:12px;align-items:center;border:1px solid var(--t-line);border-radius:12px;padding:14px;margin:18px 0}
+.shop b{display:block;font-weight:600}
+.tt{width:38px;height:38px;border-radius:10px;background:#111;color:#fff;display:grid;place-items:center;font-weight:700}
+
+/* AI drawer */
+.drawer{position:absolute;top:0;right:0;bottom:0;width:min(380px,100%);background:#fff;border-left:1px solid var(--t-line);box-shadow:-20px 0 40px -20px rgba(0,0,0,.2);display:flex;flex-direction:column;transform:translateX(105%);transition:transform .25s;z-index:5}
+.drawer.open{transform:none}
+.dhead{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--t-line)}
+.dhead b{display:flex;gap:8px;align-items:center;font-weight:650}
+.dhead .x{border:0;background:#f3f4f6;border-radius:8px;width:30px;height:30px}
+.msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:92%;padding:10px 12px;border-radius:12px;font-size:13px;line-height:1.5}
+.msg.u{align-self:flex-end;background:var(--t-brand);color:#fff;border-bottom-right-radius:4px}
+.msg.b{align-self:flex-start;background:#f3f4f8;border-bottom-left-radius:4px}
+.msg.b table{background:#fff;border-radius:8px;margin-top:8px}
+.msg.b .btn{margin-top:8px}
+.msg ol{margin:6px 0 0;padding-left:18px}
+.typing{color:var(--t-muted);font-size:12.5px}
+.sugg{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
+.sugg button{border:1px solid var(--t-line);background:#fff;border-radius:20px;padding:5px 10px;font-size:12px;text-align:left}
+.ask{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--t-line)}
+.ask input{flex:1;border:1px solid var(--t-line);border-radius:9px;padding:8px 10px;min-width:0}
+.dfoot{font-size:11px;color:var(--t-muted);padding:0 16px 12px;margin:0}
+.toast{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);background:#111;color:#fff;padding:8px 14px;border-radius:9px;font-size:12.5px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9;max-width:90%}
+.toast.show{opacity:1}
+
+@media (max-width: 1100px){
+  .stage{grid-template-columns:1fr}
+  .panel{position:static;order:2}
+  .browser{order:1}
+  .flows{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media (max-width: 760px){
+  .stage{padding-inline:0}
+  .panel{padding-inline:16px}
+  .browser{border-radius:0;border-inline:0}
+  .app{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);height:calc(100svh - 120px)}
+  .side{flex-direction:row;overflow-x:auto;overflow-y:hidden;padding:8px;border-right:0;border-bottom:1px solid var(--t-line);gap:2px}
+  .side .logo,.side .spacer,.side .grp{display:none}
+  .side button{white-space:nowrap;padding:7px 9px;font-size:13px}
+  .side button svg{display:none}
+  .main{padding:16px}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid2{grid-template-columns:1fr}
+  .wf .r{grid-template-columns:100px minmax(0,1fr) 72px}
+  .frow{grid-template-columns:1fr}
+  .dp-pop{grid-template-columns:1fr;right:auto;left:0;width:min(300px,calc(100vw - 48px))}
+  .dp-pre{border-right:0;border-bottom:1px solid var(--t-line);grid-template-columns:1fr 1fr}
+  .top .other{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="back" href="/research/#trueprofit-tiktok">← TrueProfit research stories</a>
+  <a class="other" href="/prototypes/aura/">Aura prototype →</a>
+</header>
+
+<main class="stage">
+  <section class="panel" aria-label="About this prototype">
+    <p class="eyebrow">Interactive prototype · FireGroup</p>
+    <h1>TrueProfit for TikTok Shop</h1>
+    <p class="lede">A net-profit app for TikTok Shop sellers, with an AI assistant. Start from onboarding or jump to a flow; the note explains why each screen works the way it does.</p>
+    <ul class="flows" id="flows"></ul>
+    <div class="note" aria-live="polite">
+      <h2 id="note-title"></h2>
+      <p id="note-body"></p>
+    </div>
+    <p class="disclaimer">Reconstructed for this portfolio; not the production UI. The shop, products, orders, campaigns, fee rates and every number are demo data. Assistant answers are scripted for the demo.</p>
+  </section>
+
+  <div class="browser">
+    <div class="chrome" aria-hidden="true"><div class="dots"><i></i><i></i><i></i></div><div class="url" id="url">app.trueprofit.demo/onboarding</div></div>
+    <div class="app" id="app"></div>
+  </div>
+</main>
+
+<script>
+(function(){
+  // ---------- Demo data (seeded, so every visitor sees the same shop) ----------
+  var seed = 7; function rnd(){ seed = (seed*16807) % 2147483647; return (seed-1)/2147483646; }
+  var PRODUCTS = [
+    {sku:'LB-01', name:'Hydrating lip balm (3-pack)', price:14.99, cost:null, suggested:3.20},
+    {sku:'SR-02', name:'Vitamin C face serum 30ml', price:24.90, cost:null, suggested:6.10},
+    {sku:'SM-03', name:'Silk sleep mask', price:12.50, cost:null, suggested:2.40},
+    {sku:'HC-04', name:'Claw hair clips (6-pack)', price:9.99, cost:null, suggested:1.70}
+  ];
+  var CAMPAIGNS = [
+    {name:'GMV Max · always-on', roas:3.4, color:'#4f46e5'},
+    {name:'Spark Ads · creator videos', roas:2.3, color:'#22c3a6'},
+    {name:'LIVE & flash-sale promos', roas:1.1, color:'#f59e0b'}
+  ];
+  var CFG = {
+    feeRate: 8, shipMode: 'settlement', flat: 2.50, tz: 'America/Los_Angeles (PT)', currency: 'USD',
+    fixed: [{name:'Packaging supplies', amount:180, on:true},{name:'Virtual assistant', amount:400, on:false}],
+    adsInProfit: true
+  };
+  var AFF_RATE = 0.10, NDAYS = 90;
+  var DAYS = [];
+  (function build(){
+    var today = new Date(); today.setHours(0,0,0,0);
+    for (var i=NDAYS-1;i>=0;i--){
+      var d = new Date(today); d.setDate(d.getDate()-i);
+      var dow = d.getDay(), base = 18 + (NDAYS-1-i)*0.3 + (dow===5||dow===6?10:0) + rnd()*10;
+      var orders = [], n = Math.round(base);
+      for (var k=0;k<n;k++){
+        var p = Math.floor(rnd()*4), qty = rnd()<0.18?2:1, aff = rnd()<0.35;
+        orders.push({p:p, qty:qty, aff:aff, ship:1.6 + rnd()*1.3, id:'57'+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+String(k).padStart(3,'0')});
+      }
+      var ads = [70 + rnd()*30, 30 + rnd()*20, (dow===5||dow===6?25:5) + rnd()*10 + (i===3?380:0)];
+      DAYS.push({date:d, orders:orders, ads:ads});
+    }
+  })();
+  var LAST = DAYS.length-1;
+
+  var S = {screen:'onb-connect', range:{key:'7d', from:LAST-6, to:LAST}, dpOpen:false, syncPct:0, connected:false, ai:false, chat:[]};
+
+  // ---------- Calculations ----------
+  function unit(p){ return p.cost==null ? 0 : p.cost }
+  function shipOf(o){ return CFG.shipMode==='flat' ? CFG.flat : o.ship }
+  function adsOf(d){ return d.ads[0]+d.ads[1]+d.ads[2] }
+  function fixedPerDay(){ return CFG.fixed.filter(function(f){return f.on}).reduce(function(a,f){return a+f.amount},0)*12/365 }
+  function orderCalc(o){ var p = PRODUCTS[o.p], rev = p.price*o.qty; return {rev:rev, fee:rev*CFG.feeRate/100, aff:o.aff?rev*AFF_RATE:0, ship:shipOf(o), cogs:unit(p)*o.qty} }
+  function calc(days){
+    var t = {revenue:0, fees:0, aff:0, ship:0, cogs:0, ads:0, other:0, orders:0, units:0};
+    days.forEach(function(d){
+      if (CFG.adsInProfit) t.ads += adsOf(d);
+      t.other += fixedPerDay();
+      d.orders.forEach(function(o){ var c = orderCalc(o); t.revenue += c.rev; t.fees += c.fee; t.aff += c.aff; t.ship += c.ship; t.cogs += c.cogs; t.orders++; t.units += o.qty; });
+    });
+    t.profit = t.revenue - t.fees - t.aff - t.ship - t.cogs - t.ads - t.other;
+    t.margin = t.revenue ? t.profit/t.revenue : 0;
+    return t;
+  }
+  function sel(){ return DAYS.slice(S.range.from, S.range.to+1) }
+  function prevSel(){ var L = S.range.to-S.range.from+1, f = S.range.from-L; return f<0 ? null : DAYS.slice(f, S.range.from) }
+  function last(n, offset){ offset = offset||0; return DAYS.slice(DAYS.length-n-offset, DAYS.length-offset) }
+  function money(n){ return (n<0?'-$':'$') + Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) }
+  function money0(n){ return (n<0?'-$':'$') + Math.round(Math.abs(n)).toLocaleString('en-US') }
+  function pct(n){ return (n*100).toFixed(1)+'%' }
+  function day(d){ return d.toLocaleDateString('en-GB',{weekday:'short', day:'numeric', month:'short'}) }
+  function short(d){ return d.toLocaleDateString('en-GB',{day:'numeric', month:'short'}) }
+  function iso(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0') }
+  function missing(){ return PRODUCTS.filter(function(p){return p.cost==null}).length }
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+  // ---------- Date filter ----------
+  var PRESETS = [['today','Today'],['yesterday','Yesterday'],['7d','Last 7 days'],['14d','Last 14 days'],['30d','Last 30 days'],['month','This month'],['lastmonth','Last month'],['90d','Last 90 days']];
+  function presetRange(k){
+    if (k==='today') return {from:LAST, to:LAST};
+    if (k==='yesterday') return {from:LAST-1, to:LAST-1};
+    if (k==='7d') return {from:LAST-6, to:LAST};
+    if (k==='14d') return {from:LAST-13, to:LAST};
+    if (k==='30d') return {from:LAST-29, to:LAST};
+    if (k==='90d') return {from:0, to:LAST};
+    var now = DAYS[LAST].date;
+    if (k==='month'){ var f = LAST - (now.getDate()-1); return {from:Math.max(0,f), to:LAST}; }
+    if (k==='lastmonth'){ var end = LAST - now.getDate(), start = end - (DAYS[end].date.getDate()-1); return {from:Math.max(0,start), to:end}; }
+  }
+  function rangeLabel(){
+    var r = S.range, p = PRESETS.filter(function(x){return x[0]===r.key})[0];
+    var a = DAYS[r.from].date, b = DAYS[r.to].date;
+    return '<b>'+(p?p[1]:'Custom')+'</b><span class="muted">'+(r.from===r.to?short(a):short(a)+' – '+short(b))+'</span>';
+  }
+  function datePicker(){
+    return '<div class="dp"><button class="dp-btn" id="dpbtn" aria-haspopup="true" aria-expanded="'+S.dpOpen+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>'+rangeLabel()+'<span class="muted">▾</span></button>'
+      + '<div class="dp-pop" id="dppop" '+(S.dpOpen?'':'hidden')+'><div class="dp-pre">'+PRESETS.map(function(p){return '<button data-preset="'+p[0]+'" aria-pressed="'+(S.range.key===p[0])+'">'+p[1]+'</button>'}).join('')+'</div>'
+      + '<div class="dp-cus"><b style="color:var(--t-ink)">Custom range</b><label>From<input type="date" id="dpfrom" min="'+iso(DAYS[0].date)+'" max="'+iso(DAYS[LAST].date)+'" value="'+iso(DAYS[S.range.from].date)+'"></label>'
+      + '<label>To<input type="date" id="dpto" min="'+iso(DAYS[0].date)+'" max="'+iso(DAYS[LAST].date)+'" value="'+iso(DAYS[S.range.to].date)+'"></label>'
+      + '<p class="err" id="dperr"></p><button class="btn sm" id="dpapply">Apply</button><span class="muted" style="font-size:11.5px">Changes are compared with the previous period of the same length. Demo data covers the last 90 days.</span></div></div></div>';
+  }
+  function idxOf(v){ for (var i=0;i<DAYS.length;i++) if (iso(DAYS[i].date)===v) return i; return -1 }
+
+  // ---------- Copy ----------
+  var NOTES = {
+    'onb-connect': ['Start with the shop, not a form', 'The first version focused on Shopify sellers expanding to TikTok Shop, or moving there to dropship. The first step is a single authorisation; everything else is pulled from the shop.'],
+    'onb-sync': ['Onboarding has a clear finish line', 'We counted a seller as onboarded once the shop was connected and the data had synced. The progress list shows exactly what is being imported so the wait feels like progress.'],
+    'onb-costs': ['Costs are what make profit "true"', 'TikTok Shop does not know what a product costs the seller. Product costs are the one thing they must add, so the step offers suggested values and lets them skip and come back.'],
+    dashboard: ['Net profit first', 'The dashboard leads with net profit and margin, then shows where the money goes: platform fees, affiliate commission, shipping, product costs, ads and other costs. The date filter compares every number with the previous period of the same length.'],
+    orders: ['Profit per order', 'Each order shows its own fees, shipping, product cost and profit, so a seller can see which orders actually made money, not only which ones sold.'],
+    ads: ['Profit after ads, not just ROAS', 'Ad spend is pulled in by campaign and subtracted from profit. A campaign can show a healthy-looking ROAS and still lose money once fees, shipping and product costs are counted, so the table shows both.'],
+    costs: ['Fix the input, see the effect', 'Editing a product cost recalculates every report straight away. Missing costs are highlighted rather than silently treated as zero.'],
+    shipping: ['Shipping without waiting for settlements', 'Sellers can use the actual shipping fee from TikTok settlements, or a flat estimate per order. Switching the method updates profit across the app.'],
+    settings: ['Everything else that affects profit', 'Fee rates, the reporting time zone and fixed monthly costs live in one place. Fixed costs are spread evenly across days, so any date range carries its fair share.'],
+    ai: ['Ask instead of digging', 'Getting a quick number used to mean finding the right report. The assistant answers in the chat, with the chart or table inline, and helps with set-up. The real assistant was RAG-based over app knowledge and customer-success chats; here, answers are scripted but computed from the demo shop.']
+  };
+  var FLOWS = [
+    ['onb-connect','Onboarding','Connect, sync, add costs'],
+    ['dashboard','Profit dashboard','Net profit with a date filter'],
+    ['orders','Orders','Profit per order'],
+    ['costs','Product costs','Edit costs, reports update'],
+    ['shipping','Shipping costs','Actual fees or a flat estimate'],
+    ['ads','Marketing ads','Spend, ROAS and profit by campaign'],
+    ['settings','Settings','Fees, time zone, fixed costs'],
+    ['ai','AI assistant','Ask about profit in chat']
+  ];
+  var IC = {
+    dash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
+    orders:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>',
+    ads:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10v4h4l6 4V6L7 10z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg>',
+    cost:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 12l-8 8-9-9V3h8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>',
+    ship:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>',
+    gear:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
+    spark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg>'
+  };
+
+  var app = document.getElementById('app');
+
+  // ---------- Onboarding ----------
+  function onbShell(step, body){
+    return '<div class="onb"><div class="onb-card"><div class="steps">'+[1,2,3].map(function(i){return '<div class="'+(i<=step?'on':'')+'"></div>'}).join('')+'</div>'+body+'</div></div>';
+  }
+  var R = {};
+  R['onb-connect'] = function(){
+    return onbShell(1, '<p class="muted" style="margin:0 0 4px;font-size:12.5px">Step 1 of 3</p><h2>Connect your TikTok Shop</h2>'
+      + '<p class="muted" style="margin:0">We import orders, fees, affiliate commissions and shipping so you can see your real net profit.</p>'
+      + '<div class="shop"><span class="tt">♪</span><span style="flex:1"><b>Glow Demo Store</b><span class="muted" style="font-size:12.5px">TikTok Shop · US</span></span><span class="tag '+(S.connected?'ok':'warn')+'">'+(S.connected?'Authorised':'Not connected')+'</span></div>'
+      + '<button class="btn" id="connect" style="width:100%">'+(S.connected?'Continue':'Authorise TikTok Shop')+'</button>'
+      + '<p class="muted" style="font-size:12px;margin:10px 0 0">Read-only access. We never change your listings or orders.</p>');
+  };
+  R['onb-sync'] = function(){
+    var p = S.syncPct, items = [['Orders (last 90 days)',25],['Platform fees and settlements',50],['Affiliate commissions',75],['Shipping and products',100]];
+    return onbShell(2, '<p class="muted" style="margin:0 0 4px;font-size:12.5px">Step 2 of 3</p><h2>'+(p<100?'Syncing your shop data…':'Your data is ready')+'</h2>'
+      + '<div class="prog"><i style="width:'+p+'%"></i></div><p class="muted" style="font-size:12.5px;margin:0">'+p+'% · '+DAYS.reduce(function(a,d){return a+d.orders.length},0).toLocaleString()+' orders found</p>'
+      + '<ul class="checks">'+items.map(function(it){return '<li class="'+(p>=it[1]?'done':'')+'">'+it[0]+'</li>'}).join('')+'</ul>'
+      + '<button class="btn" id="tocosts" style="width:100%;margin-top:18px" '+(p<100?'disabled':'')+'>Continue</button>');
+  };
+  function costRows(compact){
+    return PRODUCTS.map(function(p,i){
+      return '<tr><td>'+esc(p.name)+'<br><span class="muted" style="font-size:11.5px">'+p.sku+' · sells at '+money(p.price)+'</span></td>'
+        + '<td class="n"><input class="costin '+(p.cost==null?'missing':'')+'" data-cost="'+i+'" inputmode="decimal" placeholder="'+p.suggested.toFixed(2)+'" value="'+(p.cost==null?'':p.cost)+'" aria-label="Cost per unit for '+esc(p.name)+'"></td>'
+        + (compact?'':'<td class="n">'+(p.cost==null?'<span class="tag warn">Missing</span>':pct((p.price-p.cost)/p.price))+'</td>')+'</tr>';
+    }).join('');
+  }
+  R['onb-costs'] = function(){
+    return onbShell(3, '<p class="muted" style="margin:0 0 4px;font-size:12.5px">Step 3 of 3</p><h2>Add your product costs</h2>'
+      + '<p class="muted" style="margin:0 0 14px">What you pay per unit. Without it, profit looks higher than it really is.</p>'
+      + '<div class="tablewrap"><table><thead><tr><th>Product</th><th class="n">Cost / unit</th></tr></thead><tbody>'+costRows(true)+'</tbody></table></div>'
+      + '<div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><button class="btn sec" id="suggest">Use suggested costs</button><span style="flex:1"></span><button class="btn sec" id="skip">Skip for now</button><button class="btn" id="finish">See my profit</button></div>');
+  };
+
+  // ---------- Charts ----------
+  function every(n){ return n<=8 ? 1 : Math.ceil(n/7) }
+  function trendSvg(days, h, fn, color){
+    h = h||150; fn = fn || function(d){return calc([d]).profit};
+    var w = 520, vals = days.map(fn), max = Math.max.apply(null, vals.concat([1])), min = Math.min.apply(null, vals.concat([0]));
+    var bw = w/vals.length, zero = 10 + (max/(max-min))*(h-30), s = '', step = every(vals.length);
+    vals.forEach(function(v,i){
+      var y = 10 + (max-Math.max(v,0))/(max-min)*(h-30), hh = Math.abs(v)/(max-min)*(h-30);
+      s += '<rect x="'+(i*bw+bw*0.15)+'" y="'+(v>=0?y:zero)+'" width="'+Math.max(1,bw*0.7)+'" height="'+Math.max(hh,1)+'" rx="2" fill="'+(v>=0?(color||'#4f46e5'):'#dc2626')+'"><title>'+day(days[i].date)+': '+money(v)+'</title></rect>';
+      if (i%step===0) s += '<text x="'+(i*bw+bw/2)+'" y="'+(h-4)+'" font-size="10.5" font-family="Inter,sans-serif" text-anchor="middle" fill="#6b7280">'+(vals.length<=7?days[i].date.toLocaleDateString('en-GB',{weekday:'short'}):short(days[i].date))+'</text>';
+    });
+    return '<svg viewBox="0 0 '+w+' '+h+'" width="100%" role="img" aria-label="Daily chart"><line x1="0" x2="'+w+'" y1="'+zero+'" y2="'+zero+'" stroke="#e5e7eb"/>'+s+'</svg>';
+  }
+  function stackedAds(days){
+    var h = 150, w = 520, tot = days.map(adsOf), max = Math.max.apply(null, tot.concat([1])), bw = w/days.length, s = '', step = every(days.length);
+    days.forEach(function(d,i){
+      var y = h-20;
+      d.ads.forEach(function(v,c){ var hh = v/max*(h-30); y -= hh; s += '<rect x="'+(i*bw+bw*0.15)+'" y="'+y+'" width="'+Math.max(1,bw*0.7)+'" height="'+hh+'" fill="'+CAMPAIGNS[c].color+'"><title>'+day(d.date)+' · '+CAMPAIGNS[c].name+': '+money(v)+'</title></rect>' });
+      if (i%step===0) s += '<text x="'+(i*bw+bw/2)+'" y="'+(h-4)+'" font-size="10.5" font-family="Inter,sans-serif" text-anchor="middle" fill="#6b7280">'+(days.length<=7?d.date.toLocaleDateString('en-GB',{weekday:'short'}):short(d.date))+'</text>';
+    });
+    return '<div class="legend">'+CAMPAIGNS.map(function(c){return '<span><i style="background:'+c.color+'"></i>'+c.name+'</span>'}).join('')+'</div><svg viewBox="0 0 '+w+' '+h+'" width="100%" role="img" aria-label="Daily ad spend by campaign">'+s+'</svg>';
+  }
+  function waterfall(t){
+    var rows = [['Revenue',t.revenue,'#22c3a6'],['Platform fees',-t.fees,'#f59e0b'],['Affiliate commission',-t.aff,'#f59e0b'],['Shipping',-t.ship,'#f59e0b'],['Product costs',-t.cogs,'#f59e0b'],['Marketing ads',-t.ads,'#f59e0b']];
+    if (t.other) rows.push(['Other costs',-t.other,'#f59e0b']);
+    var html = rows.map(function(r){ var w = t.revenue ? Math.abs(r[1])/t.revenue*100 : 0;
+      return '<div class="r"><span>'+r[0]+'</span><span class="bar"><i style="left:0;width:'+Math.min(100,w)+'%;background:'+r[2]+'"></i></span><span class="amt">'+money0(r[1])+'</span></div>' }).join('');
+    return html + '<div class="r total"><span>Net profit</span><span class="bar"><i style="left:0;width:'+(t.revenue?Math.max(0,t.profit/t.revenue*100):0)+'%;background:#4f46e5"></i></span><span class="amt '+(t.profit<0?'neg':'')+'">'+money0(t.profit)+'</span></div>';
+  }
+  function delta(a,b,invert){ if(b==null || !b) return '<span class="muted">no earlier data to compare</span>'; var d=(a-b)/Math.abs(b), good = invert ? d<=0 : d>=0; return '<span class="'+(good?'pos':'neg')+'">'+(d>=0?'▲ ':'▼ ')+pct(Math.abs(d))+'</span> <span class="muted">vs previous period</span>' }
+
+  // ---------- App shell ----------
+  var NAV = [['Reports'],['dashboard','Dashboard','dash'],['orders','Orders','orders'],['Costs'],['costs','Product costs','cost'],['shipping','Shipping costs','ship'],['ads','Marketing ads','ads'],['Account'],['settings','Settings','gear']];
+  function mainShell(title, sub, body, withDate){
+    return '<aside class="side"><div class="logo"><i>TP</i><span>TrueProfit<small>for TikTok Shop</small></span></div>'
+      + NAV.map(function(n){ return n.length===1 ? '<div class="grp">'+n[0]+'</div>' : '<button data-go="'+n[0]+'" aria-current="'+(S.screen===n[0])+'">'+IC[n[2]]+n[1]+'</button>' }).join('')
+      + '<span class="spacer"></span><button class="ai-cta" data-ai>'+IC.spark+'Ask TrueProfit AI</button></aside>'
+      + '<section class="main"><div class="mhead"><div><h2>'+title+'</h2>'+(sub?'<p>'+sub+'</p>':'')+'</div>'+(withDate?datePicker():'')+'</div>'+body+'</section>';
+  }
+  function missingBanner(){
+    var m = missing(); if (!m) return '';
+    return '<div class="banner"><span><b>'+m+' product'+(m>1?'s have':' has')+' no cost.</b> Profit is overstated until you add '+(m>1?'them':'it')+'.</span><button class="btn sm" data-go="costs">Add costs</button></div>';
+  }
+  function kpiCards(k){ return '<div class="kpis">'+k.map(function(x){return '<div class="card kpi '+(x[3]?'hero':'')+'"><div class="l">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="d">'+(x[2]||'')+'</div></div>'}).join('')+'</div>' }
+
+  // ---------- Report screens ----------
+  R.dashboard = function(){
+    var cur = calc(sel()), pd = prevSel(), prev = pd ? calc(pd) : null;
+    return mainShell('Profit overview', 'Glow Demo Store · '+CFG.tz,
+      missingBanner()
+      + kpiCards([['Net profit',money(cur.profit),delta(cur.profit,prev&&prev.profit),true],['Revenue',money(cur.revenue),delta(cur.revenue,prev&&prev.revenue)],['Net margin',pct(cur.margin),'<span class="muted">profit ÷ revenue</span>'],['Orders',cur.orders.toLocaleString(),delta(cur.orders,prev&&prev.orders)]])
+      + '<div class="grid2"><div class="card"><h3>Daily net profit</h3>'+trendSvg(sel())+'</div><div class="card"><h3>Where your revenue goes</h3><div class="wf">'+waterfall(cur)+'</div></div></div>'
+      + '<div class="card" style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap"><span><b>Quick question about these numbers?</b><br><span class="muted" style="font-size:12.5px">Try "What is my profit trend over the week?"</span></span><button class="btn" data-ai data-q="What is my profit trend over the week?">Ask the assistant</button></div>', true);
+  };
+
+  R.orders = function(){
+    var rows = [], days = sel().slice().reverse();
+    days.forEach(function(d){ d.orders.forEach(function(o){ rows.push([d,o]) }) });
+    var body = rows.slice(0,50).map(function(r){
+      var o = r[1], p = PRODUCTS[o.p], c = orderCalc(o), fees = c.fee + c.aff, pr = c.rev-fees-c.ship-c.cogs;
+      return '<tr><td>#'+o.id+'<br><span class="muted" style="font-size:11px">'+day(r[0].date)+'</span></td><td>'+esc(p.name)+(o.qty>1?' ×'+o.qty:'')+(o.aff?' <span class="tag warn" title="Sold through a creator affiliate">Affiliate</span>':'')+'</td>'
+        + '<td class="n">'+money(c.rev)+'</td><td class="n">'+money(-fees)+'</td><td class="n">'+money(-c.ship)+'</td><td class="n">'+(p.cost==null?'<span class="tag warn">Missing</span>':money(-c.cogs))+'</td><td class="n '+(pr<0?'neg':'')+'"><b>'+money(pr)+'</b></td></tr>';
+    }).join('');
+    return mainShell('Orders', rows.length.toLocaleString()+' orders in this period', missingBanner() + '<div class="card" style="padding:0"><div class="tablewrap"><table><thead><tr><th>Order</th><th>Items</th><th class="n">Revenue</th><th class="n">Fees + commission</th><th class="n">Shipping</th><th class="n">Product cost</th><th class="n">Profit</th></tr></thead><tbody>'+(body||'<tr><td colspan="7" class="muted">No orders in this period.</td></tr>')+'</tbody></table></div>'
+      + '<p class="muted" style="font-size:12px;padding:10px 12px;margin:0">Showing the latest '+Math.min(50,rows.length)+' of '+rows.length.toLocaleString()+' orders. Ads and fixed costs are shop-level, so they appear on the dashboard, not per order.</p></div>', true);
+  };
+
+  R.ads = function(){
+    var days = sel(), pd = prevSel();
+    var spend = days.reduce(function(a,d){return a+adsOf(d)},0), pspend = pd ? pd.reduce(function(a,d){return a+adsOf(d)},0) : null;
+    var t = calc(days), grossBeforeAds = t.revenue - t.fees - t.aff - t.ship - t.cogs, gm = t.revenue ? grossBeforeAds/t.revenue : 0;
+    var rows = CAMPAIGNS.map(function(c,i){
+      var sp = days.reduce(function(a,d){return a+d.ads[i]},0), rev = sp*c.roas, contrib = rev*gm - sp;
+      return {c:c, sp:sp, rev:rev, roas:c.roas, profit:contrib, be: gm>0 ? 1/gm : null};
+    });
+    var attr = rows.reduce(function(a,r){return a+r.rev},0);
+    var table = rows.map(function(r){
+      return '<tr><td><i style="display:inline-block;width:9px;height:9px;border-radius:2px;background:'+r.c.color+';margin-right:7px"></i>'+r.c.name+'</td><td class="n">'+money(r.sp)+'</td><td class="n">'+money(r.rev)+'</td><td class="n">'+r.roas.toFixed(2)+'</td><td class="n">'+(r.be?r.be.toFixed(2):'–')+'</td><td class="n '+(r.profit<0?'neg':'pos')+'"><b>'+money(r.profit)+'</b></td></tr>';
+    }).join('');
+    return mainShell('Marketing ads', 'TikTok Ads Manager <span class="tag ok">Connected</span>',
+      kpiCards([['Ad spend',money(spend),delta(spend,pspend,true)],['Attributed revenue',money(attr),'<span class="muted">as reported by the ad platform</span>'],['Blended ROAS',spend?(attr/spend).toFixed(2):'–','<span class="muted">attributed revenue ÷ spend</span>'],['Break-even ROAS',gm>0?(1/gm).toFixed(2):'–','<span class="muted">1 ÷ margin before ads ('+pct(gm)+')</span>',true]])
+      + '<div class="card" style="margin-bottom:14px"><h3>Daily ad spend by campaign</h3>'+stackedAds(days)+'</div>'
+      + '<div class="card" style="padding:0"><div class="tablewrap"><table><thead><tr><th>Campaign</th><th class="n">Spend</th><th class="n">Attributed revenue</th><th class="n">ROAS</th><th class="n">Break-even ROAS</th><th class="n">Profit after ads</th></tr></thead><tbody>'+table+'</tbody></table></div>'
+      + '<p class="muted" style="font-size:12px;padding:10px 12px;margin:0">Profit after ads = attributed revenue × margin before ads − spend. A campaign below break-even ROAS loses money even if its ROAS looks positive.'+(missing()?' <span class="neg">Product costs are missing, so margins are overstated.</span>':'')+'</p></div>'
+      + '<label style="display:flex;gap:10px;align-items:center;margin-top:14px;font-size:13px"><input type="checkbox" class="switch" id="adsin" '+(CFG.adsInProfit?'checked':'')+'> Subtract ad spend in net profit reports</label>', true);
+  };
+
+  R.costs = function(){
+    return mainShell('Product costs', 'Cost per unit you pay your supplier', '<div class="card" style="padding:0"><div class="tablewrap"><table><thead><tr><th>Product</th><th class="n">Cost / unit</th><th class="n">Gross margin</th></tr></thead><tbody>'+costRows(false)+'</tbody></table></div></div>'
+      + '<p class="muted" style="font-size:12.5px">Net profit for the last 7 days with these costs: <b id="livep">'+money(calc(last(7)).profit)+'</b>. Changes apply to all reports immediately.</p>'
+      + '<button class="btn sec" id="suggest">Fill missing with suggested costs</button>');
+  };
+
+  R.shipping = function(){
+    var days = sel(), t = calc(days);
+    var opt = function(v,title,desc,extra){ return '<label class="'+(CFG.shipMode===v?'on':'')+'"><input type="radio" name="ship" value="'+v+'" '+(CFG.shipMode===v?'checked':'')+'><span><b>'+title+'</b><br><span class="muted" style="font-size:12px">'+desc+'</span>'+(extra||'')+'</span></label>' };
+    return mainShell('Shipping costs', 'How shipping is counted in profit',
+      kpiCards([['Shipping cost',money(t.ship),'<span class="muted">selected period</span>'],['Per order',t.orders?money(t.ship/t.orders):'–',''],['Share of revenue',t.revenue?pct(t.ship/t.revenue):'–',''],['Method',CFG.shipMode==='flat'?'Flat rate':'Settlement','',true]])
+      + '<div class="card"><h3>Calculation method</h3><div class="radio">'
+      + opt('settlement','Actual fee from TikTok settlements','Uses the shipping fee on each order once TikTok settles it. Most accurate.')
+      + opt('flat','Flat rate per order','Use an estimate until settlements arrive.', CFG.shipMode==='flat'?'<div style="margin-top:8px;display:flex;gap:8px;align-items:center"><span>$</span><input class="txt" id="flat" inputmode="decimal" value="'+CFG.flat.toFixed(2)+'" style="width:90px"><span class="muted" style="font-size:12px">per order</span></div>':'')
+      + '</div></div>'
+      + '<div class="card" style="margin-top:14px"><h3>Daily shipping cost</h3>'+trendSvg(days,140,function(d){return calc([d]).ship},'#22c3a6')+'</div>', true);
+  };
+
+  R.settings = function(){
+    var fixed = CFG.fixed.map(function(f,i){ return '<tr><td>'+esc(f.name)+'</td><td class="n">'+money(f.amount)+'</td><td class="n">'+money(f.amount*12/365)+'</td><td class="n"><input type="checkbox" class="switch" data-fixed="'+i+'" '+(f.on?'checked':'')+' aria-label="Include '+esc(f.name)+'"></td></tr>' }).join('');
+    return mainShell('Settings', 'Glow Demo Store',
+      '<div class="card form" style="margin-bottom:14px"><h3 style="margin:0">Shop connection</h3>'
+      + '<div class="frow"><span>TikTok Shop</span><span style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="tag ok">Connected</span><span class="muted" style="font-size:12.5px">Glow Demo Store · last synced 4 minutes ago</span><button class="btn sm sec" id="resync">Sync now</button></span></div>'
+      + '<div class="frow"><span>TikTok Ads Manager</span><span><span class="tag ok">Connected</span></span></div></div>'
+      + '<div class="card form" style="margin-bottom:14px"><h3 style="margin:0">Reporting</h3>'
+      + '<div class="frow"><label for="tz">Time zone<small>Decides which day an order counts in</small></label><select id="tz" class="txt" style="max-width:280px">'+['America/Los_Angeles (PT)','America/New_York (ET)','Europe/London (GMT)','Asia/Ho_Chi_Minh (ICT)'].map(function(z){return '<option'+(z===CFG.tz?' selected':'')+'>'+z+'</option>'}).join('')+'</select></div>'
+      + '<div class="frow"><label for="cur">Currency</label><select id="cur" class="txt" style="max-width:280px"><option>USD</option></select></div>'
+      + '<div class="frow"><label for="fee">Platform fee rate<small>Referral + transaction fees, until settlements arrive</small></label><span style="display:flex;gap:8px;align-items:center"><input id="fee" class="txt" inputmode="decimal" value="'+CFG.feeRate+'" style="width:80px"> %</span></div></div>'
+      + '<div class="card" style="padding:0"><div style="padding:16px 16px 4px"><h3 style="margin:0 0 4px">Fixed monthly costs</h3><p class="muted" style="margin:0 0 10px;font-size:12.5px">Spread evenly across days and shown as "Other costs" in profit.</p></div>'
+      + '<div class="tablewrap"><table><thead><tr><th>Cost</th><th class="n">Per month</th><th class="n">Per day</th><th class="n">Include</th></tr></thead><tbody>'+fixed+'</tbody></table></div>'
+      + '<form id="addfixed" style="display:flex;gap:8px;padding:12px 16px;flex-wrap:wrap"><input class="txt" id="fxname" placeholder="e.g. Warehouse rent" style="flex:1;min-width:140px"><input class="txt" id="fxamt" inputmode="decimal" placeholder="$ / month" style="width:110px"><button class="btn sm">Add cost</button></form></div>');
+  };
+
+  // ---------- Assistant ----------
+  var SUGG = ['What is my profit trend over the week?','Why did profit drop recently?','Which product makes the most profit?','How do I add product costs?'];
+  function answer(q){
+    var s = q.toLowerCase();
+    if (/trend|week|7 day/.test(s)){
+      var w = last(7), t = calc(w), prev = calc(last(7,7)), vals = w.map(function(d){return calc([d]).profit}), best = vals.indexOf(Math.max.apply(null,vals)), worst = vals.indexOf(Math.min.apply(null,vals));
+      var d = (t.profit-prev.profit)/Math.abs(prev.profit);
+      return 'Over the last 7 days you made <b>'+money(t.profit)+'</b> net profit on '+money(t.revenue)+' revenue ('+pct(t.margin)+' margin). That is '+(d>=0?'<span class="pos">up ':'<span class="neg">down ')+pct(Math.abs(d))+'</span> on the week before.'
+        + '<div style="background:#fff;border-radius:8px;padding:6px;margin-top:8px">'+trendSvg(w,120)+'</div>'
+        + 'Best day: <b>'+day(w[best].date)+'</b> ('+money(vals[best])+'). Weakest: <b>'+day(w[worst].date)+'</b> ('+money(vals[worst])+').'
+        + (missing()?'<br><br><span class="neg">Note: '+missing()+' products have no cost yet, so these figures are overstated.</span>':'');
+    }
+    if (/drop|why|lower|down|fall/.test(s)){
+      var w2 = last(7), vals2 = w2.map(function(d){return calc([d]).profit}), lo = vals2.indexOf(Math.min.apply(null,vals2)), dd = w2[lo];
+      var others = w2.filter(function(_,i){return i!==lo}), avgAds = others.reduce(function(a,d){return a+adsOf(d)},0)/others.length, avgOrd = others.reduce(function(a,d){return a+d.orders.length},0)/others.length;
+      var adsHigh = adsOf(dd) > avgAds*1.5, ordLow = dd.orders.length < avgOrd*0.85;
+      var why = adsHigh
+        ? 'The main reason is ad spend: <b>'+money(adsOf(dd))+'</b> that day against an average of '+money(avgAds)+' on the other days, mostly from "'+CAMPAIGNS[2].name+'". Orders held at '+dd.orders.length+', so sales were normal. <br><button class="btn sm" data-go="ads" data-closeai>Open Marketing ads</button>'
+        : ordLow
+          ? 'The main reason is fewer orders: <b>'+dd.orders.length+'</b> against an average of '+Math.round(avgOrd)+' on the other days. Ad spend was normal ('+money(adsOf(dd))+').'
+          : 'Nothing stands out: orders ('+dd.orders.length+') and ad spend ('+money(adsOf(dd))+') were close to the other days, so it is normal day-to-day variation.';
+      return 'Your lowest day this week was <b>'+day(dd.date)+'</b> at '+money(vals2[lo])+'. '+why;
+    }
+    if (/cost|cogs|set ?up|\badd\b|how do/.test(s)){
+      return 'Product costs are what you pay per unit. To add them:<ol><li>Open <b>Product costs</b> in the menu.</li><li>Enter a cost per unit for each product, or use the suggested values.</li><li>Every report updates straight away.</li></ol>'
+        + (missing()?'You have <b>'+missing()+'</b> products without a cost right now.':'All your products have a cost. Nice.')
+        + '<br><button class="btn sm" data-go="costs" data-closeai>Open Product costs</button>';
+    }
+    if (/product|best|most|sku|which/.test(s)){
+      var per = PRODUCTS.map(function(p,i){ var pr=0, units=0; last(30).forEach(function(d){ d.orders.forEach(function(o){ if(o.p===i){ var c=orderCalc(o); units+=o.qty; pr += c.rev-c.fee-c.aff-c.ship-c.cogs; } }) }); return {p:p, units:units, profit:pr} }).sort(function(a,b){return b.profit-a.profit});
+      return 'Profit by product over the last 30 days, before ads:'
+        + '<table><thead><tr><th>Product</th><th class="n">Units</th><th class="n">Profit</th></tr></thead><tbody>'+per.map(function(r){return '<tr><td>'+esc(r.p.name)+(r.p.cost==null?' <span class="tag warn">no cost</span>':'')+'</td><td class="n">'+r.units+'</td><td class="n">'+money0(r.profit)+'</td></tr>'}).join('')+'</tbody></table>'
+        + '<br><b>'+esc(per[0].p.name)+'</b> is your top earner.';
+    }
+    return 'In this demo I can answer questions about your profit trend, why profit dropped, your best products, and how to add product costs. Try one of the suggestions below.';
+  }
+  function drawer(){
+    var msgs = S.chat.map(function(m){return '<div class="msg '+m.who+'">'+m.html+'</div>'}).join('') || '<div class="msg b">Hi! I can answer questions about your shop\'s profit and help you finish set-up. What would you like to know?</div>';
+    return '<div class="drawer '+(S.ai?'open':'')+'" id="drawer" role="dialog" aria-label="TrueProfit AI assistant"><div class="dhead"><b>'+IC.spark.replace('<svg','<svg width="18" height="18"')+'TrueProfit AI</b><button class="x" id="closeai" aria-label="Close assistant">✕</button></div>'
+      + '<div class="msgs" id="msgs">'+msgs+'</div>'
+      + '<div class="sugg">'+SUGG.map(function(q){return '<button data-q="'+esc(q)+'">'+q+'</button>'}).join('')+'</div>'
+      + '<form class="ask" id="ask"><input id="askin" placeholder="Ask about your profit…" autocomplete="off"><button class="btn sm">Send</button></form>'
+      + '<p class="dfoot">Demo: answers are scripted, but the numbers come from this demo shop.</p></div>';
+  }
+  function ask(q){
+    if (!q) return;
+    S.chat.push({who:'u', html:esc(q)});
+    S.chat.push({who:'b', html:'<span class="typing">Thinking…</span>', pending:true});
+    renderDrawer();
+    setTimeout(function(){ var m = S.chat.filter(function(x){return x.pending})[0]; if(!m) return; m.html = answer(q); delete m.pending; renderDrawer(); }, 650);
+  }
+  function renderDrawer(){
+    var old = document.getElementById('drawer'); if (old) old.remove();
+    app.insertAdjacentHTML('beforeend', drawer());
+    var m = document.getElementById('msgs'); m.scrollTop = m.scrollHeight;
+    document.getElementById('ask').addEventListener('submit', function(e){ e.preventDefault(); var i=document.getElementById('askin'); ask(i.value.trim()); });
+    document.getElementById('closeai').addEventListener('click', function(){ S.ai=false; document.getElementById('drawer').classList.remove('open'); setNote(S.screen); renderFlows(); });
+  }
+
+  // ---------- Router ----------
+  var URLS = {'onb-connect':'onboarding','onb-sync':'onboarding/sync','onb-costs':'onboarding/costs',dashboard:'dashboard',orders:'orders',ads:'costs/marketing-ads',costs:'costs/products',shipping:'costs/shipping',settings:'settings'};
+  function setNote(k){ var n = NOTES[k]; document.getElementById('note-title').textContent = n[0]; document.getElementById('note-body').textContent = n[1]; }
+  function renderFlows(){
+    var cur = S.ai ? 'ai' : (S.screen.indexOf('onb')===0 ? 'onb-connect' : S.screen);
+    document.getElementById('flows').innerHTML = FLOWS.map(function(f,i){return '<li><button data-flow="'+f[0]+'" aria-current="'+(cur===f[0])+'"><span>0'+(i+1)+'</span><b>'+f[1]+'<small>'+f[2]+'</small></b></button></li>'}).join('');
+  }
+  function toast(msg){ var t=document.getElementById('toast'); if(!t) return; t.textContent=msg; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('show')},2000) }
+  function render(){
+    var onb = S.screen.indexOf('onb')===0, main = app.querySelector('.main'), y = main ? main.scrollTop : 0, same = render._last === S.screen;
+    app.classList.toggle('bare', onb);
+    app.innerHTML = R[S.screen]() + '<div class="toast" id="toast" role="status"></div>';
+    if (same && app.querySelector('.main')) app.querySelector('.main').scrollTop = y;
+    render._last = S.screen;
+    document.getElementById('url').textContent = 'app.trueprofit.demo/' + URLS[S.screen];
+    if (!onb) renderDrawer();
+    setNote(S.ai ? 'ai' : S.screen); renderFlows(); bind();
+  }
+  function go(s){ S.screen = s; S.dpOpen = false; render(); }
+  function openAI(q){
+    if (S.screen.indexOf('onb')===0){ finishOnboarding(true) }
+    S.ai = true; render();
+    if (q) ask(q);
+    setTimeout(function(){ var i=document.getElementById('askin'); if(i) i.focus({preventScroll:true}) }, 260);
+  }
+  function finishOnboarding(silent){ S.connected = true; S.syncPct = 100; if(!silent) go('dashboard'); else S.screen='dashboard'; }
+
+  function bind(){
+    function on(id, ev, fn){ var e = document.getElementById(id); if (e) e.addEventListener(ev, fn); }
+    on('connect','click', function(){
+      if (!S.connected){ S.connected = true; render(); return; }
+      go('onb-sync');
+      if (S.syncPct<100){ var t = setInterval(function(){ S.syncPct = Math.min(100, S.syncPct+5); if (S.screen!=='onb-sync'){ clearInterval(t); return } render(); if (S.syncPct>=100) clearInterval(t); }, 110); }
+    });
+    on('tocosts','click', function(){ go('onb-costs') });
+    on('suggest','click', function(){ PRODUCTS.forEach(function(p){ if(p.cost==null) p.cost=p.suggested }); render(); });
+    on('skip','click', function(){ go('dashboard') });
+    on('finish','click', function(){ go('dashboard') });
+    app.querySelectorAll('[data-cost]').forEach(function(inp){
+      inp.addEventListener('change', function(){ var v = parseFloat(inp.value.replace(/[^0-9.]/g,'')); PRODUCTS[+inp.dataset.cost].cost = isNaN(v) ? null : v; render(); });
+      inp.addEventListener('input', function(){
+        var v = parseFloat(inp.value.replace(/[^0-9.]/g,'')); PRODUCTS[+inp.dataset.cost].cost = isNaN(v) ? null : v;
+        inp.classList.toggle('missing', isNaN(v)); var lp = document.getElementById('livep'); if (lp) lp.textContent = money(calc(last(7)).profit);
+      });
+    });
+    // Date filter
+    on('dpbtn','click', function(e){ e.stopPropagation(); S.dpOpen = !S.dpOpen; document.getElementById('dppop').hidden = !S.dpOpen; this.setAttribute('aria-expanded', S.dpOpen); });
+    app.querySelectorAll('[data-preset]').forEach(function(b){ b.addEventListener('click', function(){ var r = presetRange(b.dataset.preset); S.range = {key:b.dataset.preset, from:r.from, to:r.to}; S.dpOpen=false; render(); }) });
+    on('dpapply','click', function(){
+      var f = idxOf(document.getElementById('dpfrom').value), t = idxOf(document.getElementById('dpto').value), err = document.getElementById('dperr');
+      if (f<0 || t<0) { err.textContent = 'Pick dates within the last 90 days.'; return; }
+      if (f>t) { err.textContent = 'Start date must be before end date.'; return; }
+      S.range = {key:'custom', from:f, to:t}; S.dpOpen=false; render();
+    });
+    var pop = document.getElementById('dppop'); if (pop) pop.addEventListener('click', function(e){ e.stopPropagation() });
+    // Ads / shipping / settings
+    on('adsin','change', function(){ CFG.adsInProfit = this.checked; toast(CFG.adsInProfit?'Ad spend is subtracted in profit reports':'Ad spend is excluded from profit reports'); });
+    app.querySelectorAll('input[name=ship]').forEach(function(r){ r.addEventListener('change', function(){ CFG.shipMode = r.value; render(); }) });
+    on('flat','change', function(){ var v = parseFloat(this.value); if (!isNaN(v) && v>=0) CFG.flat = v; render(); });
+    on('tz','change', function(){ CFG.tz = this.value; toast('Time zone saved. Reports recalculate overnight in the real app.'); });
+    on('fee','change', function(){ var v = parseFloat(this.value); if (!isNaN(v) && v>=0 && v<50){ CFG.feeRate = v; toast('Fee rate saved. All reports updated.'); } else { this.value = CFG.feeRate; toast('Enter a rate between 0 and 50%'); } });
+    on('resync','click', function(){ toast('Sync started. New orders appear in a few minutes.'); });
+    app.querySelectorAll('[data-fixed]').forEach(function(c){ c.addEventListener('change', function(){ CFG.fixed[+c.dataset.fixed].on = c.checked; render(); }) });
+    on('addfixed','submit', function(e){ e.preventDefault(); var n = document.getElementById('fxname').value.trim(), a = parseFloat(document.getElementById('fxamt').value);
+      if (!n || isNaN(a) || a<=0) { toast('Add a name and a monthly amount'); return; }
+      CFG.fixed.push({name:n, amount:a, on:true}); render(); });
+  }
+
+  document.addEventListener('click', function(e){
+    if (S.dpOpen && !e.target.closest('.dp')){ S.dpOpen = false; var p = document.getElementById('dppop'); if (p) p.hidden = true; var b = document.getElementById('dpbtn'); if (b) b.setAttribute('aria-expanded','false'); }
+    var q = e.target.closest('.sugg [data-q]'); if (q){ ask(q.dataset.q); return; }
+    var a = e.target.closest('[data-ai]'); if (a){ openAI(a.dataset.q); return; }
+    var g = e.target.closest('[data-go]'); if (g){ if (g.hasAttribute('data-closeai')) S.ai=false; go(g.dataset.go); return; }
+    var f = e.target.closest('[data-flow]');
+    if (f){
+      var to = f.dataset.flow;
+      if (window.innerWidth < 1100) document.querySelector('.browser').scrollIntoView({behavior:'smooth'});
+      if (to==='ai'){ openAI(S.chat.length?null:'What is my profit trend over the week?'); return; }
+      S.ai = false;
+      if (to==='onb-connect'){ S.connected=false; S.syncPct=0; PRODUCTS.forEach(function(p){p.cost=null}); }
+      else if (S.screen.indexOf('onb')===0) finishOnboarding(true);
+      go(to);
+    }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

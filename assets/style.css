@@ -441,3 +441,8 @@ td { background: var(--white); color: var(--ink-2); font-size: .94rem; }
 @media (max-width: 42rem) {
   html { scroll-padding-top: 8rem; }
 }
+
+/* Prototype call-to-action on case studies */
+.prototype-cta { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin: 0 0 2rem; }
+.prototype-cta small { color: var(--muted); }
+.muted-note { color: var(--muted); font-size: .85rem; margin-top: -.5rem; }
