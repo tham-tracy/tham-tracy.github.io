@@ -137,8 +137,8 @@ td.n,th.n{text-align:right}
 .dp-cus .err{color:var(--t-neg);min-height:1em;margin:0}
 
 /* Onboarding */
-.onb{display:grid;place-items:center;padding:30px 20px;overflow-y:auto}
-.onb-card{background:#fff;border:1px solid var(--t-line);border-radius:16px;padding:28px;width:min(560px,100%)}
+.onb{display:grid;grid-template-columns:minmax(0,1fr);place-items:center;padding:30px 20px;overflow-y:auto}
+.onb-card{min-width:0;max-width:100%;background:#fff;border:1px solid var(--t-line);border-radius:16px;padding:28px;width:min(560px,100%)}
 .steps{display:flex;gap:8px;margin-bottom:22px}
 .steps div{flex:1;height:5px;border-radius:3px;background:#e5e7eb}
 .steps div.on{background:var(--t-brand)}
@@ -151,6 +151,62 @@ td.n,th.n{text-align:right}
 .shop{display:flex;gap:12px;align-items:center;border:1px solid var(--t-line);border-radius:12px;padding:14px;margin:18px 0}
 .shop b{display:block;font-weight:600}
 .tt{width:38px;height:38px;border-radius:10px;background:#111;color:#fff;display:grid;place-items:center;font-weight:700}
+
+.onb-card.wide{width:min(780px,100%)}
+.onb-foot{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap;align-items:center}
+.onb-foot .grow{flex:1}
+.linkbtn{border:0;background:none;color:var(--t-brand);font-weight:600;padding:0;font-size:12.5px}
+
+/* Ad platforms */
+.plats{display:grid;gap:10px;margin:16px 0 0}
+.plat{display:flex;gap:12px;align-items:center;border:1px solid var(--t-line);border-radius:12px;padding:12px 14px;background:#fff}
+.plat .pl{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;color:#fff;font-weight:700;flex:none;font-size:15px}
+.plat b{display:block;font-weight:600}
+.plat .info{flex:1;min-width:0}
+.plat .info span{font-size:12px;color:var(--t-muted)}
+.plat.on{border-color:#bfe6cc;background:#fbfefc}
+.rec{font-size:10.5px;font-weight:700;color:var(--t-brand);background:var(--t-brand-soft);padding:2px 6px;border-radius:6px;margin-left:6px;vertical-align:1px}
+
+/* Modal */
+.mbg{position:absolute;inset:0;background:rgba(15,18,30,.45);display:grid;place-items:center;z-index:7;padding:16px}
+.modal{background:#fff;border-radius:14px;width:min(520px,100%);max-height:100%;overflow-y:auto;box-shadow:0 30px 60px -20px rgba(0,0,0,.4)}
+.modal .mh{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--t-line)}
+.modal .mh b{flex:1;font-weight:650;font-size:15px}
+.modal .mh .x{border:0;background:#f3f4f6;border-radius:8px;width:30px;height:30px}
+.modal .mb{padding:16px 18px}
+.modal .mf{display:flex;gap:8px;justify-content:flex-end;padding:12px 18px;border-top:1px solid var(--t-line);background:#fafbfc;flex-wrap:wrap}
+.consent{border:1px solid var(--t-line);border-radius:12px;padding:14px;background:#fafbfc}
+.consent ul{margin:8px 0 0;padding-left:18px;font-size:13px}
+.acct{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--t-line);border-radius:10px;padding:10px 12px;margin-bottom:8px;cursor:pointer}
+.acct input{accent-color:var(--t-brand);margin-top:3px}
+.acct b{font-weight:600}
+.acct small{display:block;color:var(--t-muted);font-size:11.5px}
+.acct.sel{border-color:var(--t-brand);background:var(--t-brand-soft)}
+.hint{font-size:12px;color:var(--t-muted);margin:8px 0 0}
+.infob{background:#f4f6ff;border:1px solid #dfe3ff;color:#3730a3;border-radius:10px;padding:9px 12px;font-size:12.5px;margin-bottom:14px}
+
+/* Cost methods */
+.mtabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0}
+.mtabs button{border:1px solid var(--t-line);background:#fff;border-radius:10px;padding:10px 12px;text-align:left}
+.mtabs button b{display:block;font-weight:600;font-size:13px}
+.mtabs button span{font-size:11.5px;color:var(--t-muted)}
+.mtabs button[aria-pressed="true"]{border-color:var(--t-brand);background:var(--t-brand-soft);box-shadow:0 0 0 1px var(--t-brand) inset}
+.cprog{display:flex;align-items:center;gap:10px;font-size:12.5px;margin-bottom:10px}
+.cprog .prog{flex:1;margin:0;height:7px}
+tr.grp td{background:#fafbfc;font-weight:600;font-size:12px;padding:7px 10px}
+.sku{font-family:var(--mono);font-size:11.5px;color:var(--t-muted)}
+.costin.sm{width:72px}
+.bulk{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--t-brand-soft);border:1px solid #d5d9ff;border-radius:10px;padding:8px 12px;margin-bottom:10px;font-size:12.5px}
+.bulk[hidden]{display:none}
+.drop{border:1.5px dashed #c7cbe0;border-radius:12px;padding:22px;text-align:center;background:#fafbff}
+.drop b{display:block;margin-bottom:4px}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.toolbar .txt{min-width:180px}
+.pillset{display:flex;gap:4px;background:#eef0f4;border-radius:9px;padding:3px}
+.pillset button{border:0;background:none;border-radius:7px;padding:5px 10px;font-size:12.5px;font-weight:500}
+.pillset button[aria-pressed="true"]{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.08);font-weight:600}
+.banner.soft{background:#f4f6ff;color:#3730a3;border-color:#dfe3ff}
+input[type=checkbox].ck{accent-color:var(--t-brand);width:15px;height:15px}
 
 /* AI drawer */
 .drawer{position:absolute;top:0;right:0;bottom:0;width:min(380px,100%);background:#fff;border-left:1px solid var(--t-line);box-shadow:-20px 0 40px -20px rgba(0,0,0,.2);display:flex;flex-direction:column;transform:translateX(105%);transition:transform .25s;z-index:5}
@@ -196,6 +252,9 @@ td.n,th.n{text-align:right}
   .frow{grid-template-columns:1fr}
   .dp-pop{grid-template-columns:1fr;right:auto;left:0;width:min(300px,calc(100vw - 48px))}
   .dp-pre{border-right:0;border-bottom:1px solid var(--t-line);grid-template-columns:1fr 1fr}
+  .mtabs{grid-template-columns:1fr}
+  .onb{padding:16px 10px;place-items:start center}
+  .onb-card{padding:18px}
   .top .other{display:none}
 }
 </style>
@@ -229,48 +288,92 @@ td.n,th.n{text-align:right}
 (function(){
   // ---------- Demo data (seeded, so every visitor sees the same shop) ----------
   var seed = 7; function rnd(){ seed = (seed*16807) % 2147483647; return (seed-1)/2147483646; }
+  // Each TikTok Shop SKU (variant) carries its own cost. cost = current unit cost, since = day index it applies from,
+  // prev = earlier cost periods, handling = packaging / pick-and-pack per unit. ref* values are what the demo CSV holds.
   var PRODUCTS = [
-    {sku:'LB-01', name:'Hydrating lip balm (3-pack)', price:14.99, cost:null, suggested:3.20},
-    {sku:'SR-02', name:'Vitamin C face serum 30ml', price:24.90, cost:null, suggested:6.10},
-    {sku:'SM-03', name:'Silk sleep mask', price:12.50, cost:null, suggested:2.40},
-    {sku:'HC-04', name:'Claw hair clips (6-pack)', price:9.99, cost:null, suggested:1.70}
+    {sku:'LB-01-3', product:'Hydrating lip balm', variant:'3-pack', price:14.99, refCost:3.20, refHand:0.35, w:.20},
+    {sku:'LB-01-6', product:'Hydrating lip balm', variant:'6-pack', price:24.99, refCost:5.40, refHand:0.35, w:.08},
+    {sku:'SR-02-30', product:'Vitamin C face serum', variant:'30ml', price:24.90, refCost:6.10, refHand:0.50, w:.18},
+    {sku:'SR-02-50', product:'Vitamin C face serum', variant:'50ml', price:34.90, refCost:8.20, refHand:0.50, w:.10},
+    {sku:'SM-03-BK', product:'Silk sleep mask', variant:'Black', price:12.50, refCost:2.40, refHand:0.20, w:.14},
+    {sku:'SM-03-PK', product:'Silk sleep mask', variant:'Blush pink', price:12.50, refCost:2.40, refHand:0.20, w:.10},
+    {sku:'HC-04-6', product:'Claw hair clips', variant:'6-pack', price:9.99, refCost:1.70, refHand:0.20, w:.20}
   ];
+  PRODUCTS.forEach(function(p){ p.name = p.product+' · '+p.variant; resetCost(p) });
+  function resetCost(p){ p.cost = null; p.handling = 0; p.since = 0; p.prev = [] }
+  // The demo CSV: one row's SKU does not exist in the shop, so the import shows a real-world mismatch.
+  var CSV_ROWS = [['LB-01-3',3.20,0.35],['LB-01-6',5.40,0.35],['SR-02-30',6.10,0.50],['SR-02-50',8.20,0.50],['SM-03-BK',2.40,0.20],['SM-03-PK',2.40,0.20],['HC-04-12',1.70,0.20]];
+
+  var PLATFORMS = [
+    {id:'tiktok', name:'TikTok Ads Manager', logo:'♪', bg:'#111', desc:'GMV Max, Spark Ads and LIVE promotions', rec:true},
+    {id:'meta', name:'Meta Ads', logo:'∞', bg:'#1877f2', desc:'Facebook and Instagram ads'},
+    {id:'google', name:'Google Ads', logo:'G', bg:'#ea4335', desc:'Search, Shopping and Performance Max'}
+  ];
+  var ACCOUNTS = [
+    {id:'tt-main', pf:'tiktok', name:'Glow Demo · Main', ext:'ID 7301442688', cur:'USD', def:true},
+    {id:'tt-live', pf:'tiktok', name:'Glow Demo · LIVE & promos', ext:'ID 7301442699', cur:'USD', def:true},
+    {id:'tt-test', pf:'tiktok', name:'Old test account', ext:'ID 7298810021', cur:'USD', def:false, idle:true},
+    {id:'meta-eu', pf:'meta', name:'Glow Beauty', ext:'act_2210934', cur:'EUR', def:true},
+    {id:'g-main', pf:'google', name:'Glow Demo Store', ext:'412-883-1093', cur:'USD', def:true}
+  ];
+  ACCOUNTS.forEach(function(a){ a.on = false });
+  var AUTH = {tiktok:false, meta:false, google:false};
   var CAMPAIGNS = [
-    {name:'GMV Max · always-on', roas:3.4, color:'#4f46e5'},
-    {name:'Spark Ads · creator videos', roas:2.3, color:'#22c3a6'},
-    {name:'LIVE & flash-sale promos', roas:1.1, color:'#f59e0b'}
+    {name:'GMV Max · always-on', roas:3.4, color:'#4f46e5', acct:'tt-main'},
+    {name:'Spark Ads · creator videos', roas:2.3, color:'#22c3a6', acct:'tt-main'},
+    {name:'LIVE & flash-sale promos', roas:1.1, color:'#f59e0b', acct:'tt-live'},
+    {name:'Meta · Advantage+ retargeting', roas:2.0, color:'#1877f2', acct:'meta-eu'},
+    {name:'Google · Performance Max', roas:1.6, color:'#ea4335', acct:'g-main'}
   ];
   var CFG = {
     feeRate: 8, shipMode: 'settlement', flat: 2.50, tz: 'America/Los_Angeles (PT)', currency: 'USD',
     fixed: [{name:'Packaging supplies', amount:180, on:true},{name:'Virtual assistant', amount:400, on:false}],
-    adsInProfit: true
+    adsInProfit: true, defPct: null
   };
   var AFF_RATE = 0.10, NDAYS = 90;
   var DAYS = [];
+  function pickSku(){ var r = rnd(), a = 0; for (var i=0;i<PRODUCTS.length;i++){ a += PRODUCTS[i].w; if (r<a) return i } return PRODUCTS.length-1 }
   (function build(){
     var today = new Date(); today.setHours(0,0,0,0);
     for (var i=NDAYS-1;i>=0;i--){
       var d = new Date(today); d.setDate(d.getDate()-i);
-      var dow = d.getDay(), base = 18 + (NDAYS-1-i)*0.3 + (dow===5||dow===6?10:0) + rnd()*10;
+      var di = NDAYS-1-i, dow = d.getDay(), we = dow===5||dow===6, base = 18 + di*0.3 + (we?10:0) + rnd()*10;
       var orders = [], n = Math.round(base);
       for (var k=0;k<n;k++){
-        var p = Math.floor(rnd()*4), qty = rnd()<0.18?2:1, aff = rnd()<0.35;
-        orders.push({p:p, qty:qty, aff:aff, ship:1.6 + rnd()*1.3, id:'57'+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+String(k).padStart(3,'0')});
+        var p = pickSku(), qty = rnd()<0.18?2:1, aff = rnd()<0.35;
+        orders.push({p:p, di:di, qty:qty, aff:aff, ship:1.6 + rnd()*1.3, id:'57'+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+String(k).padStart(3,'0')});
       }
-      var ads = [70 + rnd()*30, 30 + rnd()*20, (dow===5||dow===6?25:5) + rnd()*10 + (i===3?380:0)];
+      var ads = [70 + rnd()*30, 30 + rnd()*20, (we?25:5) + rnd()*10 + (i===3?380:0), 22 + rnd()*14, 10 + rnd()*8];
       DAYS.push({date:d, orders:orders, ads:ads});
     }
   })();
   var LAST = DAYS.length-1;
 
-  var S = {screen:'onb-connect', range:{key:'7d', from:LAST-6, to:LAST}, dpOpen:false, syncPct:0, connected:false, ai:false, chat:[]};
+  var S = {screen:'onb-connect', range:{key:'7d', from:LAST-6, to:LAST}, dpOpen:false, syncPct:0, connected:false, ai:false, chat:[],
+    modal:null, costTab:'sku', csvStep:'upload', costFilter:'all', picked:{}};
 
   // ---------- Calculations ----------
-  function unit(p){ return p.cost==null ? 0 : p.cost }
+  function costAt(p, di){
+    if (p.cost==null) return null;
+    if (di>=p.since) return p.cost;
+    for (var i=p.prev.length-1;i>=0;i--){ var q = p.prev[i]; if (di>=q.from && di<=q.to) return q.cost }
+    return null;
+  }
+  // Unit cost on a given day: exact cost if set, else the default % estimate, else missing (handling only).
+  function unitCost(p, di){
+    var c = costAt(p, di==null?LAST:di);
+    if (c!=null) return {u:c + p.handling, st:'set'};
+    if (CFG.defPct!=null) return {u:p.price*CFG.defPct/100 + p.handling, st:'est'};
+    return {u:p.handling, st:'missing'};
+  }
+  function acct(id){ return ACCOUNTS.filter(function(a){return a.id===id})[0] }
+  function camOn(i){ return acct(CAMPAIGNS[i].acct).on }
+  function pfOn(pf){ return ACCOUNTS.some(function(a){return a.pf===pf && a.on}) }
+  function anyAds(){ return ACCOUNTS.some(function(a){return a.on}) }
   function shipOf(o){ return CFG.shipMode==='flat' ? CFG.flat : o.ship }
-  function adsOf(d){ return d.ads[0]+d.ads[1]+d.ads[2] }
+  function adsOf(d){ var t = 0; d.ads.forEach(function(v,i){ if (camOn(i)) t += v }); return t }
   function fixedPerDay(){ return CFG.fixed.filter(function(f){return f.on}).reduce(function(a,f){return a+f.amount},0)*12/365 }
-  function orderCalc(o){ var p = PRODUCTS[o.p], rev = p.price*o.qty; return {rev:rev, fee:rev*CFG.feeRate/100, aff:o.aff?rev*AFF_RATE:0, ship:shipOf(o), cogs:unit(p)*o.qty} }
+  function orderCalc(o){ var p = PRODUCTS[o.p], rev = p.price*o.qty, uc = unitCost(p, o.di); return {rev:rev, fee:rev*CFG.feeRate/100, aff:o.aff?rev*AFF_RATE:0, ship:shipOf(o), cogs:uc.u*o.qty, st:uc.st} }
   function calc(days){
     var t = {revenue:0, fees:0, aff:0, ship:0, cogs:0, ads:0, other:0, orders:0, units:0};
     days.forEach(function(d){
@@ -291,7 +394,9 @@ td.n,th.n{text-align:right}
   function day(d){ return d.toLocaleDateString('en-GB',{weekday:'short', day:'numeric', month:'short'}) }
   function short(d){ return d.toLocaleDateString('en-GB',{day:'numeric', month:'short'}) }
   function iso(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0') }
-  function missing(){ return PRODUCTS.filter(function(p){return p.cost==null}).length }
+  function missing(){ return CFG.defPct!=null ? 0 : PRODUCTS.filter(function(p){return p.cost==null}).length }
+  function estimated(){ return CFG.defPct==null ? 0 : PRODUCTS.filter(function(p){return p.cost==null}).length }
+  function withCost(){ return PRODUCTS.filter(function(p){return p.cost!=null}).length }
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 
   // ---------- Date filter ----------
@@ -325,22 +430,23 @@ td.n,th.n{text-align:right}
   var NOTES = {
     'onb-connect': ['Start with the shop, not a form', 'The first version focused on Shopify sellers expanding to TikTok Shop, or moving there to dropship. The first step is a single authorisation; everything else is pulled from the shop.'],
     'onb-sync': ['Onboarding has a clear finish line', 'We counted a seller as onboarded once the shop was connected and the data had synced. The progress list shows exactly what is being imported so the wait feels like progress.'],
-    'onb-costs': ['Costs are what make profit "true"', 'TikTok Shop does not know what a product costs the seller. Product costs are the one thing they must add, so the step offers suggested values and lets them skip and come back.'],
+    'onb-ads': ['Ad spend is a cost too', 'TikTok Shop data has no ad spend in it, so ad platforms are connected separately. The seller authorises read-only access, picks which ad accounts belong to this shop (agencies and old test accounts are common), and the last 90 days of spend are imported. Skipping is allowed; profit then shows a reminder that ads are not counted.'],
+    'onb-costs': ['Costs are what make profit "true"', 'TikTok Shop does not know what a product costs the seller. Costs are set per SKU, because variants of one product rarely cost the same. Sellers can type them, import a supplier spreadsheet, or start with a default cost % and replace it later; anything estimated is labelled as such in every report.'],
     dashboard: ['Net profit first', 'The dashboard leads with net profit and margin, then shows where the money goes: platform fees, affiliate commission, shipping, product costs, ads and other costs. The date filter compares every number with the previous period of the same length.'],
     orders: ['Profit per order', 'Each order shows its own fees, shipping, product cost and profit, so a seller can see which orders actually made money, not only which ones sold.'],
-    ads: ['Profit after ads, not just ROAS', 'Ad spend is pulled in by campaign and subtracted from profit. A campaign can show a healthy-looking ROAS and still lose money once fees, shipping and product costs are counted, so the table shows both.'],
-    costs: ['Fix the input, see the effect', 'Editing a product cost recalculates every report straight away. Missing costs are highlighted rather than silently treated as zero.'],
+    ads: ['Profit after ads, not just ROAS', 'Connected ad accounts are listed at the top, and spend is pulled in by campaign and subtracted from profit. A campaign can show a healthy-looking ROAS and still lose money once fees, shipping and product costs are counted, so the table shows both.'],
+    costs: ['Fix the input, see the effect', 'Editing a cost recalculates every report straight away. Missing costs are highlighted rather than silently treated as zero. When a supplier price changes, History adds a new cost from a date, so past orders keep the cost they really had.'],
     shipping: ['Shipping without waiting for settlements', 'Sellers can use the actual shipping fee from TikTok settlements, or a flat estimate per order. Switching the method updates profit across the app.'],
     settings: ['Everything else that affects profit', 'Fee rates, the reporting time zone and fixed monthly costs live in one place. Fixed costs are spread evenly across days, so any date range carries its fair share.'],
     ai: ['Ask instead of digging', 'Getting a quick number used to mean finding the right report. The assistant answers in the chat, with the chart or table inline, and helps with set-up. The real assistant was RAG-based over app knowledge and customer-success chats; here, answers are scripted but computed from the demo shop.']
   };
   var FLOWS = [
-    ['onb-connect','Onboarding','Connect, sync, add costs'],
+    ['onb-connect','Onboarding','Shop, sync, ad platforms, costs'],
     ['dashboard','Profit dashboard','Net profit with a date filter'],
     ['orders','Orders','Profit per order'],
-    ['costs','Product costs','Edit costs, reports update'],
+    ['costs','Product costs','Per SKU, CSV import, cost history'],
     ['shipping','Shipping costs','Actual fees or a flat estimate'],
-    ['ads','Marketing ads','Spend, ROAS and profit by campaign'],
+    ['ads','Marketing ads','Ad accounts, spend, profit by campaign'],
     ['settings','Settings','Fees, time zone, fixed costs'],
     ['ai','AI assistant','Ask about profit in chat']
   ];
@@ -357,12 +463,14 @@ td.n,th.n{text-align:right}
   var app = document.getElementById('app');
 
   // ---------- Onboarding ----------
-  function onbShell(step, body){
-    return '<div class="onb"><div class="onb-card"><div class="steps">'+[1,2,3].map(function(i){return '<div class="'+(i<=step?'on':'')+'"></div>'}).join('')+'</div>'+body+'</div></div>';
+  var STEP_NAMES = ['Connect shop','Sync data','Ad platforms','Product costs'];
+  function onbShell(step, body, wide){
+    return '<div class="onb"><div class="onb-card'+(wide?' wide':'')+'"><div class="steps">'+[1,2,3,4].map(function(i){return '<div class="'+(i<=step?'on':'')+'" title="'+STEP_NAMES[i-1]+'"></div>'}).join('')+'</div>'
+      + '<p class="muted" style="margin:0 0 4px;font-size:12.5px">Step '+step+' of 4 · '+STEP_NAMES[step-1]+'</p>'+body+'</div></div>';
   }
   var R = {};
   R['onb-connect'] = function(){
-    return onbShell(1, '<p class="muted" style="margin:0 0 4px;font-size:12.5px">Step 1 of 3</p><h2>Connect your TikTok Shop</h2>'
+    return onbShell(1, '<h2>Connect your TikTok Shop</h2>'
       + '<p class="muted" style="margin:0">We import orders, fees, affiliate commissions and shipping so you can see your real net profit.</p>'
       + '<div class="shop"><span class="tt">♪</span><span style="flex:1"><b>Glow Demo Store</b><span class="muted" style="font-size:12.5px">TikTok Shop · US</span></span><span class="tag '+(S.connected?'ok':'warn')+'">'+(S.connected?'Authorised':'Not connected')+'</span></div>'
       + '<button class="btn" id="connect" style="width:100%">'+(S.connected?'Continue':'Authorise TikTok Shop')+'</button>'
@@ -370,23 +478,105 @@ td.n,th.n{text-align:right}
   };
   R['onb-sync'] = function(){
     var p = S.syncPct, items = [['Orders (last 90 days)',25],['Platform fees and settlements',50],['Affiliate commissions',75],['Shipping and products',100]];
-    return onbShell(2, '<p class="muted" style="margin:0 0 4px;font-size:12.5px">Step 2 of 3</p><h2>'+(p<100?'Syncing your shop data…':'Your data is ready')+'</h2>'
+    return onbShell(2, '<h2>'+(p<100?'Syncing your shop data…':'Your data is ready')+'</h2>'
       + '<div class="prog"><i style="width:'+p+'%"></i></div><p class="muted" style="font-size:12.5px;margin:0">'+p+'% · '+DAYS.reduce(function(a,d){return a+d.orders.length},0).toLocaleString()+' orders found</p>'
       + '<ul class="checks">'+items.map(function(it){return '<li class="'+(p>=it[1]?'done':'')+'">'+it[0]+'</li>'}).join('')+'</ul>'
-      + '<button class="btn" id="tocosts" style="width:100%;margin-top:18px" '+(p<100?'disabled':'')+'>Continue</button>');
+      + '<button class="btn" id="toads" style="width:100%;margin-top:18px" '+(p<100?'disabled':'')+'>Continue</button>');
   };
-  function costRows(compact){
-    return PRODUCTS.map(function(p,i){
-      return '<tr><td>'+esc(p.name)+'<br><span class="muted" style="font-size:11.5px">'+p.sku+' · sells at '+money(p.price)+'</span></td>'
-        + '<td class="n"><input class="costin '+(p.cost==null?'missing':'')+'" data-cost="'+i+'" inputmode="decimal" placeholder="'+p.suggested.toFixed(2)+'" value="'+(p.cost==null?'':p.cost)+'" aria-label="Cost per unit for '+esc(p.name)+'"></td>'
-        + (compact?'':'<td class="n">'+(p.cost==null?'<span class="tag warn">Missing</span>':pct((p.price-p.cost)/p.price))+'</td>')+'</tr>';
-    }).join('');
+
+  // Step 3: ad platforms
+  function platRows(){
+    return '<div class="plats">'+PLATFORMS.map(function(pf){
+      var accts = ACCOUNTS.filter(function(a){return a.pf===pf.id && a.on}), on = accts.length>0;
+      return '<div class="plat '+(on?'on':'')+'"><span class="pl" style="background:'+pf.bg+'">'+pf.logo+'</span><span class="info"><b>'+pf.name+(pf.rec&&!on?'<span class="rec">Recommended</span>':'')+'</b>'
+        + '<span>'+(on ? accts.map(function(a){return esc(a.name)}).join(', ')+' · '+(accts.length>1?accts.length+' accounts':'1 account')+' · synced just now' : pf.desc)+'</span></span>'
+        + (on ? '<span class="tag ok">Connected</span><button class="btn sm sec" data-connect="'+pf.id+'">Manage</button>' : '<button class="btn sm" data-connect="'+pf.id+'">Connect</button>')+'</div>';
+    }).join('')+'</div>';
+  }
+  R['onb-ads'] = function(){
+    var n = ACCOUNTS.filter(function(a){return a.on}).length;
+    return onbShell(3, '<h2>Connect your ad platforms</h2>'
+      + '<p class="muted" style="margin:0">Ad spend is usually the biggest cost after products, and TikTok Shop data does not include it. Connect every platform you advertise on.</p>'
+      + platRows()
+      + '<p class="hint">Read-only. We import spend and campaign results; we never create, pause or edit ads.</p>'
+      + '<div class="onb-foot"><button class="linkbtn" id="noads">I don\'t run ads</button><span class="grow"></span><button class="btn sec" id="back-sync">Back</button><button class="btn" id="tocosts" '+(n?'':'disabled')+'>Continue</button></div>', true);
+  };
+
+  // Ad connection modal: authorise → choose accounts → import
+  function adModal(){
+    var m = S.modal, pf = PLATFORMS.filter(function(x){return x.id===m.pf})[0], head = '<div class="mh"><span class="pl" style="width:26px;height:26px;border-radius:7px;display:grid;place-items:center;color:#fff;font-weight:700;background:'+pf.bg+'">'+pf.logo+'</span><b>'+(pfOn(pf.id)?'Manage ':'Connect ')+pf.name+'</b><button class="x" data-close aria-label="Close">✕</button></div>';
+    if (m.step==='auth') return head + '<div class="mb"><p style="margin:0 0 12px">You\'ll sign in to '+pf.name+' and approve access. <span class="muted">(Demo: no real sign-in.)</span></p>'
+      + '<div class="consent"><b>TrueProfit is requesting to:</b><ul><li>See the ad accounts you manage</li><li>Read spend, campaigns and reported conversions</li></ul><p class="hint" style="margin-top:10px">It cannot create, change or pause ads, or see payment methods.</p></div>'
+      + '<p class="hint">Signed in as <b>ads@glow-demo.store</b></p></div><div class="mf"><button class="btn sec" data-close>Cancel</button><button class="btn" id="m-allow">Allow access</button></div>';
+    if (m.step==='accounts'){
+      var list = ACCOUNTS.filter(function(a){return a.pf===pf.id}), nsel = list.filter(function(a){return m.sel[a.id]}).length;
+      return head + '<div class="mb"><p style="margin:0 0 12px">Which ad accounts advertise <b>Glow Demo Store</b>? Leave out accounts for other shops or clients.</p>'
+        + list.map(function(a){ return '<label class="acct '+(m.sel[a.id]?'sel':'')+'"><input type="checkbox" data-acct="'+a.id+'" '+(m.sel[a.id]?'checked':'')+'><span style="flex:1"><b>'+esc(a.name)+'</b><small>'+a.ext+' · '+a.cur+(a.idle?' · no spend in the last 90 days':'')+'</small></span></label>' }).join('')
+        + (list.some(function(a){return a.cur!=='USD'})?'<div class="infob">This account reports in EUR. Spend is converted to your shop currency (USD) at each day\'s rate.</div>':'')
+        + '</div><div class="mf"><button class="btn sec" data-close>Cancel</button><button class="btn" id="m-accts" '+(nsel||AUTH[pf.id]?'':'disabled')+'>'+(nsel?'Connect '+nsel+' account'+(nsel>1?'s':''):AUTH[pf.id]?'Disconnect '+pf.name:'Select an account')+'</button></div>';
+    }
+    var done = m.pct>=100;
+    return head + '<div class="mb"><b>'+(done?'Ad spend imported':'Importing 90 days of ad spend…')+'</b><div class="prog"><i style="width:'+m.pct+'%"></i></div>'
+      + '<ul class="checks"><li class="'+(m.pct>=40?'done':'')+'">Campaigns and ad groups</li><li class="'+(m.pct>=80?'done':'')+'">Daily spend'+(pf.id==='meta'?' (converted from EUR)':'')+'</li><li class="'+(done?'done':'')+'">Reported conversions and ROAS</li></ul>'
+      + (done?'<p class="hint">'+pf.name+' spend now counts in profit and refreshes every few hours.</p>':'')+'</div><div class="mf"><button class="btn" data-close '+(done?'':'disabled')+'>Done</button></div>';
+  }
+
+  // Step 4: product costs
+  function costTable(page){
+    var f = S.costFilter, rows = '', lastP = '';
+    PRODUCTS.forEach(function(p,i){
+      var uc = unitCost(p), st = uc.st;
+      if (page && f==='missing' && p.cost!=null) return;
+      if (page && f==='est' && st!=='est') return;
+      if (p.product!==lastP){ lastP = p.product; rows += '<tr class="grp" data-s="'+esc(p.product.toLowerCase())+'"><td colspan="'+(page?8:6)+'">'+esc(p.product)+'</td></tr>' }
+      var margin = (p.price-uc.u)/p.price;
+      rows += '<tr data-s="'+esc((p.name+' '+p.sku).toLowerCase())+'"><td><input type="checkbox" class="ck" data-pick="'+i+'" '+(S.picked[i]?'checked':'')+' aria-label="Select '+esc(p.name)+'"></td>'
+        + '<td>'+esc(p.variant)+'<br><span class="sku">'+p.sku+'</span></td><td class="n">'+money(p.price)+'</td>'
+        + '<td class="n"><input class="costin sm '+(p.cost==null?'missing':'')+'" data-cost="'+i+'" inputmode="decimal" placeholder="'+(st==='est'?uc.u.toFixed(2):'0.00')+'" value="'+(p.cost==null?'':p.cost)+'" aria-label="Cost per unit for '+esc(p.name)+'"></td>'
+        + '<td class="n"><input class="costin sm" data-hand="'+i+'" inputmode="decimal" placeholder="0.00" value="'+(p.handling?p.handling:'')+'" aria-label="Handling fee per unit for '+esc(p.name)+'"></td>'
+        + '<td class="n" data-margin="'+i+'">'+(st==='missing'?'<span class="tag warn">Missing</span>':pct(margin)+(st==='est'?' <span class="tag off">est.</span>':''))+'</td>'
+        + (page?'<td class="n">'+(p.prev.length?'<span class="muted" style="font-size:11.5px">'+(p.prev.length+1)+' periods</span> ':'')+'<button class="btn sm sec" data-hist="'+i+'">History</button></td>':'')+'</tr>';
+    });
+    var npick = Object.keys(S.picked).filter(function(k){return S.picked[k]}).length;
+    return '<div class="bulk" id="bulk" '+(npick?'':'hidden')+'><b id="npick">'+npick+' selected</b><span>Cost/unit</span><input class="costin sm" id="bulkcost" inputmode="decimal" placeholder="0.00"><span>Handling</span><input class="costin sm" id="bulkhand" inputmode="decimal" placeholder="0.00"><button class="btn sm" id="bulkapply">Apply to selected</button><button class="linkbtn" id="bulkclear">Clear</button></div>'
+      + '<div class="tablewrap"><table><thead><tr><th><input type="checkbox" class="ck" id="pickall" aria-label="Select all"></th><th>Variant / SKU</th><th class="n">Price</th><th class="n">Cost / unit</th><th class="n">Handling / unit</th><th class="n">Margin</th>'+(page?'<th class="n">Cost history</th>':'')+'</tr></thead><tbody>'+(rows||'<tr><td colspan="8" class="muted">Nothing matches this filter.</td></tr>')+'</tbody></table></div>';
+  }
+  function costProgress(){
+    var n = withCost(), t = PRODUCTS.length;
+    return '<div class="cprog"><b>'+n+' of '+t+' SKUs</b><span class="muted">have an exact cost</span><div class="prog"><i style="width:'+(n/t*100)+'%"></i></div>'
+      + (estimated()?'<span class="tag off">'+estimated()+' estimated at '+CFG.defPct+'%</span>':missing()?'<span class="tag warn">'+missing()+' missing</span>':'<span class="tag ok">Complete</span>')+'</div>';
+  }
+  function csvPanel(){
+    if (S.csvStep==='upload') return '<ol style="margin:0 0 12px;padding-left:18px;font-size:13px"><li>Download the template. It already lists your '+PRODUCTS.length+' SKUs.</li><li>Fill in <b>cost_per_unit</b> and, if you have one, <b>handling_fee</b>. Your supplier invoice usually has these.</li><li>Upload it. We match rows by SKU.</li></ol>'
+      + '<div class="drop"><b>Drop your CSV or XLSX here</b><span class="muted" style="font-size:12.5px">Columns: sku, cost_per_unit, handling_fee, effective_from (optional)</span><div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap"><button class="btn sm sec" id="csvtpl">Download template</button><button class="btn sm" id="csvup">Choose file (demo)</button></div></div>';
+    if (S.csvStep==='preview'){
+      var rows = CSV_ROWS.map(function(r){ var hit = PRODUCTS.some(function(p){return p.sku===r[0]});
+        return '<tr><td class="sku">'+r[0]+'</td><td class="n">'+money(r[1])+'</td><td class="n">'+money(r[2])+'</td><td>'+(hit?'<span class="tag ok">Matched</span>':'<span class="tag warn">SKU not in shop</span>')+'</td></tr>' }).join('');
+      var ok = CSV_ROWS.filter(function(r){return PRODUCTS.some(function(p){return p.sku===r[0]})}).length;
+      return '<p style="margin:0 0 8px"><b>glow-supplier-costs.csv</b> <span class="muted">· '+CSV_ROWS.length+' rows</span></p>'
+        + '<div class="tablewrap"><table><thead><tr><th>SKU</th><th class="n">Cost / unit</th><th class="n">Handling</th><th>Match</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+        + '<p class="hint"><b>HC-04-12</b> is not a SKU in your shop (did you mean HC-04-6?). It will be skipped; fix it in the file or enter that cost by hand.</p>'
+        + '<div class="onb-foot"><button class="btn sec sm" id="csvback">Choose another file</button><span class="grow"></span><button class="btn sm" id="csvimport">Import '+ok+' costs</button></div>';
+    }
+    return '';
+  }
+  function pctPanel(){
+    var v = CFG.defPct!=null ? CFG.defPct : 30, ex = PRODUCTS[2];
+    return '<p style="margin:0 0 10px;font-size:13px">Don\'t have exact costs yet? Use a percentage of the selling price as a placeholder. Any SKU without an exact cost uses it, and reports mark those numbers as <b>estimated</b>.</p>'
+      + '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><label for="defpct" style="font-weight:550">Cost as % of price</label><input class="txt" id="defpct" inputmode="decimal" value="'+v+'" style="width:70px"> %'
+      + '<span class="muted" style="font-size:12.5px" id="pctex">e.g. '+esc(ex.name)+' at '+money(ex.price)+' → '+money(ex.price*v/100)+' per unit</span></div>'
+      + '<div class="onb-foot"><span class="grow"></span>'+(CFG.defPct!=null?'<button class="btn sm sec" id="pctoff">Stop using an estimate</button>':'')+'<button class="btn sm" id="pcton">'+(CFG.defPct!=null?'Update estimate':'Use this estimate')+'</button></div>';
+  }
+  function methodTabs(){
+    var t = [['sku','Enter per SKU','Type or bulk-edit costs'],['csv','Import a spreadsheet','Upload your supplier costs'],['pct','Use a default %','Estimate now, refine later']];
+    return '<div class="mtabs" role="group" aria-label="How to add costs">'+t.map(function(x){return '<button data-ctab="'+x[0]+'" aria-pressed="'+(S.costTab===x[0])+'"><b>'+x[1]+'</b><span>'+x[2]+'</span></button>'}).join('')+'</div>';
   }
   R['onb-costs'] = function(){
-    return onbShell(3, '<p class="muted" style="margin:0 0 4px;font-size:12.5px">Step 3 of 3</p><h2>Add your product costs</h2>'
-      + '<p class="muted" style="margin:0 0 14px">What you pay per unit. Without it, profit looks higher than it really is.</p>'
-      + '<div class="tablewrap"><table><thead><tr><th>Product</th><th class="n">Cost / unit</th></tr></thead><tbody>'+costRows(true)+'</tbody></table></div>'
-      + '<div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><button class="btn sec" id="suggest">Use suggested costs</button><span style="flex:1"></span><button class="btn sec" id="skip">Skip for now</button><button class="btn" id="finish">See my profit</button></div>');
+    var body = S.costTab==='sku' ? costTable(false) : S.costTab==='csv' ? csvPanel() : pctPanel();
+    return onbShell(4, '<h2>Add your product costs</h2>'
+      + '<p class="muted" style="margin:0">What you pay per unit, plus any handling or packaging fee. TikTok Shop doesn\'t know these, so without them profit looks higher than it is.</p>'
+      + methodTabs() + costProgress() + body
+      + '<div class="onb-foot"><button class="btn sec" id="back-ads">Back</button><span class="grow"></span><button class="btn sec" id="skip">Skip for now</button><button class="btn" id="finish">See my profit</button></div>', true);
   };
 
   // ---------- Charts ----------
@@ -406,10 +596,10 @@ td.n,th.n{text-align:right}
     var h = 150, w = 520, tot = days.map(adsOf), max = Math.max.apply(null, tot.concat([1])), bw = w/days.length, s = '', step = every(days.length);
     days.forEach(function(d,i){
       var y = h-20;
-      d.ads.forEach(function(v,c){ var hh = v/max*(h-30); y -= hh; s += '<rect x="'+(i*bw+bw*0.15)+'" y="'+y+'" width="'+Math.max(1,bw*0.7)+'" height="'+hh+'" fill="'+CAMPAIGNS[c].color+'"><title>'+day(d.date)+' · '+CAMPAIGNS[c].name+': '+money(v)+'</title></rect>' });
+      d.ads.forEach(function(v,c){ if (!camOn(c)) return; var hh = v/max*(h-30); y -= hh; s +='<rect x="'+(i*bw+bw*0.15)+'" y="'+y+'" width="'+Math.max(1,bw*0.7)+'" height="'+hh+'" fill="'+CAMPAIGNS[c].color+'"><title>'+day(d.date)+' · '+CAMPAIGNS[c].name+': '+money(v)+'</title></rect>' });
       if (i%step===0) s += '<text x="'+(i*bw+bw/2)+'" y="'+(h-4)+'" font-size="10.5" font-family="Inter,sans-serif" text-anchor="middle" fill="#6b7280">'+(days.length<=7?d.date.toLocaleDateString('en-GB',{weekday:'short'}):short(d.date))+'</text>';
     });
-    return '<div class="legend">'+CAMPAIGNS.map(function(c){return '<span><i style="background:'+c.color+'"></i>'+c.name+'</span>'}).join('')+'</div><svg viewBox="0 0 '+w+' '+h+'" width="100%" role="img" aria-label="Daily ad spend by campaign">'+s+'</svg>';
+    return '<div class="legend">'+CAMPAIGNS.filter(function(c,i){return camOn(i)}).map(function(c){return '<span><i style="background:'+c.color+'"></i>'+c.name+'</span>'}).join('')+'</div><svg viewBox="0 0 '+w+' '+h+'" width="100%" role="img" aria-label="Daily ad spend by campaign">'+s+'</svg>';
   }
   function waterfall(t){
     var rows = [['Revenue',t.revenue,'#22c3a6'],['Platform fees',-t.fees,'#f59e0b'],['Affiliate commission',-t.aff,'#f59e0b'],['Shipping',-t.ship,'#f59e0b'],['Product costs',-t.cogs,'#f59e0b'],['Marketing ads',-t.ads,'#f59e0b']];
@@ -428,9 +618,12 @@ td.n,th.n{text-align:right}
       + '<span class="spacer"></span><button class="ai-cta" data-ai>'+IC.spark+'Ask TrueProfit AI</button></aside>'
       + '<section class="main"><div class="mhead"><div><h2>'+title+'</h2>'+(sub?'<p>'+sub+'</p>':'')+'</div>'+(withDate?datePicker():'')+'</div>'+body+'</section>';
   }
-  function missingBanner(){
-    var m = missing(); if (!m) return '';
-    return '<div class="banner"><span><b>'+m+' product'+(m>1?'s have':' has')+' no cost.</b> Profit is overstated until you add '+(m>1?'them':'it')+'.</span><button class="btn sm" data-go="costs">Add costs</button></div>';
+  function missingBanner(noAds){
+    var m = missing(), e = estimated(), out = '';
+    if (m) out += '<div class="banner"><span><b>'+m+' SKU'+(m>1?'s have':' has')+' no cost.</b> Profit is overstated until you add '+(m>1?'them':'it')+'.</span><button class="btn sm" data-go="costs">Add costs</button></div>';
+    else if (e) out += '<div class="banner soft"><span><b>'+e+' SKU'+(e>1?'s use':' uses')+' the '+CFG.defPct+'% cost estimate.</b> Add exact costs for a precise profit.</span><button class="btn sm sec" data-go="costs">Review costs</button></div>';
+    if (!noAds && !anyAds()) out += '<div class="banner soft"><span><b>No ad platform connected.</b> Profit does not include any ad spend.</span><button class="btn sm sec" data-go="ads">Connect ads</button></div>';
+    return out;
   }
   function kpiCards(k){ return '<div class="kpis">'+k.map(function(x){return '<div class="card kpi '+(x[3]?'hero':'')+'"><div class="l">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="d">'+(x[2]||'')+'</div></div>'}).join('')+'</div>' }
 
@@ -450,9 +643,9 @@ td.n,th.n{text-align:right}
     var body = rows.slice(0,50).map(function(r){
       var o = r[1], p = PRODUCTS[o.p], c = orderCalc(o), fees = c.fee + c.aff, pr = c.rev-fees-c.ship-c.cogs;
       return '<tr><td>#'+o.id+'<br><span class="muted" style="font-size:11px">'+day(r[0].date)+'</span></td><td>'+esc(p.name)+(o.qty>1?' ×'+o.qty:'')+(o.aff?' <span class="tag warn" title="Sold through a creator affiliate">Affiliate</span>':'')+'</td>'
-        + '<td class="n">'+money(c.rev)+'</td><td class="n">'+money(-fees)+'</td><td class="n">'+money(-c.ship)+'</td><td class="n">'+(p.cost==null?'<span class="tag warn">Missing</span>':money(-c.cogs))+'</td><td class="n '+(pr<0?'neg':'')+'"><b>'+money(pr)+'</b></td></tr>';
+        + '<td class="n">'+money(c.rev)+'</td><td class="n">'+money(-fees)+'</td><td class="n">'+money(-c.ship)+'</td><td class="n">'+(c.st==='missing'?'<span class="tag warn">Missing</span>':money(-c.cogs)+(c.st==='est'?' <span class="tag off">est.</span>':''))+'</td><td class="n '+(pr<0?'neg':'')+'"><b>'+money(pr)+'</b></td></tr>';
     }).join('');
-    return mainShell('Orders', rows.length.toLocaleString()+' orders in this period', missingBanner() + '<div class="card" style="padding:0"><div class="tablewrap"><table><thead><tr><th>Order</th><th>Items</th><th class="n">Revenue</th><th class="n">Fees + commission</th><th class="n">Shipping</th><th class="n">Product cost</th><th class="n">Profit</th></tr></thead><tbody>'+(body||'<tr><td colspan="7" class="muted">No orders in this period.</td></tr>')+'</tbody></table></div>'
+    return mainShell('Orders', rows.length.toLocaleString()+' orders in this period', missingBanner(true) + '<div class="card" style="padding:0"><div class="tablewrap"><table><thead><tr><th>Order</th><th>Items</th><th class="n">Revenue</th><th class="n">Fees + commission</th><th class="n">Shipping</th><th class="n">Product cost</th><th class="n">Profit</th></tr></thead><tbody>'+(body||'<tr><td colspan="7" class="muted">No orders in this period.</td></tr>')+'</tbody></table></div>'
       + '<p class="muted" style="font-size:12px;padding:10px 12px;margin:0">Showing the latest '+Math.min(50,rows.length)+' of '+rows.length.toLocaleString()+' orders. Ads and fixed costs are shop-level, so they appear on the dashboard, not per order.</p></div>', true);
   };
 
@@ -460,16 +653,22 @@ td.n,th.n{text-align:right}
     var days = sel(), pd = prevSel();
     var spend = days.reduce(function(a,d){return a+adsOf(d)},0), pspend = pd ? pd.reduce(function(a,d){return a+adsOf(d)},0) : null;
     var t = calc(days), grossBeforeAds = t.revenue - t.fees - t.aff - t.ship - t.cogs, gm = t.revenue ? grossBeforeAds/t.revenue : 0;
-    var rows = CAMPAIGNS.map(function(c,i){
+    var accounts = '<div class="card" style="margin-bottom:14px"><h3 style="margin:0">Ad accounts</h3>'+platRows()+'</div>';
+    if (!anyAds()) return mainShell('Marketing ads', 'No ad platform connected yet',
+      '<div class="card" style="margin-bottom:14px;text-align:center;padding:26px"><b style="font-size:15px">Connect an ad platform to count ad spend in profit</b><p class="muted" style="margin:6px auto 0;max-width:440px">Until then, net profit leaves out what you spend on ads, so it looks higher than it really is.</p></div>' + accounts, false);
+    var rows = [];
+    CAMPAIGNS.forEach(function(c,i){
+      if (!camOn(i)) return;
       var sp = days.reduce(function(a,d){return a+d.ads[i]},0), rev = sp*c.roas, contrib = rev*gm - sp;
-      return {c:c, sp:sp, rev:rev, roas:c.roas, profit:contrib, be: gm>0 ? 1/gm : null};
+      rows.push({c:c, sp:sp, rev:rev, roas:c.roas, profit:contrib, be: gm>0 ? 1/gm : null, pf:PLATFORMS.filter(function(x){return x.id===acct(c.acct).pf})[0]});
     });
     var attr = rows.reduce(function(a,r){return a+r.rev},0);
     var table = rows.map(function(r){
-      return '<tr><td><i style="display:inline-block;width:9px;height:9px;border-radius:2px;background:'+r.c.color+';margin-right:7px"></i>'+r.c.name+'</td><td class="n">'+money(r.sp)+'</td><td class="n">'+money(r.rev)+'</td><td class="n">'+r.roas.toFixed(2)+'</td><td class="n">'+(r.be?r.be.toFixed(2):'–')+'</td><td class="n '+(r.profit<0?'neg':'pos')+'"><b>'+money(r.profit)+'</b></td></tr>';
+      return '<tr><td><i style="display:inline-block;width:9px;height:9px;border-radius:2px;background:'+r.c.color+';margin-right:7px"></i>'+r.c.name+'<br><span class="muted" style="font-size:11px;margin-left:16px">'+r.pf.name+' · '+esc(acct(r.c.acct).name)+'</span></td><td class="n">'+money(r.sp)+'</td><td class="n">'+money(r.rev)+'</td><td class="n">'+r.roas.toFixed(2)+'</td><td class="n">'+(r.be?r.be.toFixed(2):'–')+'</td><td class="n '+(r.profit<0?'neg':'pos')+'"><b>'+money(r.profit)+'</b></td></tr>';
     }).join('');
-    return mainShell('Marketing ads', 'TikTok Ads Manager <span class="tag ok">Connected</span>',
-      kpiCards([['Ad spend',money(spend),delta(spend,pspend,true)],['Attributed revenue',money(attr),'<span class="muted">as reported by the ad platform</span>'],['Blended ROAS',spend?(attr/spend).toFixed(2):'–','<span class="muted">attributed revenue ÷ spend</span>'],['Break-even ROAS',gm>0?(1/gm).toFixed(2):'–','<span class="muted">1 ÷ margin before ads ('+pct(gm)+')</span>',true]])
+    var npf = PLATFORMS.filter(function(p){return pfOn(p.id)}).length;
+    return mainShell('Marketing ads', npf+' of '+PLATFORMS.length+' ad platforms connected',
+      accounts + kpiCards([['Ad spend',money(spend),delta(spend,pspend,true)],['Attributed revenue',money(attr),'<span class="muted">as reported by the ad platform</span>'],['Blended ROAS',spend?(attr/spend).toFixed(2):'–','<span class="muted">attributed revenue ÷ spend</span>'],['Break-even ROAS',gm>0?(1/gm).toFixed(2):'–','<span class="muted">1 ÷ margin before ads ('+pct(gm)+')</span>',true]])
       + '<div class="card" style="margin-bottom:14px"><h3>Daily ad spend by campaign</h3>'+stackedAds(days)+'</div>'
       + '<div class="card" style="padding:0"><div class="tablewrap"><table><thead><tr><th>Campaign</th><th class="n">Spend</th><th class="n">Attributed revenue</th><th class="n">ROAS</th><th class="n">Break-even ROAS</th><th class="n">Profit after ads</th></tr></thead><tbody>'+table+'</tbody></table></div>'
       + '<p class="muted" style="font-size:12px;padding:10px 12px;margin:0">Profit after ads = attributed revenue × margin before ads − spend. A campaign below break-even ROAS loses money even if its ROAS looks positive.'+(missing()?' <span class="neg">Product costs are missing, so margins are overstated.</span>':'')+'</p></div>'
@@ -477,10 +676,34 @@ td.n,th.n{text-align:right}
   };
 
   R.costs = function(){
-    return mainShell('Product costs', 'Cost per unit you pay your supplier', '<div class="card" style="padding:0"><div class="tablewrap"><table><thead><tr><th>Product</th><th class="n">Cost / unit</th><th class="n">Gross margin</th></tr></thead><tbody>'+costRows(false)+'</tbody></table></div></div>'
-      + '<p class="muted" style="font-size:12.5px">Net profit for the last 7 days with these costs: <b id="livep">'+money(calc(last(7)).profit)+'</b>. Changes apply to all reports immediately.</p>'
-      + '<button class="btn sec" id="suggest">Fill missing with suggested costs</button>');
+    var f = S.costFilter, pills = [['all','All'],['missing','No exact cost'],['est','Estimated']].map(function(x){return '<button data-cfilter="'+x[0]+'" aria-pressed="'+(f===x[0])+'">'+x[1]+'</button>'}).join('');
+    return mainShell('Product costs', 'What each SKU costs you, per unit',
+      missingBanner(true)
+      + '<div class="toolbar"><input class="txt" id="csearch" type="search" placeholder="Search product or SKU" aria-label="Search product or SKU"><div class="pillset" role="group" aria-label="Filter">'+pills+'</div><span style="flex:1"></span><button class="btn sm sec" id="csvexport">Export CSV</button><button class="btn sm" id="csvopen">Import CSV</button></div>'
+      + '<div class="card" style="padding:12px 0 0"><div style="padding:0 12px">'+costProgress()+'</div>'+costTable(true)
+      + '<p class="muted" style="font-size:12px;padding:10px 12px;margin:0">Editing a cost here changes the current cost. If your supplier changed the price, use <b>History</b> to add a new cost from a date, so older orders keep the old cost.</p></div>'
+      + '<p style="font-size:12.5px;margin:12px 0 14px">Net profit for the last 7 days with these costs: <b id="livep">'+money(calc(last(7)).profit)+'</b>. Changes apply to all reports immediately.</p>'
+      + '<div class="card"><h3>Default cost for SKUs without an exact cost</h3>'+pctPanel()+'</div>');
   };
+  function csvModal(){
+    return '<div class="mh"><b>Import product costs</b><button class="x" data-close aria-label="Close">✕</button></div><div class="mb">'+csvPanel()+'</div>';
+  }
+  function histModal(){
+    var p = PRODUCTS[S.modal.i], periods = p.prev.map(function(q){return [q.from,q.to,q.cost]});
+    if (p.cost!=null) periods.push([p.since, LAST, p.cost]);
+    var rows = periods.slice().reverse().map(function(q,k){ return '<tr><td>'+short(DAYS[q[0]].date)+' – '+(k===0?'today':short(DAYS[q[1]].date))+'</td><td class="n">'+money(q[2])+'</td><td>'+(k===0?'<span class="tag ok">Current</span>':'')+'</td></tr>' }).join('');
+    var minD = p.cost==null ? 0 : p.since+1;
+    return '<div class="mh"><b>Cost history · '+esc(p.name)+'</b><button class="x" data-close aria-label="Close">✕</button></div><div class="mb">'
+      + (rows?'<div class="tablewrap" style="margin-bottom:14px"><table><thead><tr><th>Applies to orders from</th><th class="n">Cost / unit</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<p class="muted" style="margin:0 0 12px">No cost yet. The first cost you add applies from the date you choose; earlier orders stay without a cost.</p>')
+      + '<b style="display:block;margin-bottom:8px">Add a new cost</b><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span>$</span><input class="txt" id="hcost" inputmode="decimal" placeholder="0.00" style="width:90px"><span class="muted">from</span><input class="txt" type="date" id="hfrom" min="'+iso(DAYS[Math.min(minD,LAST)].date)+'" max="'+iso(DAYS[LAST].date)+'" value="'+iso(DAYS[LAST].date)+'"></div>'
+      + '<p class="err" id="herr" style="color:var(--t-neg);font-size:12px;margin:6px 0 0;min-height:1em"></p><p class="hint">Orders before that date keep the cost that applied at the time.</p></div>'
+      + '<div class="mf"><button class="btn sec" data-close>Cancel</button><button class="btn" id="hsave">Save cost</button></div>';
+  }
+  function modalHtml(){
+    if (!S.modal) return '';
+    var inner = S.modal.type==='ads' ? adModal() : S.modal.type==='csv' ? csvModal() : histModal();
+    return '<div class="mbg" id="mbg"><div class="modal" role="dialog" aria-modal="true">'+inner+'</div></div>';
+  }
 
   R.shipping = function(){
     var days = sel(), t = calc(days);
@@ -499,7 +722,7 @@ td.n,th.n{text-align:right}
     return mainShell('Settings', 'Glow Demo Store',
       '<div class="card form" style="margin-bottom:14px"><h3 style="margin:0">Shop connection</h3>'
       + '<div class="frow"><span>TikTok Shop</span><span style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="tag ok">Connected</span><span class="muted" style="font-size:12.5px">Glow Demo Store · last synced 4 minutes ago</span><button class="btn sm sec" id="resync">Sync now</button></span></div>'
-      + '<div class="frow"><span>TikTok Ads Manager</span><span><span class="tag ok">Connected</span></span></div></div>'
+      + PLATFORMS.map(function(pf){ var on = pfOn(pf.id); return '<div class="frow"><span>'+pf.name+'</span><span style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="tag '+(on?'ok':'off')+'">'+(on?'Connected':'Not connected')+'</span><button class="btn sm sec" data-connect="'+pf.id+'">'+(on?'Manage':'Connect')+'</button></span></div>' }).join('')+'</div>'
       + '<div class="card form" style="margin-bottom:14px"><h3 style="margin:0">Reporting</h3>'
       + '<div class="frow"><label for="tz">Time zone<small>Decides which day an order counts in</small></label><select id="tz" class="txt" style="max-width:280px">'+['America/Los_Angeles (PT)','America/New_York (ET)','Europe/London (GMT)','Asia/Ho_Chi_Minh (ICT)'].map(function(z){return '<option'+(z===CFG.tz?' selected':'')+'>'+z+'</option>'}).join('')+'</select></div>'
       + '<div class="frow"><label for="cur">Currency</label><select id="cur" class="txt" style="max-width:280px"><option>USD</option></select></div>'
@@ -533,14 +756,14 @@ td.n,th.n{text-align:right}
       return 'Your lowest day this week was <b>'+day(dd.date)+'</b> at '+money(vals2[lo])+'. '+why;
     }
     if (/cost|cogs|set ?up|\badd\b|how do/.test(s)){
-      return 'Product costs are what you pay per unit. To add them:<ol><li>Open <b>Product costs</b> in the menu.</li><li>Enter a cost per unit for each product, or use the suggested values.</li><li>Every report updates straight away.</li></ol>'
-        + (missing()?'You have <b>'+missing()+'</b> products without a cost right now.':'All your products have a cost. Nice.')
+      return 'Product costs are what you pay per unit, set for each SKU. To add them:<ol><li>Open <b>Product costs</b> in the menu.</li><li>Type a cost per SKU, select several to bulk-edit, or <b>Import CSV</b> with your supplier costs.</li><li>No exact costs yet? Set a default cost % as a placeholder.</li></ol>Every report updates straight away. '
+        + (missing()?'You have <b>'+missing()+'</b> SKUs without a cost right now.':estimated()?'<b>'+estimated()+'</b> SKUs still use the '+CFG.defPct+'% estimate.':'All your SKUs have a cost. Nice.')
         + '<br><button class="btn sm" data-go="costs" data-closeai>Open Product costs</button>';
     }
     if (/product|best|most|sku|which/.test(s)){
       var per = PRODUCTS.map(function(p,i){ var pr=0, units=0; last(30).forEach(function(d){ d.orders.forEach(function(o){ if(o.p===i){ var c=orderCalc(o); units+=o.qty; pr += c.rev-c.fee-c.aff-c.ship-c.cogs; } }) }); return {p:p, units:units, profit:pr} }).sort(function(a,b){return b.profit-a.profit});
-      return 'Profit by product over the last 30 days, before ads:'
-        + '<table><thead><tr><th>Product</th><th class="n">Units</th><th class="n">Profit</th></tr></thead><tbody>'+per.map(function(r){return '<tr><td>'+esc(r.p.name)+(r.p.cost==null?' <span class="tag warn">no cost</span>':'')+'</td><td class="n">'+r.units+'</td><td class="n">'+money0(r.profit)+'</td></tr>'}).join('')+'</tbody></table>'
+      return 'Profit by SKU over the last 30 days, before ads:'
+        + '<table><thead><tr><th>SKU</th><th class="n">Units</th><th class="n">Profit</th></tr></thead><tbody>'+per.map(function(r){return '<tr><td>'+esc(r.p.name)+(r.p.cost==null?(CFG.defPct!=null?' <span class="tag off">est.</span>':' <span class="tag warn">no cost</span>'):'')+'</td><td class="n">'+r.units+'</td><td class="n">'+money0(r.profit)+'</td></tr>'}).join('')+'</tbody></table>'
         + '<br><b>'+esc(per[0].p.name)+'</b> is your top earner.';
     }
     return 'In this demo I can answer questions about your profit trend, why profit dropped, your best products, and how to add product costs. Try one of the suggestions below.';
@@ -569,7 +792,7 @@ td.n,th.n{text-align:right}
   }
 
   // ---------- Router ----------
-  var URLS = {'onb-connect':'onboarding','onb-sync':'onboarding/sync','onb-costs':'onboarding/costs',dashboard:'dashboard',orders:'orders',ads:'costs/marketing-ads',costs:'costs/products',shipping:'costs/shipping',settings:'settings'};
+  var URLS = {'onb-connect':'onboarding','onb-sync':'onboarding/sync','onb-ads':'onboarding/ad-platforms','onb-costs':'onboarding/costs',dashboard:'dashboard',orders:'orders',ads:'costs/marketing-ads',costs:'costs/products',shipping:'costs/shipping',settings:'settings'};
   function setNote(k){ var n = NOTES[k]; document.getElementById('note-title').textContent = n[0]; document.getElementById('note-body').textContent = n[1]; }
   function renderFlows(){
     var cur = S.ai ? 'ai' : (S.screen.indexOf('onb')===0 ? 'onb-connect' : S.screen);
@@ -579,21 +802,44 @@ td.n,th.n{text-align:right}
   function render(){
     var onb = S.screen.indexOf('onb')===0, main = app.querySelector('.main'), y = main ? main.scrollTop : 0, same = render._last === S.screen;
     app.classList.toggle('bare', onb);
-    app.innerHTML = R[S.screen]() + '<div class="toast" id="toast" role="status"></div>';
+    app.innerHTML = R[S.screen]() + modalHtml() + '<div class="toast" id="toast" role="status"></div>';
     if (same && app.querySelector('.main')) app.querySelector('.main').scrollTop = y;
     render._last = S.screen;
     document.getElementById('url').textContent = 'app.trueprofit.demo/' + URLS[S.screen];
     if (!onb) renderDrawer();
     setNote(S.ai ? 'ai' : S.screen); renderFlows(); bind();
   }
-  function go(s){ S.screen = s; S.dpOpen = false; render(); }
+  function go(s){ S.screen = s; S.dpOpen = false; S.modal = null; S.picked = {}; render(); }
+  function resetAll(){
+    S.connected=false; S.syncPct=0; S.costTab='sku'; S.csvStep='upload'; S.costFilter='all'; S.picked={}; S.modal=null;
+    PRODUCTS.forEach(resetCost); CFG.defPct=null;
+    ACCOUNTS.forEach(function(a){a.on=false}); Object.keys(AUTH).forEach(function(k){AUTH[k]=false});
+  }
+  // Jumping past onboarding: behave as if the seller connected TikTok Ads and nothing else.
+  function defaultAds(){ if (anyAds()) return; AUTH.tiktok = true; ACCOUNTS.forEach(function(a){ if (a.pf==='tiktok' && a.def) a.on = true }) }
+  function openConnect(pf){ var sel = {}; ACCOUNTS.forEach(function(a){ if (a.pf===pf) sel[a.id] = AUTH[pf] ? a.on : a.def }); S.modal = {type:'ads', pf:pf, step:AUTH[pf]?'accounts':'auth', sel:sel, pct:0}; render(); }
+  function importCsv(){
+    var n = 0;
+    CSV_ROWS.forEach(function(r){ PRODUCTS.forEach(function(p){ if (p.sku===r[0]){ p.cost = r[1]; p.handling = r[2]; p.since = 0; p.prev = []; n++ } }) });
+    S.csvStep = 'upload'; return n;
+  }
+  function closeModal(){ S.modal = null; render() }
+  function syncBulk(){ var n = Object.keys(S.picked).filter(function(k){return S.picked[k]}).length, b = document.getElementById('bulk'); if (!b) return; b.hidden = !n; document.getElementById('npick').textContent = n+' selected' }
+  function renderKeepFocus(){
+    setTimeout(function(){
+      var ae = document.activeElement, sel = null;
+      if (ae && app.contains(ae)){ ['data-cost','data-hand'].forEach(function(a){ if (ae.hasAttribute(a)) sel = '['+a+'="'+ae.getAttribute(a)+'"]' }); if (!sel && ae.id) sel = '#'+ae.id }
+      render(); if (sel){ var n = app.querySelector(sel); if (n) n.focus({preventScroll:true}) }
+    }, 0);
+  }
+  function num(v){ var x = parseFloat(String(v).replace(/[^0-9.]/g,'')); return isNaN(x) ? null : x }
   function openAI(q){
     if (S.screen.indexOf('onb')===0){ finishOnboarding(true) }
     S.ai = true; render();
     if (q) ask(q);
     setTimeout(function(){ var i=document.getElementById('askin'); if(i) i.focus({preventScroll:true}) }, 260);
   }
-  function finishOnboarding(silent){ S.connected = true; S.syncPct = 100; if(!silent) go('dashboard'); else S.screen='dashboard'; }
+  function finishOnboarding(silent){ S.connected = true; S.syncPct = 100; if (silent) defaultAds(); if(!silent) go('dashboard'); else S.screen='dashboard'; }
 
   function bind(){
     function on(id, ev, fn){ var e = document.getElementById(id); if (e) e.addEventListener(ev, fn); }
@@ -602,16 +848,77 @@ td.n,th.n{text-align:right}
       go('onb-sync');
       if (S.syncPct<100){ var t = setInterval(function(){ S.syncPct = Math.min(100, S.syncPct+5); if (S.screen!=='onb-sync'){ clearInterval(t); return } render(); if (S.syncPct>=100) clearInterval(t); }, 110); }
     });
+    on('toads','click', function(){ go('onb-ads') });
     on('tocosts','click', function(){ go('onb-costs') });
-    on('suggest','click', function(){ PRODUCTS.forEach(function(p){ if(p.cost==null) p.cost=p.suggested }); render(); });
+    on('noads','click', function(){ go('onb-costs') });
+    on('back-sync','click', function(){ go('onb-sync') });
+    on('back-ads','click', function(){ go('onb-ads') });
     on('skip','click', function(){ go('dashboard') });
     on('finish','click', function(){ go('dashboard') });
-    app.querySelectorAll('[data-cost]').forEach(function(inp){
-      inp.addEventListener('change', function(){ var v = parseFloat(inp.value.replace(/[^0-9.]/g,'')); PRODUCTS[+inp.dataset.cost].cost = isNaN(v) ? null : v; render(); });
-      inp.addEventListener('input', function(){
-        var v = parseFloat(inp.value.replace(/[^0-9.]/g,'')); PRODUCTS[+inp.dataset.cost].cost = isNaN(v) ? null : v;
-        inp.classList.toggle('missing', isNaN(v)); var lp = document.getElementById('livep'); if (lp) lp.textContent = money(calc(last(7)).profit);
+    app.querySelectorAll('[data-connect]').forEach(function(b){ b.addEventListener('click', function(){ openConnect(b.dataset.connect) }) });
+
+    // Cost table: typing updates numbers in place; leaving the field re-renders and keeps focus where the user went.
+    function liveCost(attr, set){
+      app.querySelectorAll('['+attr+']').forEach(function(inp){
+        var i = +inp.getAttribute(attr);
+        inp.addEventListener('input', function(){
+          var v = num(inp.value); set(PRODUCTS[i], v);
+          if (attr==='data-cost') inp.classList.toggle('missing', v==null);
+          var m = app.querySelector('[data-margin="'+i+'"]'), uc = unitCost(PRODUCTS[i]);
+          if (m) m.innerHTML = uc.st==='missing' ? '<span class="tag warn">Missing</span>' : pct((PRODUCTS[i].price-uc.u)/PRODUCTS[i].price)+(uc.st==='est'?' <span class="tag off">est.</span>':'');
+          var lp = document.getElementById('livep'); if (lp) lp.textContent = money(calc(last(7)).profit);
+        });
+        inp.addEventListener('change', renderKeepFocus);
       });
+    }
+    liveCost('data-cost', function(p,v){ p.cost = v; if (v==null){ p.since = 0; p.prev = [] } });
+    liveCost('data-hand', function(p,v){ p.handling = v||0 });
+    app.querySelectorAll('[data-pick]').forEach(function(c){ c.addEventListener('change', function(){ S.picked[c.dataset.pick] = c.checked; syncBulk() }) });
+    on('pickall','change', function(){ var ck = this.checked; app.querySelectorAll('[data-pick]').forEach(function(c){ if (c.closest('tr').style.display!=='none'){ c.checked = ck; S.picked[c.dataset.pick] = ck } }); syncBulk() });
+    on('bulkclear','click', function(){ S.picked = {}; render() });
+    on('bulkapply','click', function(){
+      var c = num(document.getElementById('bulkcost').value), h = num(document.getElementById('bulkhand').value);
+      if (c==null && h==null){ toast('Enter a cost or a handling fee to apply'); return }
+      var n = 0; Object.keys(S.picked).forEach(function(k){ if (!S.picked[k]) return; var p = PRODUCTS[+k]; if (c!=null){ p.cost = c } if (h!=null) p.handling = h; n++ });
+      S.picked = {}; render(); toast('Updated '+n+' SKU'+(n>1?'s':''));
+    });
+    app.querySelectorAll('[data-ctab]').forEach(function(b){ b.addEventListener('click', function(){ S.costTab = b.dataset.ctab; render() }) });
+    app.querySelectorAll('[data-cfilter]').forEach(function(b){ b.addEventListener('click', function(){ S.costFilter = b.dataset.cfilter; S.picked = {}; render() }) });
+    on('csearch','input', function(){ var q = this.value.trim().toLowerCase();
+      app.querySelectorAll('tbody tr[data-s]').forEach(function(tr){ if (!tr.classList.contains('grp')) tr.style.display = !q || tr.dataset.s.indexOf(q)>=0 ? '' : 'none' });
+      app.querySelectorAll('tbody tr.grp').forEach(function(g){ var n = g.nextElementSibling, any = false; while (n && !n.classList.contains('grp')){ if (n.style.display!=='none') any = true; n = n.nextElementSibling } g.style.display = any ? '' : 'none' });
+    });
+    on('csvtpl','click', function(){ toast('Template downloaded (demo): '+PRODUCTS.length+' SKUs, blank cost columns') });
+    on('csvexport','click', function(){ toast('Exported '+PRODUCTS.length+' SKUs with costs (demo)') });
+    on('csvopen','click', function(){ S.csvStep = 'upload'; S.modal = {type:'csv'}; render() });
+    on('csvup','click', function(){ S.csvStep = 'preview'; render() });
+    on('csvback','click', function(){ S.csvStep = 'upload'; render() });
+    on('csvimport','click', function(){ var n = importCsv(); if (S.modal) S.modal = null; S.costTab = 'sku'; render(); toast(n+' costs imported · 1 row skipped (SKU not found)') });
+    on('defpct','input', function(){ var v = num(this.value), ex = PRODUCTS[2], el = document.getElementById('pctex'); if (el && v!=null) el.textContent = 'e.g. '+ex.name+' at '+money(ex.price)+' → '+money(ex.price*v/100)+' per unit' });
+    on('pcton','click', function(){ var v = num(document.getElementById('defpct').value); if (v==null || v<=0 || v>=100){ toast('Enter a percentage between 1 and 99'); return } CFG.defPct = v; render(); toast('SKUs without an exact cost now use '+v+'% of price (estimated)') });
+    on('pctoff','click', function(){ CFG.defPct = null; render(); toast('Estimate removed. SKUs without a cost show as missing') });
+    app.querySelectorAll('[data-hist]').forEach(function(b){ b.addEventListener('click', function(){ S.modal = {type:'hist', i:+b.dataset.hist}; render() }) });
+
+    // Modals
+    app.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click', closeModal) });
+    var bg = document.getElementById('mbg'); if (bg) bg.addEventListener('click', function(e){ if (e.target===bg && !(S.modal.type==='ads' && S.modal.step==='import' && S.modal.pct<100)) closeModal() });
+    on('m-allow','click', function(){ AUTH[S.modal.pf] = true; S.modal.step = 'accounts'; render() });
+    app.querySelectorAll('[data-acct]').forEach(function(c){ c.addEventListener('change', function(){ S.modal.sel[c.dataset.acct] = c.checked; render() }) });
+    on('m-accts','click', function(){
+      var m = S.modal, any = false;
+      ACCOUNTS.forEach(function(a){ if (a.pf===m.pf){ a.on = !!m.sel[a.id]; if (a.on) any = true } });
+      if (!any){ AUTH[m.pf] = false; S.modal = null; render(); toast('Disconnected. Its spend no longer counts in profit'); return }
+      m.step = 'import'; m.pct = 0; render();
+      var t = setInterval(function(){ if (S.modal!==m){ clearInterval(t); return } m.pct = Math.min(100, m.pct+10); render(); if (m.pct>=100) clearInterval(t) }, 120);
+    });
+    on('hsave','click', function(){
+      var p = PRODUCTS[S.modal.i], c = num(document.getElementById('hcost').value), d = idxOf(document.getElementById('hfrom').value), err = document.getElementById('herr');
+      if (c==null){ err.textContent = 'Enter a cost per unit.'; return }
+      if (d<0){ err.textContent = 'Pick a date within the last 90 days.'; return }
+      if (p.cost==null){ p.cost = c; p.since = d; }
+      else if (d<=p.since){ err.textContent = 'Pick a date after '+short(DAYS[p.since].date)+', when the current cost started.'; return }
+      else { p.prev.push({from:p.since, to:d-1, cost:p.cost}); p.cost = c; p.since = d; }
+      S.modal = null; render(); toast('New cost saved from '+short(DAYS[d].date)+'. Reports recalculated.');
     });
     // Date filter
     on('dpbtn','click', function(e){ e.stopPropagation(); S.dpOpen = !S.dpOpen; document.getElementById('dppop').hidden = !S.dpOpen; this.setAttribute('aria-expanded', S.dpOpen); });
@@ -647,7 +954,7 @@ td.n,th.n{text-align:right}
       if (window.innerWidth < 1100) document.querySelector('.browser').scrollIntoView({behavior:'smooth'});
       if (to==='ai'){ openAI(S.chat.length?null:'What is my profit trend over the week?'); return; }
       S.ai = false;
-      if (to==='onb-connect'){ S.connected=false; S.syncPct=0; PRODUCTS.forEach(function(p){p.cost=null}); }
+      if (to==='onb-connect') resetAll();
       else if (S.screen.indexOf('onb')===0) finishOnboarding(true);
       go(to);
     }

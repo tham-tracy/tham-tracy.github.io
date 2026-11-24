@@ -144,6 +144,22 @@ h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spaci
 .vs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .vs > div{border-radius:12px;padding:10px;font-size:12px}
 .vs .p{background:var(--a-teal-soft)}.vs .e{background:#fff4dc}
+.inp{width:100%;border:1px solid var(--a-line);background:var(--a-field);border-radius:10px;padding:11px 12px;font:inherit;font-size:14px;outline:none}
+.inp:focus{border-color:var(--a-teal)}
+.inp[readonly]{color:#777}
+.flabel{display:block;font-size:12.5px;color:var(--a-muted);margin:12px 0 5px}
+.addr{font-family:var(--mono);font-size:12.5px;word-break:break-all;background:var(--a-field);border-radius:10px;padding:10px 12px}
+.qr{display:block;margin:6px auto 4px;border:8px solid #fff;border-radius:10px;box-shadow:0 0 0 1px var(--a-line)}
+.warn{background:#fff4dc;color:#7a4d00;border-radius:12px;padding:11px 12px;font-size:12.5px}
+.pick{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1.5px solid var(--a-line);background:#fff;border-radius:12px;padding:12px;margin-bottom:8px}
+.pick.on{border-color:var(--a-ink)}
+.pick[disabled]{opacity:.6;cursor:not-allowed}
+.otp{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:14px 0}
+.otp input{width:100%;text-align:center;font:inherit;font-size:22px;font-weight:700;border:1px solid var(--a-line);background:var(--a-field);border-radius:10px;padding:10px 0;outline:none}
+.otp input:focus{border-color:var(--a-teal)}
+.orow{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--a-line);font-size:13px}
+.arow{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--a-line)}
+.arow .r{margin-left:auto;text-align:right}
 
 @media (max-width: 900px){
   .stage{grid-template-columns:1fr;padding-top:1.2rem}
@@ -195,13 +211,16 @@ h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spaci
 (function(){
   // ---------- Demo data ----------
   var S = {
-    balance: 48250.62, usdt: 12480.00, usdc: 6200.00, btc: 0.1825,
-    btcPrice: 78104.79,
-    positions: [],
+    usdt: 12480.00, usdc: 6200.00, btc: 0.1825, eth: 4.2,
+    btcPrice: 78104.79, ethPrice: 2580.44,
+    positions: [], orders: [],
+    banks: [{name:'Demo Bank', last4:'4821', status:'verified'}],
+    bankForm: {bank:'', acct:'', swift:'', country:'Hong Kong', proof:false},
+    cdep: {asset:'USDT', net:0, step:0, amount:500},
     convert: {from:'USDT', to:'BTC', amount:''},
     spot: {side:'buy', type:'Market', amount:'', price:'', stop:''},
     deposit: {amount:'', step:0, ref:'AUR-' + Math.floor(100000 + Math.random()*899999)},
-    withdraw: {asset:'USDT', amount:'', step:0},
+    withdraw: {asset:'USDT', amount:'', step:0, bank:0},
     earnTab: 'Top'
   };
   var PRODUCTS = [
@@ -233,16 +252,25 @@ h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spaci
     'deposit-usd': ['On-ramp: no surprises', 'Before submitting, the client sees the USD to USDT rate, what they will receive and the exact bank details with a payment reference. Bank details here are demo values.'],
     'deposit-status': ['Trackable status', 'A bank wire can take a day or more. The status tracker shows each step until USDT is credited, so clients do not have to ask their relationship manager where their money is.'],
     withdraw: ['Off-ramp: verified accounts only', 'USD can only go to a bank account that has been added and verified in Aura. The client sees the rate and the USD amount before submitting.'],
-    'withdraw-status': ['Same status pattern', 'Withdrawals use the same status tracker as deposits, from request to funds sent.']
+    'withdraw-status': ['Same status pattern', 'Withdrawals use the same status tracker as deposits, from request to funds sent.'],
+    'withdraw-review': ['Review before it leaves', 'The client sees the amount, the rate, what the bank receives and which verified account it goes to, then confirms with 2FA. Money leaving the platform always needs a second factor.'],
+    'withdraw-2fa': ['Second factor', 'Withdrawals are confirmed with a code from the client\'s authenticator app. In this demo any 6 digits work.'],
+    'bank-add': ['Adding a bank account', 'The account must be in the client\'s own name, so the holder name is fixed to their Aura account. A recent bank statement is attached for the verification review. Field names and documents here are illustrative.'],
+    'bank-status': ['Verification before first use', 'A new bank account cannot receive USD until it is verified. The tracker shows where the review is; once verified, it appears as a choice on the withdrawal screen.'],
+    'deposit-crypto': ['Network first, then the address', 'Sending a token on the wrong network can lose it, so the client picks the asset and network before any address is shown, and the screen repeats which asset and network this address accepts. Addresses here are demo placeholders.'],
+    'deposit-crypto-status': ['Confirmations, not a spinner', 'A transfer is credited after enough network confirmations. The tracker shows detected, confirming (with a count) and credited, so the client can see it is on its way.'],
+    'earn-redeem': ['Exit terms, again, at exit', 'Redeeming repeats the product\'s exit conditions and says when funds settle. For a fixed product with early redemption, it shows the yield that will be forfeited before the client confirms.'],
+    'assets': ['Everything the client holds', 'Balances by asset in one list, with what is locked in Earn shown separately from what is available to trade or withdraw.']
   };
 
   var FLOWS = [
     ['home','Home','Portfolio and quick actions'],
-    ['earn','Earn','Fixed vs market-linked yield'],
+    ['earn','Earn','Subscribe, track, redeem'],
     ['convert','Convert','Simple quote-based trade'],
-    ['spot','Spot','Five order types'],
+    ['spot','Spot','Five order types, open orders'],
     ['deposit-usd','Deposit USD','Fiat on-ramp with status'],
-    ['withdraw','Withdraw USD','Fiat off-ramp']
+    ['deposit-crypto','Deposit crypto','Network, address, confirmations'],
+    ['withdraw','Withdraw USD','Verified bank, 2FA, status']
   ];
 
   // ---------- Helpers ----------
@@ -286,7 +314,7 @@ h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spaci
       + [['doc','Statements'],['lend','Borrow & Lend'],['card','Card']].map(function(a){return '<button class="dim" data-soon="'+a[1]+'"><span class="soon">Coming Soon</span><span class="ic">'+IC[a[0]]+'</span>'+a[1]+'</button>'}).join('')
       + '<button data-soon="View all"><span class="ic">'+IC.all+'</span>View all</button>';
     return '<div class="pad" style="padding-top:6px"><div class="card">'
-      + '<div class="row"><div><div class="muted small">Est. Total Balance</div><div class="big">$'+money(S.balance)+'</div>'
+      + '<div class="row"><div><div class="muted small">Est. Total Balance</div><div class="big">$'+money(totalBal())+'</div>'
       + '<div class="small muted">Today\'s PNL <span class="down">-0.18% ($86.85)</span></div></div>'
       + '<button class="btn sm" data-go="deposit">Deposit</button></div>'
       + '<div class="qa">'+q+'</div></div>'
@@ -296,7 +324,7 @@ h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spaci
   };
 
   R.earn = function(){
-    var earnBal = S.positions.reduce(function(a,p){return a+p.amount},0);
+    var earnBal = earnUsd();
     var tabs = ['Top','Fixed','Strategies'].map(function(t){return '<button role="tab" aria-selected="'+(S.earnTab===t)+'" data-tab="'+t+'">'+t+'</button>'}).join('');
     var list = PRODUCTS.filter(function(p){return S.earnTab==='Top' || (S.earnTab==='Fixed'?p.kind==='fixed':p.kind==='variable')}).map(function(p){
       var fixed = p.kind==='fixed';
@@ -307,11 +335,14 @@ h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spaci
         + '<span class="btn sm">Subscribe</span></dl></button>';
     }).join('');
     return '<div class="pad" style="padding-top:6px"><div class="row"><div><div class="muted small">Est. Earn Balance</div><div class="big">$'+money(earnBal)+'</div>'
-      + '<div class="small muted">Positions <b>'+S.positions.length+'</b></div></div><button class="btn sm line" data-go="earn-portfolio">My Portfolio</button></div></div>'
+      + '<div class="small muted">Positions <b>'+S.positions.filter(function(p){return p.status!=='redeemed'}).length+'</b></div></div><button class="btn sm line" data-go="earn-portfolio">My Portfolio</button></div></div>'
       + '<div class="seg" role="tablist" style="margin-top:16px">'+tabs+'</div><div class="pad" style="padding-top:14px">'+list+'</div>';
   };
 
   function product(){return PRODUCTS.filter(function(p){return p.id===ctx.pid})[0]}
+  function px(asset){return asset==='BTC'?S.btcPrice:asset==='ETH'?S.ethPrice:1}
+  function earnUsd(){return S.positions.reduce(function(a,p){return a+p.amount*px(p.asset)},0)}
+  function totalBal(){return S.usdt+S.usdc+S.btc*S.btcPrice+S.eth*S.ethPrice+earnUsd()}
   function avail(asset){return asset==='USDT'?S.usdt:asset==='USDC'?S.usdc:S.btc}
   function estEarn(p, amt){var days = p.term || 30; return amt*p.apy/100*days/365}
 
@@ -375,16 +406,32 @@ h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spaci
       + '<button class="btn" data-go="earn-portfolio">View in My Portfolio</button><button class="btn line" style="margin-top:8px" data-go="earn">Back to Earn</button></div>';
   };
 
+  function prodOf(pos){return PRODUCTS.filter(function(p){return p.id===pos.pid})[0]}
   R['earn-portfolio'] = function(){
-    var list = S.positions.length ? S.positions.map(function(p){
+    var list = S.positions.length ? S.positions.map(function(p,i){
+      var pr = prodOf(p), dp = p.asset==='BTC'?6:2, act;
+      if (p.status==='redeeming') act = '<div class="info" style="margin-top:10px">Redemption requested · settles '+p.settle+'</div><button class="sim" data-settle="'+i+'" style="margin-top:8px">Demo only: settle the redemption</button>';
+      else if (p.kind==='fixed' && pr.early.indexOf('Not available')===0) act = '<p class="small muted" style="margin:10px 0 0">Held to maturity. Principal and yield are credited on '+p.payout+'.</p>';
+      else act = '<button class="btn line sm" data-redeem="'+i+'" style="margin-top:12px;width:100%">'+(p.kind==='fixed'?'Redeem early':'Redeem')+'</button>';
       return '<div class="box" style="margin-bottom:10px"><div class="row"><b>'+p.name+'</b><span class="chip '+(p.kind==='fixed'?'':'est')+'">'+(p.kind==='fixed'?'Fixed':'Market-linked')+'</span></div>'
-        + '<dl class="lines" style="margin-top:10px"><div><dt>Principal</dt><dd>'+money(p.amount,p.asset==='BTC'?6:2)+' '+p.asset+'</dd></div>'
+        + '<dl class="lines" style="margin-top:10px"><div><dt>Principal</dt><dd>'+money(p.amount,dp)+' '+p.asset+'</dd></div>'
         + '<div><dt>'+(p.kind==='fixed'?'APY':'Today\'s est. APY')+'</dt><dd>'+p.apy+'%</dd></div>'
         + '<div><dt>Accrued yield</dt><dd>0.00 '+p.asset+'</dd></div>'
-        + '<div><dt>'+(p.kind==='fixed'?'Maturity':'Status')+'</dt><dd>'+(p.kind==='fixed'?p.maturity:'Earning from '+p.start)+'</dd></div></dl></div>';
+        + '<div><dt>'+(p.kind==='fixed'?'Maturity':'Status')+'</dt><dd>'+(p.kind==='fixed'?p.maturity:'Earning from '+p.start)+'</dd></div></dl>'+act+'</div>';
     }).join('') : '<div class="center muted" style="padding:40px 10px">No positions yet.<br><br><button class="btn sm" data-go="earn">Browse products</button></div>';
     return header('My Portfolio','earn') + '<div class="pad">'+list+'</div>';
   };
+  function redeemSheet(i){
+    var p = S.positions[i], pr = prodOf(p), dp = p.asset==='BTC'?6:2, fixed = p.kind==='fixed';
+    var settle = fixed ? 'Next business day' : (pr.id==='basis'?'2 business days':'Next business day');
+    return '<div class="sheet-bg" id="sheetbg"><div class="sheet" role="dialog" aria-label="Confirm redemption"><div class="grab"></div>'
+      + '<b style="font-size:17px">'+(fixed?'Redeem early':'Redeem')+'</b><p class="small muted" style="margin:4px 0 14px">'+p.name+'</p>'
+      + '<dl class="lines" style="margin-bottom:14px"><div><dt>Principal returned</dt><dd>'+money(p.amount,dp)+' '+p.asset+'</dd></div>'
+      + '<div><dt>Accrued yield</dt><dd>'+(fixed?'<span class="down">0.00 '+p.asset+' forfeited</span>':'0.00 '+p.asset+' paid out')+'</dd></div>'
+      + '<div><dt>Settles</dt><dd>'+settle+'</dd></div><div><dt>To</dt><dd>Your '+p.asset+' wallet in Aura</dd></div></dl>'
+      + '<p class="info" style="margin:0 0 14px">'+pr.early+'</p>'
+      + '<button class="btn" id="rconfirm">Confirm redemption</button><button class="btn line" style="margin-top:8px" id="cancel">Back</button></div></div>';
+  }
 
   function tradeTabs(active){
     return '<div class="seg plain" role="tablist" style="padding-top:4px">'+['Convert','Spot','OTC'].map(function(t){return '<button role="tab" aria-selected="'+(t===active)+'" data-trade="'+t+'">'+t+'</button>'}).join('')+'</div>';
@@ -460,19 +507,23 @@ h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spaci
       + f + '<div class="field flat" style="margin-top:8px"><input id="samt" inputmode="decimal" placeholder="'+amtLabel+'" value="'+esc(o.amount)+'"></div>'
       + '<dl class="lines small" style="margin:12px 0"><div><dt>Available</dt><dd>'+(buy?money(S.usdt,2)+' USDT':S.btc.toFixed(6)+' BTC')+'</dd></div>'
       + '<div><dt>'+(o.type==='Recurring'?'Each purchase':'Est. total')+'</dt><dd>'+(total?money(total,2):'0.00')+' USDT</dd></div><div><dt>Est. fee</dt><dd>'+money(total*0.001,2)+' USDT</dd></div></dl>'
-      + '<button class="btn '+(buy?'buy':'sell')+'" id="place" '+(ok?'':'disabled')+'>'+(o.type==='Recurring'?'Set up recurring buy':(buy?'Buy':'Sell')+' BTC')+'</button><div style="height:18px"></div></div>';
+      + '<button class="btn '+(buy?'buy':'sell')+'" id="place" '+(ok?'':'disabled')+'>'+(o.type==='Recurring'?'Set up recurring buy':(buy?'Buy':'Sell')+' BTC')+'</button>'
+      + '<div id="orders" style="margin-top:20px"><b>Open orders ('+S.orders.length+')</b>'
+      + (S.orders.length ? S.orders.map(function(x,i){return '<div class="orow"><span><b class="ticker '+(x.side==='buy'?'up':'down')+'">'+(x.side==='buy'?'Buy':'Sell')+'</b> '+x.type+'<br><span class="small muted">'+x.detail+'</span></span><button class="btn sm line" data-cancel="'+i+'" style="border-width:1px">Cancel</button></div>'}).join('') : '<p class="small muted" style="margin:6px 0 0">No open orders. Limit, stop and recurring orders wait here until they fill.</p>')
+      + '</div><div style="height:18px"></div></div>';
   };
   R['spot-done'] = function(){
     var o = ctx.order;
     return '<div class="pad center"><div class="done-ic">'+IC.check+'</div><b style="font-size:20px">'+o.title+'</b>'
       + '<dl class="lines box" style="text-align:left;margin:18px 0"><div><dt>Order type</dt><dd>'+o.type+'</dd></div><div><dt>Side</dt><dd class="'+(o.side==='buy'?'up':'down')+'">'+(o.side==='buy'?'Buy':'Sell')+'</dd></div><div><dt>Amount</dt><dd>'+o.amount+'</dd></div><div><dt>Status</dt><dd>'+o.status+'</dd></div></dl>'
+      + (o.status==='Filled'?'':'<button class="btn line" id="vieworders" style="margin-bottom:8px">View open orders</button>')
       + '<button class="btn" data-go="spot">Done</button></div>';
   };
 
   R.deposit = function(){
     return header('Deposit','home') + '<div class="pad"><p class="small muted">How would you like to fund your account?</p>'
       + '<button class="product row" data-go="deposit-usd"><span style="display:flex;gap:10px;align-items:center">'+IC.bank.replace('<svg','<svg width="26" height="26"')+'<span><b>USD bank transfer</b><br><span class="small muted">Receive USDT · 1–2 business days</span></span></span><span>›</span></button>'
-      + '<button class="product row" data-crypto><span style="display:flex;gap:10px;align-items:center">'+coin('usdt')+'<span><b>Digital assets</b><br><span class="small muted">Send USDT, USDC, BTC, ETH from a wallet</span></span></span><span>›</span></button></div>';
+      + '<button class="product row" data-go="deposit-crypto"><span style="display:flex;gap:10px;align-items:center">'+coin('usdt')+'<span><b>Digital assets</b><br><span class="small muted">Send USDT, USDC, BTC, ETH from a wallet</span></span></span><span>›</span></button></div>';
   };
   var FX = 0.998;
   R['deposit-usd'] = function(){
@@ -507,21 +558,117 @@ h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spaci
       + '<div class="field" style="margin-top:8px"><label>You receive</label><input disabled value="'+(amt?money(amt*rate,2):'0.00')+'"><b class="small">USD</b></div>'
       + '<p class="small" style="margin:8px 2px 14px">Rate 1 '+w.asset+' = '+rate+' USD</p>'
       + '<b style="display:block;margin-bottom:8px">To bank account</b>'
-      + '<div class="box row" style="margin-bottom:6px"><span style="display:flex;gap:10px;align-items:center">'+IC.bank.replace('<svg','<svg width="24" height="24"')+'<span><b>Demo Bank ····4821</b><br><span class="small muted">USD · in your name</span></span></span><span class="chip">Verified</span></div>'
-      + '<button class="box row" style="width:100%;margin-bottom:14px;color:#999" data-addbank><span>+ Add bank account</span><span class="small">Needs verification</span></button>'
+      + S.banks.map(function(b,i){ var v = b.status==='verified';
+          return '<button class="pick '+(v&&w.bank===i?'on':'')+'" data-bank="'+i+'" '+(v?'':'disabled')+'>'+IC.bank.replace('<svg','<svg width="24" height="24"')+'<span style="flex:1"><b>'+esc(b.name)+' ····'+b.last4+'</b><br><span class="small muted">USD · in your name</span></span><span class="chip '+(v?'':'est')+'">'+(v?'Verified':'In review')+'</span></button>' }).join('')
+      + '<button class="box row" style="width:100%;margin-bottom:14px" data-go="bank-add"><span>+ Add bank account</span><span class="small muted">Needs verification</span></button>'
       + '<button class="btn" id="wsubmit" '+(ok?'':'disabled')+'>Submit withdrawal</button><p class="small muted center" style="margin:8px 0 18px">'+(!amt?'Enter an amount':amt<1000?'Minimum is 1,000 '+w.asset:amt>avail(w.asset)?'Not enough '+w.asset:'')+'</p></div>';
   };
   R['withdraw-status'] = function(){
     var w = S.withdraw, amt = parseFloat(w.amount);
-    var steps = [['Request submitted','Today'],['Being processed','We review and convert '+money(amt,2)+' '+w.asset],['USD sent',money(amt*0.997,2)+' USD to Demo Bank ····4821'],['Completed','Funds usually arrive in 1–2 business days']];
+    var steps = [['Request submitted','Today'],['Being processed','We review and convert '+money(amt,2)+' '+w.asset],['USD sent',money(amt*0.997,2)+' USD to '+bankLabel(S.banks[w.bank])],['Completed','Funds usually arrive in 1–2 business days']];
     return header('Withdrawal status','home',true) + '<div class="pad"><div class="row box" style="margin-bottom:16px"><span><span class="muted small">Withdrawal</span><br><b>'+money(amt,2)+' '+w.asset+' → '+money(amt*0.997,2)+' USD</b></span><span class="chip '+(w.step>=3?'':'grey')+'">'+(w.step>=3?'Completed':'In progress')+'</span></div>'
       + tracker(steps, w.step)
       + (w.step<3?'<button class="sim" id="wadvance" style="margin-top:8px">Demo only: simulate the next step</button>':'<button class="btn" data-go="home" style="margin-top:8px">Back to Home</button>')+'</div>';
   };
 
+  function bankLabel(b){return esc(b.name)+' ····'+b.last4}
+  function withdrawReview(){
+    var w = S.withdraw, amt = parseFloat(w.amount), b = S.banks[w.bank];
+    return '<div class="sheet-bg" id="sheetbg"><div class="sheet" role="dialog" aria-label="Review withdrawal"><div class="grab"></div>'
+      + '<b style="font-size:17px">Review withdrawal</b>'
+      + '<dl class="lines" style="margin:14px 0"><div><dt>You pay</dt><dd>'+money(amt,2)+' '+w.asset+'</dd></div>'
+      + '<div><dt>Rate</dt><dd>1 '+w.asset+' = 0.997 USD</dd></div>'
+      + '<div><dt>Bank receives</dt><dd>'+money(amt*0.997,2)+' USD</dd></div>'
+      + '<div><dt>To</dt><dd>'+bankLabel(b)+'</dd></div>'
+      + '<div><dt>Usually arrives</dt><dd>1–2 business days</dd></div></dl>'
+      + '<p class="info" style="margin:0 0 14px">Once submitted, the rate is locked and the request cannot be edited. Your bank may charge an incoming wire fee.</p>'
+      + '<button class="btn" id="wnext">Continue to 2FA</button><button class="btn line" style="margin-top:8px" id="cancel">Back</button></div></div>';
+  }
+  function otpSheet(){
+    return '<div class="sheet-bg" id="sheetbg"><div class="sheet" role="dialog" aria-label="Two-factor authentication"><div class="grab"></div>'
+      + '<b style="font-size:17px">Enter your 2FA code</b><p class="small muted" style="margin:4px 0 0">Open your authenticator app and enter the 6-digit code for Aura.</p>'
+      + '<div class="otp">'+[0,1,2,3,4,5].map(function(i){return '<input inputmode="numeric" maxlength="1" data-otp="'+i+'" aria-label="Digit '+(i+1)+'">'}).join('')+'</div>'
+      + '<button class="btn" id="otpok" disabled>Confirm withdrawal</button><p class="small muted center" style="margin:8px 0 0">Demo: any 6 digits work.</p>'
+      + '<button class="btn line" style="margin-top:10px" id="cancel">Cancel</button></div></div>';
+  }
+
+  R['bank-add'] = function(){
+    var f = S.bankForm, ok = f.bank && f.acct.length>=6 && f.swift.length>=8 && f.proof;
+    return header('Add bank account','withdraw') + '<div class="pad">'
+      + '<p class="small muted" style="margin-top:0">USD withdrawals can only go to an account in your own name. New accounts are reviewed before first use.</p>'
+      + '<label class="flabel">Account holder</label><input class="inp" readonly value="Demo Client Ltd"><p class="small muted" style="margin:4px 0 0">Taken from your Aura account; it must match the bank\'s records.</p>'
+      + '<label class="flabel" for="bk-bank">Bank name</label><input class="inp" id="bk-bank" data-bf="bank" placeholder="e.g. Demo Bank N.A." value="'+esc(f.bank)+'">'
+      + '<label class="flabel" for="bk-acct">Account number / IBAN</label><input class="inp ticker" id="bk-acct" data-bf="acct" placeholder="At least 6 characters" value="'+esc(f.acct)+'">'
+      + '<label class="flabel" for="bk-swift">SWIFT / BIC</label><input class="inp ticker" id="bk-swift" data-bf="swift" placeholder="8 or 11 characters" maxlength="11" value="'+esc(f.swift)+'">'
+      + '<label class="flabel" for="bk-country">Bank country</label><select class="inp" id="bk-country">'+['Hong Kong','Singapore','United Arab Emirates','United Kingdom','United States'].map(function(c){return '<option'+(c===f.country?' selected':'')+'>'+c+'</option>'}).join('')+'</select>'
+      + '<label class="flabel">Account currency</label><input class="inp" readonly value="USD">'
+      + '<label class="flabel">Proof of account</label>'
+      + (f.proof ? '<div class="box row"><span class="small"><b>bank-statement.pdf</b><br><span class="muted">Demo file · 182 KB</span></span><button class="copy" id="bk-rm">Remove</button></div>'
+                 : '<button class="box row" style="width:100%" id="bk-up"><span>Upload a recent bank statement</span><span class="small muted">PDF or image</span></button>')
+      + '<button class="btn" id="bk-submit" style="margin-top:18px" '+(ok?'':'disabled')+'>Submit for verification</button>'
+      + '<p class="small muted center" style="margin:8px 0 18px">'+(ok?'':'Fill in every field and add the statement')+'</p></div>';
+  };
+  R['bank-status'] = function(){
+    var b = S.banks[S.banks.length-1], at = b.status==='verified'?3:b.step||1;
+    var steps = [['Submitted','Today'],['Under review','Usually 1–2 business days'],['Verified','Ready to receive USD withdrawals']];
+    return header('Bank account','withdraw',true) + '<div class="pad"><div class="row box" style="margin-bottom:16px"><span><span class="muted small">New account</span><br><b>'+bankLabel(b)+'</b></span><span class="chip '+(at>=3?'':'est')+'">'+(at>=3?'Verified':'In review')+'</span></div>'
+      + tracker(steps, at)
+      + (at<3?'<button class="sim" id="bk-adv" style="margin-top:8px">Demo only: simulate the next step</button><button class="btn line" data-go="withdraw" style="margin-top:8px">Back to withdrawal</button>'
+             :'<button class="btn" data-go="withdraw" style="margin-top:8px">Withdraw to this account</button>')+'</div>';
+  };
+
+  var NETS = {
+    USDT:[{n:'Ethereum (ERC-20)', conf:12, min:'10 USDT', addr:'0xDEMO00000000000000000000000000000000A17C'},{n:'Tron (TRC-20)', conf:20, min:'10 USDT', addr:'TDEMO000000000000000000000000000XQ'}],
+    USDC:[{n:'Ethereum (ERC-20)', conf:12, min:'10 USDC', addr:'0xDEMO00000000000000000000000000000000B2D9'},{n:'Solana', conf:32, min:'10 USDC', addr:'DEMo1111111111111111111111111111111111111'}],
+    BTC:[{n:'Bitcoin', conf:2, min:'0.0005 BTC', addr:'bc1qdemo000000000000000000000000000000x7'}]
+  };
+  function qr(seed){
+    var n = 21, c = 6, s = '', h = 0, i, x, y;
+    for (i=0;i<seed.length;i++) h = (h*31 + seed.charCodeAt(i)) >>> 0;
+    function finder(px,py){ return '<rect x="'+px*c+'" y="'+py*c+'" width="'+7*c+'" height="'+7*c+'" fill="#111"/><rect x="'+(px+1)*c+'" y="'+(py+1)*c+'" width="'+5*c+'" height="'+5*c+'" fill="#fff"/><rect x="'+(px+2)*c+'" y="'+(py+2)*c+'" width="'+3*c+'" height="'+3*c+'" fill="#111"/>' }
+    for (y=0;y<n;y++) for (x=0;x<n;x++){
+      if ((x<8&&y<8)||(x>12&&y<8)||(x<8&&y>12)) continue;
+      h = (h*1103515245 + 12345) >>> 0; if ((h>>>16)%2) s += '<rect x="'+x*c+'" y="'+y*c+'" width="'+c+'" height="'+c+'" fill="#111"/>';
+    }
+    return '<svg class="qr" width="'+n*c+'" height="'+n*c+'" viewBox="0 0 '+n*c+' '+n*c+'" role="img" aria-label="Demo QR code, not scannable"><rect width="100%" height="100%" fill="#fff"/>'+s+finder(0,0)+finder(14,0)+finder(0,14)+'</svg>';
+  }
+  R['deposit-crypto'] = function(){
+    var d = S.cdep, nets = NETS[d.asset], net = nets[Math.min(d.net, nets.length-1)];
+    return header('Deposit crypto','deposit') + '<div class="pad">'
+      + '<label class="flabel" style="margin-top:0">1. Asset</label><div class="pills">'+['USDT','USDC','BTC'].map(function(a){return '<button data-casset="'+a+'" style="padding:9px 0;'+(d.asset===a?'border-color:#111;font-weight:700':'')+'">'+a+'</button>'}).join('')+'</div>'
+      + '<label class="flabel">2. Network</label>'+nets.map(function(x,i){return '<button class="pick '+(i===d.net?'on':'')+'" data-cnet="'+i+'"><span style="flex:1"><b>'+x.n+'</b><br><span class="small muted">'+x.conf+' confirmations · min '+x.min+'</span></span>'+(i===d.net?'<span class="chip">Selected</span>':'')+'</button>'}).join('')
+      + '<label class="flabel">3. Send to this address</label>'
+      + '<div class="center">'+qr(net.addr)+'<div class="small muted">Demo QR, not scannable</div></div>'
+      + '<div class="addr" style="margin:10px 0 6px">'+net.addr+'</div><div style="text-align:right"><button class="copy" data-copy>Copy address</button></div>'
+      + '<div class="warn" style="margin:12px 0">Send only <b>'+d.asset+'</b> on <b>'+net.n+'</b> to this address. Other assets or networks may be lost and cannot be recovered.</div>'
+      + '<dl class="lines small" style="margin-bottom:14px"><div><dt>Minimum deposit</dt><dd>'+net.min+'</dd></div><div><dt>Credited after</dt><dd>'+net.conf+' network confirmations</dd></div></dl>'
+      + '<button class="btn" id="csent">I\'ve sent it, track my deposit</button><div style="height:18px"></div></div>';
+  };
+  R['deposit-crypto-status'] = function(){
+    var d = S.cdep, net = NETS[d.asset][d.net], amt = d.asset==='BTC'?0.05:d.amount, dp = d.asset==='BTC'?6:2;
+    var conf = d.step<2 ? 0 : d.step===2 ? Math.round(net.conf/2) : net.conf;
+    var steps = [['Waiting for your transfer','We\'re watching '+net.n+' for it'],['Detected on chain',d.step>=1?money(amt,dp)+' '+d.asset+' · tx 0xdemo…'+d.asset.toLowerCase()+'91':'Usually a few minutes after you send'],['Confirming',conf+' / '+net.conf+' confirmations'],['Credited',d.step>=3?money(amt,dp)+' '+d.asset+' added to your wallet':'Available to trade, earn or withdraw']];
+    return header('Deposit status','home',true) + '<div class="pad"><div class="row box" style="margin-bottom:16px"><span><span class="muted small">Crypto deposit</span><br><b>'+d.asset+' · '+net.n+'</b></span><span class="chip '+(d.step>=3?'':'grey')+'">'+(d.step>=3?'Completed':'In progress')+'</span></div>'
+      + tracker(steps, d.step)
+      + (d.step<3?'<button class="sim" id="cadv" style="margin-top:8px">Demo only: '+(d.step===0?'simulate an incoming transfer':'simulate the next step')+'</button>':'<button class="btn" data-go="assets" style="margin-top:8px">View assets</button>')+'</div>';
+  };
+
+  R.assets = function(){
+    var rows = [['usdt','USDT','Tether',S.usdt,1,2],['usdc','USDC','USD Coin',S.usdc,1,2],['btc','BTC','Bitcoin',S.btc,S.btcPrice,6],['eth','ETH','Ether',S.eth,S.ethPrice,4]];
+    var earn = earnUsd();
+    return '<div class="pad" style="padding-top:6px"><div class="muted small">Est. Total Balance</div><div class="big">$'+money(totalBal())+'</div>'
+      + '<div class="qa" style="grid-template-columns:repeat(3,1fr);margin:14px 0 8px">'+[['dep','Deposit','deposit'],['wd','Withdraw','withdraw'],['trade','Convert','convert']].map(function(a){return '<button data-go="'+a[2]+'"><span class="ic" style="background:var(--a-card)">'+IC[a[0]]+'</span>'+a[1]+'</button>'}).join('')+'</div>'
+      + '<b style="display:block;margin:16px 0 4px;font-size:16px">Available</b>'
+      + rows.map(function(r){return '<div class="arow">'+coin(r[0])+'<span><b>'+r[1]+'</b><br><span class="small muted">'+r[2]+'</span></span><span class="r"><b class="ticker">'+money(r[3],r[5])+'</b><br><span class="small muted">$'+money(r[3]*r[4])+'</span></span></div>'}).join('')
+      + '<b style="display:block;margin:18px 0 4px;font-size:16px">In Earn</b>'
+      + (S.positions.length ? '<button class="arow" data-go="earn-portfolio" style="width:100%;border-left:0;border-right:0;border-top:0;background:none;text-align:left">'+IC.earn.replace('<svg','<svg width="28" height="28"')+'<span><b>'+S.positions.length+' position'+(S.positions.length>1?'s':'')+'</b><br><span class="small muted">Not available to trade until redeemed</span></span><span class="r"><b>$'+money(earn)+'</b><br><span class="small muted">›</span></span></button>'
+          : '<p class="small muted">Nothing in Earn yet. <button class="copy" data-go="earn">Browse products</button></p>')
+      + '<div style="height:18px"></div></div>';
+  };
+
   // ---------- Router ----------
-  var TAB_OF = {home:'home', earn:'earn','earn-detail':'earn','earn-done':'earn','earn-portfolio':'earn',convert:'trade','convert-done':'trade',spot:'trade','spot-done':'trade'};
-  var FLOW_OF = {home:'home',earn:'earn','earn-detail':'earn','earn-done':'earn','earn-portfolio':'earn',convert:'convert','convert-done':'convert',spot:'spot','spot-done':'spot',deposit:'deposit-usd','deposit-usd':'deposit-usd','deposit-status':'deposit-usd',withdraw:'withdraw','withdraw-status':'withdraw'};
+  var TAB_OF = {home:'home', assets:'assets', earn:'earn','earn-detail':'earn','earn-done':'earn','earn-portfolio':'earn',convert:'trade','convert-done':'trade',spot:'trade','spot-done':'trade'};
+  var FLOW_OF = {home:'home',earn:'earn','earn-detail':'earn','earn-done':'earn','earn-portfolio':'earn',convert:'convert','convert-done':'convert',spot:'spot','spot-done':'spot',deposit:'deposit-usd','deposit-usd':'deposit-usd','deposit-status':'deposit-usd','deposit-crypto':'deposit-crypto','deposit-crypto-status':'deposit-crypto',withdraw:'withdraw','withdraw-status':'withdraw','bank-add':'withdraw','bank-status':'withdraw'};
   function setNote(key){ var n = NOTES[key] || NOTES[current]; if(!n) return; document.getElementById('note-title').textContent=n[0]; document.getElementById('note-body').textContent=n[1]; }
   function render(keepScroll){
     var y = view.scrollTop;
@@ -534,7 +681,7 @@ h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spaci
   function go(name, c){ if (c) ctx = c; current = name; closeSheet(); render(); }
   function renderTabs(){
     var t = TAB_OF[current];
-    document.getElementById('tabbar').innerHTML = [['home','Home','home'],['wallet','Assets',null],['trade','Trade','convert'],['bars','Earn','earn'],['plan','Plan',null]].map(function(a){
+    document.getElementById('tabbar').innerHTML = [['home','Home','home'],['wallet','Assets','assets'],['trade','Trade','convert'],['bars','Earn','earn'],['plan','Plan',null]].map(function(a){
       var key = a[1].toLowerCase(); return '<button '+(a[2]?'data-go="'+a[2]+'"':'data-soon="'+a[1]+'"')+' aria-current="'+(t===key)+'">'+IC[a[0]]+a[1]+'</button>';
     }).join('');
   }
@@ -571,7 +718,7 @@ h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spaci
       bg.querySelector('#confirm').addEventListener('click', function(){
         var p = product(), amt = parseFloat(ctx.amount), start = new Date().getHours()>=16?1:0;
         if (p.asset==='USDT') S.usdt -= amt; else if (p.asset==='USDC') S.usdc -= amt; else S.btc -= amt;
-        S.positions.push({name:p.name, asset:p.asset, kind:p.kind, amount:amt, apy:p.apy, start:addDays(start), maturity:addDays(start+p.term)});
+        S.positions.push({pid:p.id, name:p.name, asset:p.asset, kind:p.kind, amount:amt, apy:p.apy, status:'active', start:addDays(start), maturity:addDays(start+p.term), payout:addDays(start+p.term+1)});
         go('earn-done');
       });
     });
@@ -603,16 +750,53 @@ h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spaci
     var place=$('#place'); if (place) place.addEventListener('click', function(){
       var o=S.spot, amt=parseFloat(o.amount), market=o.type==='Market', rec=o.type==='Recurring';
       if (market){ var tot=amt*S.btcPrice; if(o.side==='buy'){S.usdt-=tot*1.001;S.btc+=amt}else{S.btc-=amt;S.usdt+=tot*0.999} }
+      if (!market) S.orders.unshift({side:o.side, type:o.type+(rec?' · '+(o.freq||'Weekly'):''), detail: rec ? money(amt,2)+' USDT each time · next run '+addDays(o.freq==='Daily'?1:o.freq==='Monthly'?30:7) : amt+' BTC'+(o.stop?' · stop '+money(parseFloat(o.stop),2):'')+(o.price?' · limit '+money(parseFloat(o.price),2):'')});
       go('spot-done',{order:{type:o.type+(rec?' · '+(o.freq||'Weekly'):''), side:o.side, amount:rec?money(amt,2)+' USDT each time':amt+' BTC', status:market?'Filled':rec?'Scheduled':'Open, waiting for trigger', title:market?'Order filled':rec?'Recurring buy set up':'Order placed'}});
       S.spot.amount=''; S.spot.price=''; S.spot.stop='';
     });
-    var crypto=view.querySelector('[data-crypto]'); if (crypto) crypto.addEventListener('click', function(){ toast('Digital-asset deposit addresses are not part of this prototype') });
     view.querySelectorAll('[data-copy]').forEach(function(b){ b.addEventListener('click', function(){ toast('Copied (demo value)') }) });
     var ds=$('#dsubmit'); if (ds) ds.addEventListener('click', function(){ S.deposit.step=1; go('deposit-status') });
-    var adv=$('#advance'); if (adv) adv.addEventListener('click', function(){ S.deposit.step++; if(S.deposit.step===3){ var a=parseFloat(S.deposit.amount)*FX; S.usdt+=a; S.balance+=a; } render(true) });
+    var adv=$('#advance'); if (adv) adv.addEventListener('click', function(){ S.deposit.step++; if(S.deposit.step===3){ var a=parseFloat(S.deposit.amount)*FX; S.usdt+=a; } render(true) });
     view.querySelectorAll('[data-wasset]').forEach(function(b){ b.addEventListener('click', function(){ S.withdraw.asset=b.dataset.wasset; render(true) }) });
-    var ab=view.querySelector('[data-addbank]'); if (ab) ab.addEventListener('click', function(){ toast('New bank accounts must be verified before they can receive USD') });
-    var ws=$('#wsubmit'); if (ws) ws.addEventListener('click', function(){ var w=S.withdraw, a=parseFloat(w.amount); if(w.asset==='USDT') S.usdt-=a; else S.usdc-=a; S.balance-=a; w.step=1; go('withdraw-status') });
+    var ws=$('#wsubmit'); if (ws) ws.addEventListener('click', function(){
+      var bg = openSheet(withdrawReview(),'withdraw-review');
+      bg.querySelector('#wnext').addEventListener('click', function(){
+        var b2 = openSheet(otpSheet(),'withdraw-2fa'), boxes = b2.querySelectorAll('[data-otp]'), okb = b2.querySelector('#otpok');
+        function full(){ return Array.prototype.every.call(boxes, function(x){return /^\d$/.test(x.value)}) }
+        boxes.forEach(function(x,i){
+          x.addEventListener('input', function(){ x.value = x.value.replace(/\D/g,'').slice(-1); if (x.value && boxes[i+1]) boxes[i+1].focus(); okb.disabled = !full() });
+          x.addEventListener('keydown', function(e){ if (e.key==='Backspace' && !x.value && boxes[i-1]) boxes[i-1].focus() });
+          x.addEventListener('paste', function(e){ var t=(e.clipboardData.getData('text')||'').replace(/\D/g,'').slice(0,6); if(!t) return; e.preventDefault(); t.split('').forEach(function(ch,k){ if(boxes[k]) boxes[k].value=ch }); okb.disabled = !full() });
+        });
+        setTimeout(function(){ boxes[0].focus({preventScroll:true}) }, 50);
+        okb.addEventListener('click', function(){ var w=S.withdraw, a=parseFloat(w.amount); if(w.asset==='USDT') S.usdt-=a; else S.usdc-=a; w.step=1; go('withdraw-status') });
+      });
+    });
+    view.querySelectorAll('[data-bank]').forEach(function(b){ b.addEventListener('click', function(){ S.withdraw.bank=+b.dataset.bank; render(true) }) });
+    // Add bank
+    view.querySelectorAll('[data-bf]').forEach(function(inp){ inp.addEventListener('input', function(){
+      var k = inp.dataset.bf, v = k==='swift' ? inp.value.toUpperCase().replace(/[^A-Z0-9]/g,'') : inp.value; S.bankForm[k] = v;
+      var pos = inp.selectionStart; render(true); var n = $('#'+inp.id); if (n){ n.focus(); try{ n.setSelectionRange(pos,pos) }catch(e){} }
+    }) });
+    var bc=$('#bk-country'); if (bc) bc.addEventListener('change', function(){ S.bankForm.country=bc.value });
+    var bu=$('#bk-up'); if (bu) bu.addEventListener('click', function(){ S.bankForm.proof=true; render(true) });
+    var br=$('#bk-rm'); if (br) br.addEventListener('click', function(){ S.bankForm.proof=false; render(true) });
+    var bs=$('#bk-submit'); if (bs) bs.addEventListener('click', function(){ var f=S.bankForm; S.banks.push({name:f.bank, last4:f.acct.replace(/\s/g,'').slice(-4), status:'review', step:1}); S.bankForm={bank:'',acct:'',swift:'',country:'Hong Kong',proof:false}; go('bank-status') });
+    var ba=$('#bk-adv'); if (ba) ba.addEventListener('click', function(){ var b=S.banks[S.banks.length-1]; b.step=(b.step||1)+1; if(b.step>=3){ b.status='verified'; S.withdraw.bank=S.banks.length-1; toast('Bank account verified') } render(true) });
+    // Crypto deposit
+    view.querySelectorAll('[data-casset]').forEach(function(b){ b.addEventListener('click', function(){ S.cdep.asset=b.dataset.casset; S.cdep.net=0; render(true) }) });
+    view.querySelectorAll('[data-cnet]').forEach(function(b){ b.addEventListener('click', function(){ S.cdep.net=+b.dataset.cnet; render(true) }) });
+    var cs=$('#csent'); if (cs) cs.addEventListener('click', function(){ S.cdep.step=0; go('deposit-crypto-status') });
+    var ca=$('#cadv'); if (ca) ca.addEventListener('click', function(){ var d=S.cdep; d.step++; if(d.step===3){ if(d.asset==='BTC') S.btc+=0.05; else if(d.asset==='USDT') S.usdt+=d.amount; else S.usdc+=d.amount; toast('Deposit credited') } render(true) });
+    // Earn redeem
+    view.querySelectorAll('[data-redeem]').forEach(function(b){ b.addEventListener('click', function(){
+      var i=+b.dataset.redeem, bg=openSheet(redeemSheet(i),'earn-redeem');
+      bg.querySelector('#rconfirm').addEventListener('click', function(){ var p=S.positions[i], pr=prodOf(p); p.status='redeeming'; p.settle=addDays(pr.id==='basis'?2:1); closeSheet(); render(true); toast('Redemption requested') });
+    }) });
+    view.querySelectorAll('[data-settle]').forEach(function(b){ b.addEventListener('click', function(){ var i=+b.dataset.settle, p=S.positions[i]; if(p.asset==='USDT') S.usdt+=p.amount; else if(p.asset==='USDC') S.usdc+=p.amount; else S.btc+=p.amount; S.positions.splice(i,1); render(true); toast('Redeemed. '+p.asset+' is back in your wallet') }) });
+    // Spot open orders
+    view.querySelectorAll('[data-cancel]').forEach(function(b){ b.addEventListener('click', function(){ S.orders.splice(+b.dataset.cancel,1); render(true); toast('Order cancelled') }) });
+    var vo=$('#vieworders'); if (vo) vo.addEventListener('click', function(){ go('spot'); var o=document.getElementById('orders'); if(o) o.scrollIntoView({block:'start'}) });
     var wadv=$('#wadvance'); if (wadv) wadv.addEventListener('click', function(){ S.withdraw.step++; render(true) });
   }
 
@@ -623,7 +807,9 @@ h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spaci
       var to = g.dataset.go;
       if (g.closest('#flows') && window.innerWidth < 900) document.querySelector('.device-wrap').scrollIntoView({behavior:'smooth'});
       if (to==='deposit-usd' && S.deposit.step>0 && S.deposit.step<3 && g.closest('#flows')) to='deposit-status';
-      if (to==='withdraw' && S.withdraw.step>0 && g.closest('#flows')) { S.withdraw = {asset:'USDT', amount:'', step:0}; }
+      if (to==='withdraw' && S.withdraw.step>0 && g.closest('#flows')) { S.withdraw = {asset:'USDT', amount:'', step:0, bank:0}; }
+      if (to==='deposit-crypto' && g.closest('#flows') && S.cdep.step>0 && S.cdep.step<3) to='deposit-crypto-status';
+      if (to==='deposit-crypto' && S.cdep.step>=3) S.cdep.step=0;
       if (to==='deposit-usd' && S.deposit.step>=3) S.deposit = {amount:'', step:0, ref:'AUR-' + Math.floor(100000 + Math.random()*899999)};
       go(to); return;
     }
