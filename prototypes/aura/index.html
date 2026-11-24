@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aura prototype · Tracy Le</title>
+<meta name="description" content="Clickable prototype of Aura's Earn, Trade and fiat on/off-ramp journeys, with the product decisions behind each screen. Demo data.">
+<meta property="og:title" content="Aura prototype · Tracy Le">
+<meta property="og:description" content="Clickable prototype of Aura's Earn, Trade and fiat on/off-ramp journeys. Demo data.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0b1113;--ink-2:#243033;--muted:#617073;--line:#dce5e3;--paper:#f7f8f3;--white:#fff;
+  --aqua:#39e6cb;--aqua-deep:#008f7a;--aqua-soft:#dffaf4;--navy:#071b22;
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  /* app tokens */
+  --a-bg:#fff;--a-card:#f3f2ef;--a-field:#f6f6f6;--a-line:#ececec;--a-ink:#111;--a-muted:#7a7a7a;
+  --a-teal:#14806f;--a-teal-soft:#d8f5ef;--a-up:#2e9d4f;--a-up-soft:#eaf7ee;--a-down:#e5484d;--a-down-soft:#fdecec;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+.big,.lines dd,.mkt,.ticker,.field input,.kv dd,#est{font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit;text-underline-offset:.2em}
+
+/* Page shell */
+.top{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem clamp(1rem,4vw,2.4rem);border-bottom:1px solid var(--line);background:rgba(247,248,243,.9);position:sticky;top:0;z-index:20;backdrop-filter:blur(14px)}
+.top a{text-decoration:none;font-weight:650}
+.top .back{color:var(--aqua-deep)}
+.top .other{font-size:.9rem;color:var(--muted)}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,4rem);max-width:78rem;margin:0 auto;padding:2rem clamp(1rem,4vw,2.4rem) 4rem;align-items:start}
+.panel{position:sticky;top:5.5rem}
+.device-wrap{justify-self:center}
+.eyebrow{margin:0 0 .8rem;color:var(--aqua-deep);font-size:.74rem;font-weight:760;letter-spacing:.13em;text-transform:uppercase}
+h1{margin:0 0 .8rem;font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spacing:-.03em;font-weight:700}
+.lede{color:var(--ink-2);margin:0 0 1.5rem;max-width:34rem}
+.flows{list-style:none;padding:0;margin:0 0 1.5rem;display:grid;gap:.5rem}
+.flows button{width:100%;text-align:left;display:flex;gap:.8rem;align-items:baseline;padding:.75rem 1rem;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.flows button span{font-family:var(--mono);font-size:.72rem;color:var(--aqua-deep)}
+.flows button small{display:block;color:var(--muted);font-size:.82rem}
+.flows button[aria-current="true"]{border-color:var(--aqua-deep);box-shadow:0 0 0 1px var(--aqua-deep);background:var(--aqua-soft)}
+.note{border-left:3px solid var(--aqua);background:var(--white);padding:1rem 1.2rem;border-radius:0 12px 12px 0;min-height:7rem}
+.note h2{font-size:1rem;margin:0 0 .4rem;letter-spacing:-.01em}
+.note p{margin:0;color:var(--ink-2);font-size:.93rem}
+.disclaimer{margin-top:1.2rem;font-size:.8rem;color:var(--muted)}
+
+/* Phone */
+.phone{width:390px;height:812px;border-radius:48px;background:#0d0d0d;padding:12px;box-shadow:0 30px 70px -30px rgba(7,27,34,.45)}
+.screen{position:relative;width:100%;height:100%;border-radius:38px;overflow:hidden;background:var(--a-bg);color:var(--a-ink);display:flex;flex-direction:column;font-family:var(--sans)}
+.status{display:flex;justify-content:space-between;padding:14px 26px 6px;font-weight:650;font-size:14px;flex:none}
+.view{flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
+.view::-webkit-scrollbar{display:none}
+.tabbar{flex:none;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--a-line);padding:8px 4px 22px;background:#fff}
+.tabbar button{border:0;background:none;display:grid;justify-items:center;gap:2px;font-size:11px;color:var(--a-muted);padding:4px 0}
+.tabbar button[aria-current="true"]{color:var(--a-ink);font-weight:650}
+.tabbar svg{width:22px;height:22px}
+.pad{padding:0 18px}
+
+/* App components */
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.hdr{display:flex;align-items:center;gap:10px;padding:8px 18px 12px}
+.hdr h2{font-size:18px;margin:0;flex:1;text-align:center;letter-spacing:-.01em}
+.icon-btn{width:34px;height:34px;border-radius:50%;border:0;background:var(--a-field);display:grid;place-items:center;flex:none}
+.icon-btn svg{width:18px;height:18px}
+.ghost{width:34px;flex:none}
+.card{background:var(--a-card);border-radius:16px;padding:16px}
+.box{border:1px solid var(--a-line);border-radius:14px;padding:14px;background:#fff}
+.muted{color:var(--a-muted)}
+.small{font-size:12.5px}
+.big{font-size:30px;font-weight:750;letter-spacing:-.02em}
+.btn{border:0;border-radius:10px;padding:13px 16px;font-weight:700;background:var(--a-ink);color:#fff;width:100%}
+.btn.sm{width:auto;padding:8px 14px;font-size:13.5px}
+.btn.line{background:#fff;color:var(--a-ink);border:1.5px solid var(--a-ink)}
+.btn:disabled{background:#cfcfcf;cursor:not-allowed}
+.btn.buy{background:var(--a-up)}
+.btn.sell{background:var(--a-down)}
+.up{color:var(--a-up)}.down{color:var(--a-down)}
+.chip{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:6px;background:var(--a-teal-soft);color:var(--a-teal);letter-spacing:.01em}
+.chip.est{background:#fff4dc;color:#8a5a00}
+.chip.grey{background:#eee;color:#555}
+.coin{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px;flex:none}
+.c-usdt{background:#26a17b}.c-usdc{background:#2775ca}.c-btc{background:#f7931a}.c-eth{background:#627eea}.c-usd{background:#3c6e47}
+.qa{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 8px;margin-top:16px}
+.qa button{border:0;background:none;display:grid;justify-items:center;gap:6px;font-size:12px;position:relative;padding:0}
+.qa .ic{width:52px;height:52px;border-radius:12px;background:#fff;display:grid;place-items:center}
+.qa .ic svg{width:24px;height:24px;color:var(--a-teal)}
+.qa .soon{position:absolute;top:-8px;font-size:8.5px;font-weight:700;background:var(--a-teal-soft);color:var(--a-teal);padding:1px 4px;border-radius:4px}
+.qa button.dim{cursor:default}
+.seg{display:flex;gap:18px;border-bottom:1px solid var(--a-line);padding:0 18px;overflow-x:auto;scrollbar-width:none}
+.seg button{border:0;background:none;padding:10px 0;font-weight:650;color:#aaa;font-size:15px;border-bottom:2.5px solid transparent;white-space:nowrap}
+.seg button[aria-selected="true"]{color:var(--a-ink);border-color:var(--a-teal)}
+.seg.plain{border:0}
+.seg.plain button[aria-selected="true"]{border-color:transparent}
+.mkt{display:grid;grid-template-columns:1fr 1fr auto;align-items:center;padding:10px 0;font-family:var(--mono);font-size:14px}
+.pct{min-width:78px;text-align:center;color:#fff;border-radius:6px;padding:5px 0;font-weight:600}
+.pct.up{background:var(--a-up)}.pct.down{background:var(--a-down)}
+.product{border:1px solid var(--a-line);border-radius:14px;padding:14px;margin-bottom:12px;background:#fff;width:100%;text-align:left}
+.kv{display:grid;grid-template-columns:1fr 1fr auto;align-items:end;gap:8px;margin-top:12px}
+.kv dt{font-size:12px;color:var(--a-muted)}
+.kv dd{margin:0;font-weight:600}
+.lines{display:grid;gap:10px;margin:0}
+.lines div{display:flex;justify-content:space-between;gap:10px;font-size:13.5px}
+.lines dt{color:var(--a-muted)}
+.lines dd{margin:0;font-weight:600;text-align:right}
+.field{background:var(--a-field);border:1px solid var(--a-line);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.field input{flex:1;min-width:0;border:0;background:none;font:inherit;font-size:20px;font-weight:650;text-align:right;outline:none}
+.field input::placeholder{color:#bbb}
+.field label{font-size:12.5px;color:var(--a-muted)}
+.field.flat input{font-size:15px;text-align:center}
+.timeline{list-style:none;margin:0;padding:0}
+.timeline li{position:relative;padding:0 0 14px 26px;font-size:13.5px}
+.timeline li::before{content:"";position:absolute;left:5px;top:5px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #c8c8c8}
+.timeline li::after{content:"";position:absolute;left:10px;top:17px;bottom:-1px;width:2px;background:#e6e6e6}
+.timeline li:last-child::after{display:none}
+.timeline li.done::before{background:var(--a-teal);border-color:var(--a-teal)}
+.timeline li.now::before{border-color:var(--a-teal);box-shadow:0 0 0 4px var(--a-teal-soft)}
+.timeline b{display:block;font-weight:650}
+.timeline span{color:var(--a-muted);font-size:12.5px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#444}
+.check input{margin-top:2px;accent-color:var(--a-teal)}
+.sheet-bg{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:flex-end;z-index:5}
+.sheet{background:#fff;border-radius:20px 20px 0 0;padding:18px 18px 28px;width:100%;max-height:88%;overflow:auto}
+.sheet .grab{width:40px;height:4px;border-radius:2px;background:#ddd;margin:0 auto 14px}
+.done-ic{width:64px;height:64px;border-radius:50%;background:var(--a-teal-soft);display:grid;place-items:center;margin:28px auto 14px}
+.done-ic svg{width:30px;height:30px;color:var(--a-teal)}
+.center{text-align:center}
+.toast{position:absolute;left:50%;bottom:96px;transform:translateX(-50%);background:#111;color:#fff;padding:9px 14px;border-radius:10px;font-size:12.5px;width:max-content;max-width:86%;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9}
+.toast.show{opacity:1}
+.pills{display:flex;gap:6px}
+.pills button{flex:1;border:1px solid var(--a-line);background:#fff;border-radius:8px;padding:6px 0;font-size:12px}
+.bs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bs button{border:1.5px solid var(--a-line);background:#fff;border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:13.5px}
+.bs button.on.b{border-color:var(--a-up);background:var(--a-up-soft);color:var(--a-up)}
+.bs button.on.s{border-color:var(--a-down);background:var(--a-down-soft);color:var(--a-down)}
+.copy{border:0;background:none;color:var(--a-teal);font-weight:650;font-size:12.5px;padding:0;margin-left:6px}
+.info{background:#f7f5ef;border-radius:12px;padding:12px;font-size:12.5px;color:#555}
+.ticker{font-family:var(--mono)}
+.sim{border:1px dashed var(--a-teal);color:var(--a-teal);background:#fff;border-radius:10px;padding:9px;width:100%;font-size:12.5px;font-weight:650}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vs > div{border-radius:12px;padding:10px;font-size:12px}
+.vs .p{background:var(--a-teal-soft)}.vs .e{background:#fff4dc}
+
+@media (max-width: 900px){
+  .stage{grid-template-columns:1fr;padding-top:1.2rem}
+  .panel{position:static;order:2}
+  .device-wrap{order:1;justify-self:center}
+}
+@media (max-width: 430px){
+  .stage{padding-inline:0}
+  .panel{padding-inline:16px}
+  .phone{width:100vw;height:calc(100svh - 58px);min-height:640px;border-radius:0;padding:0;box-shadow:none}
+  .screen{border-radius:0}
+  .status{display:none}
+  .top .other{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="back" href="/work/aura/">← Aura case study</a>
+  <a class="other" href="/prototypes/trueprofit/">TrueProfit prototype →</a>
+</header>
+
+<main class="stage">
+  <section class="panel" aria-label="About this prototype">
+    <p class="eyebrow">Interactive prototype · Hex Trust</p>
+    <h1>Aura</h1>
+    <p class="lede">Click through the main client journeys. Pick a flow below or tap around inside the phone; the note under the list explains the product decision behind each screen.</p>
+    <ul class="flows" id="flows"></ul>
+    <div class="note" aria-live="polite">
+      <h2 id="note-title"></h2>
+      <p id="note-body"></p>
+    </div>
+    <p class="disclaimer">Recreated for this portfolio from the live product's screens. All balances, prices, rates, cutoff times, product terms and bank details are demo values. Product names are generic. Nothing here places a real order.</p>
+  </section>
+
+  <div class="device-wrap">
+    <div class="phone">
+      <div class="screen" id="screen">
+        <div class="status" aria-hidden="true"><span>9:41</span><span>5G ▮▮▮</span></div>
+        <div class="view" id="view"></div>
+        <nav class="tabbar" id="tabbar" aria-label="App tabs"></nav>
+        <div class="toast" id="toast" role="status"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  // ---------- Demo data ----------
+  var S = {
+    balance: 48250.62, usdt: 12480.00, usdc: 6200.00, btc: 0.1825,
+    btcPrice: 78104.79,
+    positions: [],
+    convert: {from:'USDT', to:'BTC', amount:''},
+    spot: {side:'buy', type:'Market', amount:'', price:'', stop:''},
+    deposit: {amount:'', step:0, ref:'AUR-' + Math.floor(100000 + Math.random()*899999)},
+    withdraw: {asset:'USDT', amount:'', step:0},
+    earnTab: 'Top'
+  };
+  var PRODUCTS = [
+    {id:'usdt-90', name:'USDT Fixed Earn', coin:'usdt', asset:'USDT', kind:'fixed', apy:8, term:90, min:100, max:250000,
+     early:'Not available. Principal and yield are credited at maturity.'},
+    {id:'usdc-60', name:'USDC Fixed Earn', coin:'usdc', asset:'USDC', kind:'fixed', apy:7, term:60, min:100, max:250000,
+     early:'Available. Redeeming early forfeits the yield accrued so far; principal is returned.'},
+    {id:'basis', name:'Basis Trading Strategy', coin:'usdt', asset:'USDT', kind:'variable', apyLow:4, apyHigh:8, apy:6, term:0, min:500, max:500000,
+     early:'Flexible. Redeem any time; redemption settles in 2 business days.'},
+    {id:'btc-flex', name:'BTC Flexible Earn', coin:'btc', asset:'BTC', kind:'variable', apyLow:1, apyHigh:3, apy:2, term:0, min:0.001, max:20,
+     early:'Flexible. Redeem any time; redemption settles next business day.'}
+  ];
+  var MARKETS = [['AVAX',7.761,-3.47],['BNB',719.52,-4.74],['BTC',78104.79,-1.6],['ETH',2580.44,1.92],['SOL',148.21,2.35]];
+
+  var NOTES = {
+    home: ['One portfolio, every journey', 'The home screen answers "what do I own and how is it doing?" first, then puts Trade, Deposit, Withdraw and Earn one tap away. Borrow & Lend, Card and Statements appear as Coming Soon concepts, as they did in the product; they are not claimed as delivered.'],
+    earn: ['Promised vs estimated, at a glance', 'Clients kept picking Fixed even when Variable paid more. Research showed they could not tell which numbers were promised. Fixed products show a plain APY and a Fixed tag; market-linked products always say "Est. APY" with a range.'],
+    'earn-detail-fixed': ['Fixed Earn reads like a term deposit', 'Rate, term, limits and the full timeline sit on one screen: when you subscribe, the cutoff time, when earning starts, the maturity date and when principal plus yield come back. Exit conditions are shown before the client commits.'],
+    'earn-detail-variable': ['Market-linked products say so', 'The rate is shown as an estimate with a range and a reason it can move. When a redemption will settle is stated up front, before the client confirms.'],
+    'earn-confirm': ['Confirm what is guaranteed', 'The confirmation sheet splits the summary into what is fixed and what is estimated, then repeats the exit terms. Nothing new appears for the first time at the confirm step.'],
+    'earn-done': ['A status, not just a tick', 'Success says when the position starts earning and when it matures, so the client knows what happens next without opening a support chat.'],
+    'earn-portfolio': ['Track the position', 'Subscribed positions show principal, accrued yield and maturity in the client\'s portfolio, next to the rest of their assets.'],
+    convert: ['Convert: the simple path', 'Convert reduces a trade to "what I give, what I get". It is the entry point for traditional wealth clients who do not want an order book.'],
+    'convert-preview': ['Quotes expire on purpose', 'In this demo the quote is held for 10 seconds; when it lapses the client refreshes it rather than confirming a price they can no longer see. The window length is illustrative.'],
+    'convert-done': ['Trade receipt', 'The receipt shows the executed rate and amounts, and the trade appears in Recent Trades on the Convert screen.'],
+    spot: ['Spot: control when wanted', 'Experienced clients get Market, Limit, Stop Market, Stop Limit and Recurring orders. Each order type only shows the fields it needs, and available balance and estimated fee stay visible.'],
+    'spot-done': ['Order placed', 'Market orders fill immediately; conditional orders show as open until their trigger price is reached.'],
+    deposit: ['Choose how to fund', 'Clients fund with digital assets or with USD by bank transfer. The fiat route is the on-ramp.'],
+    'deposit-usd': ['On-ramp: no surprises', 'Before submitting, the client sees the USD to USDT rate, what they will receive and the exact bank details with a payment reference. Bank details here are demo values.'],
+    'deposit-status': ['Trackable status', 'A bank wire can take a day or more. The status tracker shows each step until USDT is credited, so clients do not have to ask their relationship manager where their money is.'],
+    withdraw: ['Off-ramp: verified accounts only', 'USD can only go to a bank account that has been added and verified in Aura. The client sees the rate and the USD amount before submitting.'],
+    'withdraw-status': ['Same status pattern', 'Withdrawals use the same status tracker as deposits, from request to funds sent.']
+  };
+
+  var FLOWS = [
+    ['home','Home','Portfolio and quick actions'],
+    ['earn','Earn','Fixed vs market-linked yield'],
+    ['convert','Convert','Simple quote-based trade'],
+    ['spot','Spot','Five order types'],
+    ['deposit-usd','Deposit USD','Fiat on-ramp with status'],
+    ['withdraw','Withdraw USD','Fiat off-ramp']
+  ];
+
+  // ---------- Helpers ----------
+  var view = document.getElementById('view');
+  var screenEl = document.getElementById('screen');
+  var current = 'home', ctx = {};
+  function $(s){return view.querySelector(s)}
+  function money(n,d){d = d===undefined?2:d; return n.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d})}
+  function addDays(n){var d=new Date(); d.setDate(d.getDate()+n); return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function toast(msg){var t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('show')},2200)}
+  var IC = {
+    back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>',
+    close:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+    check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>',
+    trade:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="9" r="5"/><circle cx="15" cy="15" r="5"/></svg>',
+    dep:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9 13l3 3 3-3"/></svg>',
+    wd:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 16V8M9 11l3-3 3 3"/></svg>',
+    earn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 5h8l-2 3a7 7 0 1 1-4 0z"/><circle cx="12" cy="14" r="1.5" fill="currentColor"/></svg>',
+    doc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3h7l4 4v14H7z"/><path d="M10 12h5M10 16h5"/></svg>',
+    lend:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v4h4"/></svg>',
+    card:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>',
+    all:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><circle cx="17" cy="17" r="3" fill="currentColor"/></svg>',
+    home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 11l8-7 8 7v9H4z"/></svg>',
+    wallet:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M15 12h3"/></svg>',
+    bars:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 20v-5M10 20v-8M15 20v-6M20 20V8M4 9l6-4 5 3 5-4"/></svg>',
+    plan:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M15 9l-2 4-4 2 2-4z"/></svg>',
+    swap:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4v16M4 8l4-4 4 4M16 20V4M12 16l4 4 4-4"/></svg>',
+    bank:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 9l9-5 9 5M5 10v8M10 10v8M14 10v8M19 10v8M3 20h18"/></svg>'
+  };
+  function coin(c){var l={usdt:'₮',usdc:'$',btc:'₿',eth:'Ξ',usd:'$'}[c]||'?'; return '<span class="coin c-'+c+'">'+l+'</span>'}
+  function header(title, backTo, closeMode){
+    return '<div class="hdr"><button class="icon-btn" data-go="'+backTo+'" aria-label="'+(closeMode?'Close':'Back')+'">'+(closeMode?IC.close:IC.back)+'</button><h2>'+title+'</h2><span class="ghost"></span></div>';
+  }
+
+  // ---------- Screens ----------
+  var R = {};
+  R.home = function(){
+    var mk = MARKETS.map(function(m){return '<div class="mkt"><span>'+m[0]+'</span><span>$'+money(m[1], m[1]>=100?2:3)+'</span><span class="pct '+(m[2]<0?'down':'up')+'">'+(m[2]>0?'+':'')+m[2].toFixed(2)+'%</span></div>'}).join('');
+    var q = [['trade','Trade','convert'],['dep','Deposit','deposit'],['wd','Withdraw','withdraw'],['earn','Earn','earn']].map(function(a){return '<button data-go="'+a[2]+'"><span class="ic">'+IC[a[0]]+'</span>'+a[1]+'</button>'}).join('')
+      + [['doc','Statements'],['lend','Borrow & Lend'],['card','Card']].map(function(a){return '<button class="dim" data-soon="'+a[1]+'"><span class="soon">Coming Soon</span><span class="ic">'+IC[a[0]]+'</span>'+a[1]+'</button>'}).join('')
+      + '<button data-soon="View all"><span class="ic">'+IC.all+'</span>View all</button>';
+    return '<div class="pad" style="padding-top:6px"><div class="card">'
+      + '<div class="row"><div><div class="muted small">Est. Total Balance</div><div class="big">$'+money(S.balance)+'</div>'
+      + '<div class="small muted">Today\'s PNL <span class="down">-0.18% ($86.85)</span></div></div>'
+      + '<button class="btn sm" data-go="deposit">Deposit</button></div>'
+      + '<div class="qa">'+q+'</div></div>'
+      + '<div class="row" style="margin:22px 0 6px"><b style="font-size:18px">Markets</b><button class="copy" data-go="spot">Trade BTC</button></div>'
+      + '<div class="row small muted" style="font-family:var(--mono)"><span>Name</span><span>Last price</span><span>24h change</span></div>'
+      + mk + '<div style="height:14px"></div></div>';
+  };
+
+  R.earn = function(){
+    var earnBal = S.positions.reduce(function(a,p){return a+p.amount},0);
+    var tabs = ['Top','Fixed','Strategies'].map(function(t){return '<button role="tab" aria-selected="'+(S.earnTab===t)+'" data-tab="'+t+'">'+t+'</button>'}).join('');
+    var list = PRODUCTS.filter(function(p){return S.earnTab==='Top' || (S.earnTab==='Fixed'?p.kind==='fixed':p.kind==='variable')}).map(function(p){
+      var fixed = p.kind==='fixed';
+      return '<button class="product" data-product="'+p.id+'"><div class="row"><div style="display:flex;gap:10px;align-items:center">'+coin(p.coin)+'<b>'+p.name+'</b></div>'
+        + '<span class="chip '+(fixed?'':'est')+'">'+(fixed?'Fixed rate':'Market-linked')+'</span></div>'
+        + '<dl class="kv"><div><dt>Term</dt><dd>'+(p.term?p.term+' days':'Flexible')+'</dd></div>'
+        + '<div><dt>'+(fixed?'APY':'Est. APY')+'</dt><dd>'+(fixed?p.apy.toFixed(2)+'%':p.apyLow+'–'+p.apyHigh+'%')+'</dd></div>'
+        + '<span class="btn sm">Subscribe</span></dl></button>';
+    }).join('');
+    return '<div class="pad" style="padding-top:6px"><div class="row"><div><div class="muted small">Est. Earn Balance</div><div class="big">$'+money(earnBal)+'</div>'
+      + '<div class="small muted">Positions <b>'+S.positions.length+'</b></div></div><button class="btn sm line" data-go="earn-portfolio">My Portfolio</button></div></div>'
+      + '<div class="seg" role="tablist" style="margin-top:16px">'+tabs+'</div><div class="pad" style="padding-top:14px">'+list+'</div>';
+  };
+
+  function product(){return PRODUCTS.filter(function(p){return p.id===ctx.pid})[0]}
+  function avail(asset){return asset==='USDT'?S.usdt:asset==='USDC'?S.usdc:S.btc}
+  function estEarn(p, amt){var days = p.term || 30; return amt*p.apy/100*days/365}
+
+  R['earn-detail'] = function(){
+    var p = product(), fixed = p.kind==='fixed', amt = parseFloat(ctx.amount)||0, dp = p.asset==='BTC'?6:2;
+    var now = new Date(), afterCut = now.getHours()>=16, start = afterCut?1:0;
+    var valid = amt>=p.min && amt<=Math.min(p.max, avail(p.asset)) && ctx.agree;
+    var tl = fixed
+      ? '<li class="now"><b>Subscribe today</b><span>Cutoff 16:00 HKT. '+(afterCut?'You are past today\'s cutoff.':'Before cutoff, earning starts today.')+'</span></li>'
+        + '<li><b>Starts earning · '+addDays(start)+'</b><span>Yield accrues daily at the fixed APY</span></li>'
+        + '<li><b>Matures · '+addDays(start+p.term)+'</b><span>'+p.term+'-day term ends</span></li>'
+        + '<li><b>Principal + yield credited · '+addDays(start+p.term+1)+'</b><span>To your '+p.asset+' wallet in Aura</span></li>'
+      : '<li class="now"><b>Subscribe today</b><span>Cutoff 16:00 HKT</span></li>'
+        + '<li><b>Starts earning · '+addDays(start)+'</b><span>Rate updates daily with market performance</span></li>'
+        + '<li><b>Redeem any time</b><span>'+p.early.replace('Flexible. ','')+'</span></li>';
+    return header(p.name,'earn')
+      + '<div class="pad"><div class="row" style="margin-bottom:12px"><div style="display:flex;gap:10px;align-items:center">'+coin(p.coin)+'<div><div class="muted small">'+(fixed?'APY · fixed for the term':'Est. APY · can change daily')+'</div><div class="big">'+(fixed?p.apy.toFixed(2)+'%':p.apyLow+'–'+p.apyHigh+'%')+'</div></div></div>'
+      + '<span class="chip '+(fixed?'':'est')+'">'+(fixed?'Fixed rate':'Market-linked')+'</span></div>'
+      + (fixed?'':'<div class="info" style="margin-bottom:12px">This is an estimate, not a promise. The rate comes from the strategy\'s market performance and can go up or down. Today\'s est. APY is '+p.apy+'%.</div>')
+      + '<dl class="lines box" style="margin-bottom:14px"><div><dt>Term</dt><dd>'+(p.term?p.term+' days':'Flexible')+'</dd></div>'
+      + '<div><dt>Min / max</dt><dd>'+p.min+' – '+money(p.max,0)+' '+p.asset+'</dd></div>'
+      + '<div><dt>Early exit</dt><dd style="max-width:60%;font-weight:500">'+p.early+'</dd></div></dl>'
+      + '<div class="field"><label>Amount</label><input id="amt" inputmode="decimal" placeholder="Min '+p.min+'" value="'+esc(ctx.amount||'')+'"><b class="small">'+p.asset+'</b></div>'
+      + '<div class="row small" style="margin:8px 2px 14px"><span class="muted">Available '+money(avail(p.asset),dp)+' '+p.asset+'</span><button class="copy" id="max">Max</button></div>'
+      + '<div class="row box" style="margin-bottom:16px"><span class="small muted">'+(fixed?'Yield at maturity':'Est. yield over 30 days')+'</span><b id="est">'+(amt?money(estEarn(p,amt),dp):'–')+' '+p.asset+'</b></div>'
+      + '<b style="display:block;margin-bottom:10px">Timeline</b><ul class="timeline">'+tl+'</ul>'
+      + '<label class="check" style="margin:6px 0 14px"><input type="checkbox" id="agree" '+(ctx.agree?'checked':'')+'> I have read the product terms, including the early-exit conditions above.</label>'
+      + '<button class="btn" id="sub" '+(valid?'':'disabled')+'>Review subscription</button>'
+      + '<p class="small muted center" id="hint" style="margin:8px 0 20px">'+(valid?'':hint(p,amt))+'</p></div>';
+  };
+  function hint(p,amt){
+    if(!amt) return 'Enter an amount to continue';
+    if(amt<p.min) return 'Minimum is '+p.min+' '+p.asset;
+    if(amt>avail(p.asset)) return 'Not enough '+p.asset+'. Deposit first.';
+    if(amt>p.max) return 'Maximum is '+money(p.max,0)+' '+p.asset;
+    if(!ctx.agree) return 'Tick the box to confirm you have read the terms';
+    return '';
+  }
+
+  function earnConfirmSheet(){
+    var p = product(), fixed = p.kind==='fixed', amt = parseFloat(ctx.amount), dp = p.asset==='BTC'?6:2;
+    var start = new Date().getHours()>=16?1:0;
+    return '<div class="sheet-bg" id="sheetbg"><div class="sheet" role="dialog" aria-label="Confirm subscription"><div class="grab"></div>'
+      + '<b style="font-size:17px">Confirm subscription</b><p class="small muted" style="margin:4px 0 14px">'+p.name+'</p>'
+      + '<dl class="lines" style="margin-bottom:14px"><div><dt>Amount</dt><dd>'+money(amt,dp)+' '+p.asset+'</dd></div>'
+      + '<div><dt>Starts earning</dt><dd>'+addDays(start)+'</dd></div>'
+      + (fixed?'<div><dt>Maturity</dt><dd>'+addDays(start+p.term)+'</dd></div>':'<div><dt>Redemption settles</dt><dd>'+(p.id==='basis'?'2 business days':'Next business day')+'</dd></div>')+'</dl>'
+      + '<div class="vs" style="margin-bottom:12px"><div class="p"><b>Fixed</b><br>'+(fixed?'APY '+p.apy.toFixed(2)+'%<br>Term '+p.term+' days':'Your principal amount')+'</div>'
+      + '<div class="e"><b>Estimated</b><br>'+(fixed?'Nothing. Yield '+money(estEarn(p,amt),dp)+' '+p.asset+' is set by the fixed APY':'APY '+p.apyLow+'–'+p.apyHigh+'%<br>Yield can change daily')+'</div></div>'
+      + '<p class="info" style="margin:0 0 14px">'+p.early+'</p>'
+      + '<button class="btn" id="confirm">Confirm</button><button class="btn line" style="margin-top:8px" id="cancel">Back</button></div></div>';
+  }
+
+  R['earn-done'] = function(){
+    var pos = S.positions[S.positions.length-1];
+    return '<div class="pad center"><div class="done-ic">'+IC.check+'</div><b style="font-size:20px">Subscription confirmed</b>'
+      + '<p class="muted small" style="margin:6px 0 18px">'+money(pos.amount,pos.asset==='BTC'?6:2)+' '+pos.asset+' in '+pos.name+'</p>'
+      + '<ul class="timeline" style="text-align:left;margin:0 0 18px"><li class="done"><b>Subscribed</b><span>Today</span></li>'
+      + '<li class="now"><b>Starts earning</b><span>'+pos.start+'</span></li>'
+      + '<li><b>'+(pos.kind==='fixed'?'Matures':'Redeem any time')+'</b><span>'+(pos.kind==='fixed'?pos.maturity:'From the position in My Portfolio')+'</span></li></ul>'
+      + '<button class="btn" data-go="earn-portfolio">View in My Portfolio</button><button class="btn line" style="margin-top:8px" data-go="earn">Back to Earn</button></div>';
+  };
+
+  R['earn-portfolio'] = function(){
+    var list = S.positions.length ? S.positions.map(function(p){
+      return '<div class="box" style="margin-bottom:10px"><div class="row"><b>'+p.name+'</b><span class="chip '+(p.kind==='fixed'?'':'est')+'">'+(p.kind==='fixed'?'Fixed':'Market-linked')+'</span></div>'
+        + '<dl class="lines" style="margin-top:10px"><div><dt>Principal</dt><dd>'+money(p.amount,p.asset==='BTC'?6:2)+' '+p.asset+'</dd></div>'
+        + '<div><dt>'+(p.kind==='fixed'?'APY':'Today\'s est. APY')+'</dt><dd>'+p.apy+'%</dd></div>'
+        + '<div><dt>Accrued yield</dt><dd>0.00 '+p.asset+'</dd></div>'
+        + '<div><dt>'+(p.kind==='fixed'?'Maturity':'Status')+'</dt><dd>'+(p.kind==='fixed'?p.maturity:'Earning from '+p.start)+'</dd></div></dl></div>';
+    }).join('') : '<div class="center muted" style="padding:40px 10px">No positions yet.<br><br><button class="btn sm" data-go="earn">Browse products</button></div>';
+    return header('My Portfolio','earn') + '<div class="pad">'+list+'</div>';
+  };
+
+  function tradeTabs(active){
+    return '<div class="seg plain" role="tablist" style="padding-top:4px">'+['Convert','Spot','OTC'].map(function(t){return '<button role="tab" aria-selected="'+(t===active)+'" data-trade="'+t+'">'+t+'</button>'}).join('')+'</div>';
+  }
+  var RATE = {USDT:{BTC:1/S.btcPrice, USDC:0.9998}, USDC:{BTC:1/S.btcPrice, USDT:1.0001}, BTC:{USDT:S.btcPrice*0.999, USDC:S.btcPrice*0.999}};
+  function cdp(a){return a==='BTC'?8:2}
+  R.convert = function(){
+    var c = S.convert, amt = parseFloat(c.amount)||0, r = RATE[c.from][c.to], out = amt*r;
+    var min = c.from==='BTC'?0.0001:10, ok = amt>=min && amt<=avail(c.from);
+    var opt = function(sel,skip){return ['USDT','USDC','BTC'].filter(function(a){return a!==skip}).map(function(a){return '<option'+(a===sel?' selected':'')+'>'+a+'</option>'}).join('')};
+    var hist = (S.trades||[]).map(function(t){return '<div class="row small" style="padding:10px 0;border-top:1px solid var(--a-line)"><span><b class="ticker">'+t.pair+'</b><br><span class="up">Filled</span></span><span class="muted">'+t.when+'</span></div>'}).join('') || '<p class="small muted">No trades yet.</p>';
+    return tradeTabs('Convert') + '<div class="pad" style="padding-top:16px">'
+      + '<div class="card" style="background:var(--a-field)"><div class="row small"><span>From</span><span class="muted">Available: '+money(avail(c.from),cdp(c.from))+' '+c.from+'</span></div>'
+      + '<div class="row" style="margin-top:10px"><select id="from" class="ticker" style="font-weight:700;font-size:16px;border:0;background:none">'+opt(c.from,c.to)+'</select><input id="camt" inputmode="decimal" placeholder="&gt;'+min+'" value="'+esc(c.amount)+'" style="text-align:right;border:0;background:none;font-size:22px;font-weight:650;width:55%;outline:none"></div>'
+      + '<div style="text-align:right;margin-top:6px"><button class="btn sm line" id="cmax" style="border-width:1px;border-color:#ddd">Max</button></div></div>'
+      + '<div style="display:grid;place-items:center;margin:-12px 0;position:relative;z-index:1"><button class="icon-btn" id="flip" style="background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.12);width:42px;height:42px" aria-label="Swap assets">'+IC.swap+'</button></div>'
+      + '<div class="card" style="background:var(--a-field)"><div class="row small"><span>To</span><span class="muted">Available: '+money(avail(c.to),cdp(c.to))+' '+c.to+'</span></div>'
+      + '<div class="row" style="margin-top:10px"><select id="to" class="ticker" style="font-weight:700;font-size:16px;border:0;background:none">'+opt(c.to,c.from)+'</select><span style="font-size:22px;font-weight:650;color:'+(amt?'#111':'#bbb')+'">'+(amt?money(out,cdp(c.to)):'0')+'</span></div></div>'
+      + '<p class="center small" style="margin:14px 0">1 '+c.from+' ≈ '+(r<0.01?r.toFixed(8):money(r,4))+' '+c.to+'</p>'
+      + '<button class="btn" id="preview" '+(ok?'':'disabled')+'>Preview</button>'
+      + '<p class="small muted center" style="margin:8px 0 18px">'+(!amt?'Enter an amount':amt<min?'Minimum is '+min+' '+c.from:amt>avail(c.from)?'Not enough '+c.from:'')+'</p>'
+      + '<div class="row" style="margin-bottom:6px"><b>Recent Trades</b></div>'+hist+'<div style="height:14px"></div></div>';
+  };
+
+  function convertSheet(){
+    var c = S.convert, amt = parseFloat(c.amount), r = RATE[c.from][c.to];
+    return '<div class="sheet-bg" id="sheetbg"><div class="sheet" role="dialog" aria-label="Confirm conversion"><div class="grab"></div>'
+      + '<b style="font-size:17px">Confirm conversion</b>'
+      + '<dl class="lines" style="margin:14px 0"><div><dt>You pay</dt><dd>'+money(amt,cdp(c.from))+' '+c.from+'</dd></div>'
+      + '<div><dt>You receive</dt><dd>'+money(amt*r,cdp(c.to))+' '+c.to+'</dd></div>'
+      + '<div><dt>Rate</dt><dd>1 '+c.from+' = '+(r<0.01?r.toFixed(8):money(r,4))+' '+c.to+'</dd></div>'
+      + '<div><dt>Fee</dt><dd>Included in rate</dd></div></dl>'
+      + '<div class="info row" style="margin-bottom:14px"><span id="qlabel">Quote valid for</span><b id="qtime" class="ticker">10s</b></div>'
+      + '<button class="btn" id="cconfirm">Confirm</button><button class="btn line" style="margin-top:8px" id="cancel">Cancel</button></div></div>';
+  }
+
+  R['convert-done'] = function(){
+    var t = S.trades[0];
+    return '<div class="pad center"><div class="done-ic">'+IC.check+'</div><b style="font-size:20px">Conversion complete</b>'
+      + '<dl class="lines box" style="text-align:left;margin:18px 0"><div><dt>Paid</dt><dd>'+t.paid+'</dd></div><div><dt>Received</dt><dd>'+t.got+'</dd></div><div><dt>Status</dt><dd class="up">Filled</dd></div></dl>'
+      + '<button class="btn" data-go="convert">Done</button></div>';
+  };
+
+  function candles(){
+    var pts = [], p = 78300, s = '', x;
+    for (var i=0;i<22;i++){ var o=p, c=o+(Math.sin(i*1.7)*120 + (i%5-2)*40), h=Math.max(o,c)+40+((i*37)%60), l=Math.min(o,c)-40-((i*53)%50); pts.push([o,c,h,l]); p=c; }
+    var min = Math.min.apply(null, pts.map(function(q){return q[3]})), max = Math.max.apply(null, pts.map(function(q){return q[2]}));
+    var y = function(v){return 8 + (max-v)/(max-min)*124};
+    pts.forEach(function(q,i){ x = 10+i*15; var up=q[1]>=q[0], col=up?'#2e9d4f':'#e5484d';
+      s += '<line x1="'+(x+4)+'" x2="'+(x+4)+'" y1="'+y(q[2])+'" y2="'+y(q[3])+'" stroke="'+col+'"/><rect x="'+x+'" width="8" y="'+y(Math.max(q[0],q[1]))+'" height="'+Math.max(2,Math.abs(y(q[0])-y(q[1])))+'" fill="'+col+'"/>'; });
+    return '<svg viewBox="0 0 354 140" width="100%" height="140" role="img" aria-label="Demo BTC/USDT price chart">'+s+'<line x1="0" x2="354" y1="'+y(p)+'" y2="'+y(p)+'" stroke="#111" stroke-dasharray="3 3"/></svg>';
+  }
+  var ORDER_TYPES = ['Market','Limit','Stop Market','Stop Limit','Recurring'];
+  R.spot = function(){
+    var o = S.spot, buy = o.side==='buy', px = S.btcPrice;
+    var f = '', amt = parseFloat(o.amount)||0;
+    if (o.type==='Market') f = '<div class="field flat"><input disabled value="Market price" style="color:#666"></div>';
+    if (o.type==='Limit' || o.type==='Stop Limit' || o.type==='Stop Market'){
+      if (o.type!=='Limit') f += '<div class="field flat"><input id="stop" inputmode="decimal" placeholder="Stop price (USDT)" value="'+esc(o.stop)+'"></div>';
+      if (o.type!=='Stop Market') f += '<div class="field flat" style="margin-top:8px"><input id="price" inputmode="decimal" placeholder="Limit price (USDT)" value="'+esc(o.price)+'"></div>';
+    }
+    if (o.type==='Recurring') f = '<div class="pills" id="freq">'+['Daily','Weekly','Monthly'].map(function(q){return '<button data-freq="'+q+'" style="'+((o.freq||'Weekly')===q?'border-color:#111;font-weight:700':'')+'">'+q+'</button>'}).join('')+'</div>';
+    var amtLabel = o.type==='Recurring' ? 'Amount each time (USDT)' : 'Amount (BTC)';
+    var total = o.type==='Recurring' ? amt : amt*(parseFloat(o.price)||px);
+    var needs = (o.type==='Limit'||o.type==='Stop Limit')&&!o.price || (o.type.indexOf('Stop')===0)&&!o.stop;
+    var ok = amt>0 && !needs && (buy ? total<=S.usdt : (o.type==='Recurring'?false:amt<=S.btc));
+    var explain = {Market:'Fills now at the best available price.',Limit:'Fills only at your limit price or better.','Stop Market':'When the market reaches your stop price, a market order is placed.','Stop Limit':'When the market reaches your stop price, a limit order is placed at your limit price.',Recurring:'Buys BTC on a schedule to build a position over time.'}[o.type];
+    return tradeTabs('Spot') + '<div class="pad" style="padding-top:10px"><div class="row"><b class="ticker" style="font-size:17px">BTC/USDT</b><span class="down small">-1.77%</span></div>'
+      + candles()
+      + '<div class="bs" style="margin:6px 0 12px"><button class="b '+(buy?'on':'')+'" data-side="buy"><span>Buy</span><span>'+money(px,2)+'</span></button><button class="s '+(!buy?'on':'')+'" data-side="sell"><span>'+money(px-0.01,2)+'</span><span>Sell</span></button></div>'
+      + '<div class="seg plain" style="padding:0;gap:14px">'+ORDER_TYPES.filter(function(t){return !(t==='Recurring'&&!buy)}).map(function(t){return '<button data-otype="'+t+'" aria-selected="'+(o.type===t)+'" style="font-size:14px">'+t+'</button>'}).join('')+'</div>'
+      + '<p class="small muted" style="margin:6px 0 10px">'+explain+'</p>'
+      + f + '<div class="field flat" style="margin-top:8px"><input id="samt" inputmode="decimal" placeholder="'+amtLabel+'" value="'+esc(o.amount)+'"></div>'
+      + '<dl class="lines small" style="margin:12px 0"><div><dt>Available</dt><dd>'+(buy?money(S.usdt,2)+' USDT':S.btc.toFixed(6)+' BTC')+'</dd></div>'
+      + '<div><dt>'+(o.type==='Recurring'?'Each purchase':'Est. total')+'</dt><dd>'+(total?money(total,2):'0.00')+' USDT</dd></div><div><dt>Est. fee</dt><dd>'+money(total*0.001,2)+' USDT</dd></div></dl>'
+      + '<button class="btn '+(buy?'buy':'sell')+'" id="place" '+(ok?'':'disabled')+'>'+(o.type==='Recurring'?'Set up recurring buy':(buy?'Buy':'Sell')+' BTC')+'</button><div style="height:18px"></div></div>';
+  };
+  R['spot-done'] = function(){
+    var o = ctx.order;
+    return '<div class="pad center"><div class="done-ic">'+IC.check+'</div><b style="font-size:20px">'+o.title+'</b>'
+      + '<dl class="lines box" style="text-align:left;margin:18px 0"><div><dt>Order type</dt><dd>'+o.type+'</dd></div><div><dt>Side</dt><dd class="'+(o.side==='buy'?'up':'down')+'">'+(o.side==='buy'?'Buy':'Sell')+'</dd></div><div><dt>Amount</dt><dd>'+o.amount+'</dd></div><div><dt>Status</dt><dd>'+o.status+'</dd></div></dl>'
+      + '<button class="btn" data-go="spot">Done</button></div>';
+  };
+
+  R.deposit = function(){
+    return header('Deposit','home') + '<div class="pad"><p class="small muted">How would you like to fund your account?</p>'
+      + '<button class="product row" data-go="deposit-usd"><span style="display:flex;gap:10px;align-items:center">'+IC.bank.replace('<svg','<svg width="26" height="26"')+'<span><b>USD bank transfer</b><br><span class="small muted">Receive USDT · 1–2 business days</span></span></span><span>›</span></button>'
+      + '<button class="product row" data-crypto><span style="display:flex;gap:10px;align-items:center">'+coin('usdt')+'<span><b>Digital assets</b><br><span class="small muted">Send USDT, USDC, BTC, ETH from a wallet</span></span></span><span>›</span></button></div>';
+  };
+  var FX = 0.998;
+  R['deposit-usd'] = function(){
+    var d = S.deposit, amt = parseFloat(d.amount)||0, ok = amt>=1000;
+    return header('Deposit USD','deposit') + '<div class="pad">'
+      + '<div class="field"><label>You send</label><input id="damt" inputmode="decimal" placeholder="Min 1,000" value="'+esc(d.amount)+'"><b class="small">USD</b></div>'
+      + '<div class="field" style="margin-top:8px"><label>You receive</label><input disabled value="'+(amt?money(amt*FX,2):'0.00')+'"><b class="small">USDT</b></div>'
+      + '<p class="small" style="margin:8px 2px 14px">Rate 1 USD = '+FX+' USDT <span class="muted">· shown before you submit</span></p>'
+      + '<b style="display:block;margin-bottom:8px">Send your wire to</b>'
+      + '<dl class="lines box" style="margin-bottom:12px"><div><dt>Beneficiary</dt><dd>Demo Custody Ltd</dd></div><div><dt>Bank</dt><dd>Demo Bank N.A.</dd></div>'
+      + '<div><dt>Account no.</dt><dd class="ticker">000-000000-000<button class="copy" data-copy>Copy</button></dd></div><div><dt>SWIFT</dt><dd class="ticker">DEMOXXXX<button class="copy" data-copy>Copy</button></dd></div>'
+      + '<div><dt>Reference</dt><dd class="ticker">'+d.ref+'<button class="copy" data-copy>Copy</button></dd></div></dl>'
+      + '<div class="info" style="margin-bottom:14px">Include the reference so we can match your wire. Send from a bank account in your own name.</div>'
+      + '<button class="btn" id="dsubmit" '+(ok?'':'disabled')+'>Submit deposit request</button><p class="small muted center" style="margin:8px 0 18px">'+(amt&&!ok?'Minimum is 1,000 USD':!amt?'Enter an amount':'')+'</p></div>';
+  };
+  function tracker(steps, at){
+    return '<ul class="timeline">'+steps.map(function(s,i){return '<li class="'+(i<at?'done':i===at?'now':'')+'"><b>'+s[0]+'</b><span>'+s[1]+'</span></li>'}).join('')+'</ul>';
+  }
+  R['deposit-status'] = function(){
+    var d = S.deposit, amt = parseFloat(d.amount);
+    var steps = [['Request submitted','Today'],['Awaiting your transfer','Send '+money(amt,2)+' USD with reference '+d.ref],['Wire received','We confirm receipt from the bank'],['USDT credited',money(amt*FX,2)+' USDT to your wallet']];
+    return header('Deposit status','home',true) + '<div class="pad"><div class="row box" style="margin-bottom:16px"><span><span class="muted small">Deposit</span><br><b>'+money(amt,2)+' USD → '+money(amt*FX,2)+' USDT</b></span><span class="chip '+(d.step>=3?'':'grey')+'">'+(d.step>=3?'Completed':'In progress')+'</span></div>'
+      + tracker(steps, d.step)
+      + (d.step<3?'<button class="sim" id="advance" style="margin-top:8px">Demo only: simulate the next step</button>':'<button class="btn" data-go="home" style="margin-top:8px">Back to Home</button>')+'</div>';
+  };
+
+  R.withdraw = function(){
+    var w = S.withdraw, amt = parseFloat(w.amount)||0, rate = 0.997, ok = amt>=1000 && amt<=avail(w.asset);
+    return header('Withdraw USD','home') + '<div class="pad"><p class="small muted" style="margin-top:0">Pay with</p>'
+      + '<div class="pills" style="margin-bottom:12px">'+['USDT','USDC'].map(function(a){return '<button data-wasset="'+a+'" style="padding:9px 0;'+(w.asset===a?'border-color:#111;font-weight:700':'')+'">'+a+' · '+money(avail(a),0)+'</button>'}).join('')+'</div>'
+      + '<div class="field"><label>Amount</label><input id="wamt" inputmode="decimal" placeholder="Min 1,000" value="'+esc(w.amount)+'"><b class="small">'+w.asset+'</b></div>'
+      + '<div class="field" style="margin-top:8px"><label>You receive</label><input disabled value="'+(amt?money(amt*rate,2):'0.00')+'"><b class="small">USD</b></div>'
+      + '<p class="small" style="margin:8px 2px 14px">Rate 1 '+w.asset+' = '+rate+' USD</p>'
+      + '<b style="display:block;margin-bottom:8px">To bank account</b>'
+      + '<div class="box row" style="margin-bottom:6px"><span style="display:flex;gap:10px;align-items:center">'+IC.bank.replace('<svg','<svg width="24" height="24"')+'<span><b>Demo Bank ····4821</b><br><span class="small muted">USD · in your name</span></span></span><span class="chip">Verified</span></div>'
+      + '<button class="box row" style="width:100%;margin-bottom:14px;color:#999" data-addbank><span>+ Add bank account</span><span class="small">Needs verification</span></button>'
+      + '<button class="btn" id="wsubmit" '+(ok?'':'disabled')+'>Submit withdrawal</button><p class="small muted center" style="margin:8px 0 18px">'+(!amt?'Enter an amount':amt<1000?'Minimum is 1,000 '+w.asset:amt>avail(w.asset)?'Not enough '+w.asset:'')+'</p></div>';
+  };
+  R['withdraw-status'] = function(){
+    var w = S.withdraw, amt = parseFloat(w.amount);
+    var steps = [['Request submitted','Today'],['Being processed','We review and convert '+money(amt,2)+' '+w.asset],['USD sent',money(amt*0.997,2)+' USD to Demo Bank ····4821'],['Completed','Funds usually arrive in 1–2 business days']];
+    return header('Withdrawal status','home',true) + '<div class="pad"><div class="row box" style="margin-bottom:16px"><span><span class="muted small">Withdrawal</span><br><b>'+money(amt,2)+' '+w.asset+' → '+money(amt*0.997,2)+' USD</b></span><span class="chip '+(w.step>=3?'':'grey')+'">'+(w.step>=3?'Completed':'In progress')+'</span></div>'
+      + tracker(steps, w.step)
+      + (w.step<3?'<button class="sim" id="wadvance" style="margin-top:8px">Demo only: simulate the next step</button>':'<button class="btn" data-go="home" style="margin-top:8px">Back to Home</button>')+'</div>';
+  };
+
+  // ---------- Router ----------
+  var TAB_OF = {home:'home', earn:'earn','earn-detail':'earn','earn-done':'earn','earn-portfolio':'earn',convert:'trade','convert-done':'trade',spot:'trade','spot-done':'trade'};
+  var FLOW_OF = {home:'home',earn:'earn','earn-detail':'earn','earn-done':'earn','earn-portfolio':'earn',convert:'convert','convert-done':'convert',spot:'spot','spot-done':'spot',deposit:'deposit-usd','deposit-usd':'deposit-usd','deposit-status':'deposit-usd',withdraw:'withdraw','withdraw-status':'withdraw'};
+  function setNote(key){ var n = NOTES[key] || NOTES[current]; if(!n) return; document.getElementById('note-title').textContent=n[0]; document.getElementById('note-body').textContent=n[1]; }
+  function render(keepScroll){
+    var y = view.scrollTop;
+    view.innerHTML = R[current]();
+    if (!keepScroll) view.scrollTop = 0; else view.scrollTop = y;
+    var key = current==='earn-detail' ? 'earn-detail-'+product().kind : current;
+    setNote(key);
+    renderTabs(); renderFlows(); bind();
+  }
+  function go(name, c){ if (c) ctx = c; current = name; closeSheet(); render(); }
+  function renderTabs(){
+    var t = TAB_OF[current];
+    document.getElementById('tabbar').innerHTML = [['home','Home','home'],['wallet','Assets',null],['trade','Trade','convert'],['bars','Earn','earn'],['plan','Plan',null]].map(function(a){
+      var key = a[1].toLowerCase(); return '<button '+(a[2]?'data-go="'+a[2]+'"':'data-soon="'+a[1]+'"')+' aria-current="'+(t===key)+'">'+IC[a[0]]+a[1]+'</button>';
+    }).join('');
+  }
+  function renderFlows(){
+    var f = FLOW_OF[current];
+    document.getElementById('flows').innerHTML = FLOWS.map(function(x,i){return '<li><button data-go="'+x[0]+'" aria-current="'+(f===x[0])+'"><span>0'+(i+1)+'</span><b>'+x[1]+'<small>'+x[2]+'</small></b></button></li>'}).join('');
+  }
+  var sheetTimer;
+  function openSheet(html, noteKey){ closeSheet(); screenEl.insertAdjacentHTML('beforeend', html); setNote(noteKey); var bg=document.getElementById('sheetbg'); bg.addEventListener('click',function(e){ if(e.target===bg || e.target.id==='cancel') { closeSheet(); setNote(current==='earn-detail'?'earn-detail-'+product().kind:current);} }); return bg; }
+  function closeSheet(){ clearInterval(sheetTimer); var s=document.getElementById('sheetbg'); if(s) s.remove(); }
+
+  // Partial re-render that keeps focus inside a text field while typing
+  function liveInput(id, setter){
+    var el = $('#'+id); if(!el) return;
+    el.addEventListener('input', function(){
+      setter(el.value.replace(/[^0-9.]/g,''));
+      var pos = el.selectionStart; render(true);
+      var n = $('#'+id); if(n){ n.focus(); try{ n.setSelectionRange(pos,pos) }catch(e){} }
+    });
+  }
+
+  function bind(){
+    liveInput('amt', function(v){ ctx.amount = v });
+    liveInput('camt', function(v){ S.convert.amount = v });
+    liveInput('samt', function(v){ S.spot.amount = v });
+    liveInput('price', function(v){ S.spot.price = v });
+    liveInput('stop', function(v){ S.spot.stop = v });
+    liveInput('damt', function(v){ S.deposit.amount = v });
+    liveInput('wamt', function(v){ S.withdraw.amount = v });
+    var agree = $('#agree'); if (agree) agree.addEventListener('change', function(){ ctx.agree = agree.checked; render(true) });
+    var max = $('#max'); if (max) max.addEventListener('click', function(){ var p=product(); ctx.amount = String(Math.min(p.max, avail(p.asset))); render(true) });
+    var sub = $('#sub'); if (sub) sub.addEventListener('click', function(){
+      var bg = openSheet(earnConfirmSheet(),'earn-confirm');
+      bg.querySelector('#confirm').addEventListener('click', function(){
+        var p = product(), amt = parseFloat(ctx.amount), start = new Date().getHours()>=16?1:0;
+        if (p.asset==='USDT') S.usdt -= amt; else if (p.asset==='USDC') S.usdc -= amt; else S.btc -= amt;
+        S.positions.push({name:p.name, asset:p.asset, kind:p.kind, amount:amt, apy:p.apy, start:addDays(start), maturity:addDays(start+p.term)});
+        go('earn-done');
+      });
+    });
+    view.querySelectorAll('[data-tab]').forEach(function(b){ b.addEventListener('click', function(){ S.earnTab=b.dataset.tab; render(true) }) });
+    view.querySelectorAll('[data-product]').forEach(function(b){ b.addEventListener('click', function(){ go('earn-detail',{pid:b.dataset.product, amount:'', agree:false}) }) });
+    view.querySelectorAll('[data-trade]').forEach(function(b){ b.addEventListener('click', function(){ var t=b.dataset.trade; if(t==='OTC') return toast('OTC is not part of this prototype'); go(t==='Spot'?'spot':'convert') }) });
+    var from=$('#from'), to=$('#to');
+    if (from) from.addEventListener('change', function(){ S.convert.from=from.value; S.convert.amount=''; render(true) });
+    if (to) to.addEventListener('change', function(){ S.convert.to=to.value; render(true) });
+    var flip=$('#flip'); if (flip) flip.addEventListener('click', function(){ var c=S.convert, f=c.from; c.from=c.to; c.to=f; c.amount=''; render(true) });
+    var cmax=$('#cmax'); if (cmax) cmax.addEventListener('click', function(){ S.convert.amount=String(+avail(S.convert.from).toFixed(cdp(S.convert.from))); render(true) });
+    var pv=$('#preview'); if (pv) pv.addEventListener('click', function(){
+      var bg = openSheet(convertSheet(),'convert-preview'), left=10, btn=bg.querySelector('#cconfirm');
+      function tick(){ left--; var t=bg.querySelector('#qtime'); if(!t) return clearInterval(sheetTimer);
+        if(left<=0){ clearInterval(sheetTimer); t.textContent='Expired'; bg.querySelector('#qlabel').textContent='Quote expired'; btn.textContent='Refresh quote'; btn.dataset.expired='1'; }
+        else t.textContent=left+'s'; }
+      sheetTimer = setInterval(tick,1000);
+      btn.addEventListener('click', function(){
+        if (btn.dataset.expired){ left=11; delete btn.dataset.expired; btn.textContent='Confirm'; bg.querySelector('#qlabel').textContent='Quote valid for'; tick(); sheetTimer=setInterval(tick,1000); return; }
+        var c=S.convert, amt=parseFloat(c.amount), out=amt*RATE[c.from][c.to];
+        var bal={USDT:'usdt',USDC:'usdc',BTC:'btc'}; S[bal[c.from]]-=amt; S[bal[c.to]]+=out;
+        S.trades=[{pair:c.from+'-'+c.to, when:new Date().toLocaleTimeString('en-GB'), paid:money(amt,cdp(c.from))+' '+c.from, got:money(out,cdp(c.to))+' '+c.to}].concat(S.trades||[]);
+        c.amount=''; go('convert-done');
+      });
+    });
+    view.querySelectorAll('[data-side]').forEach(function(b){ b.addEventListener('click', function(){ S.spot.side=b.dataset.side; if(S.spot.side==='sell'&&S.spot.type==='Recurring') S.spot.type='Market'; render(true) }) });
+    view.querySelectorAll('[data-otype]').forEach(function(b){ b.addEventListener('click', function(){ S.spot.type=b.dataset.otype; S.spot.amount=''; render(true) }) });
+    view.querySelectorAll('[data-freq]').forEach(function(b){ b.addEventListener('click', function(){ S.spot.freq=b.dataset.freq; render(true) }) });
+    var place=$('#place'); if (place) place.addEventListener('click', function(){
+      var o=S.spot, amt=parseFloat(o.amount), market=o.type==='Market', rec=o.type==='Recurring';
+      if (market){ var tot=amt*S.btcPrice; if(o.side==='buy'){S.usdt-=tot*1.001;S.btc+=amt}else{S.btc-=amt;S.usdt+=tot*0.999} }
+      go('spot-done',{order:{type:o.type+(rec?' · '+(o.freq||'Weekly'):''), side:o.side, amount:rec?money(amt,2)+' USDT each time':amt+' BTC', status:market?'Filled':rec?'Scheduled':'Open, waiting for trigger', title:market?'Order filled':rec?'Recurring buy set up':'Order placed'}});
+      S.spot.amount=''; S.spot.price=''; S.spot.stop='';
+    });
+    var crypto=view.querySelector('[data-crypto]'); if (crypto) crypto.addEventListener('click', function(){ toast('Digital-asset deposit addresses are not part of this prototype') });
+    view.querySelectorAll('[data-copy]').forEach(function(b){ b.addEventListener('click', function(){ toast('Copied (demo value)') }) });
+    var ds=$('#dsubmit'); if (ds) ds.addEventListener('click', function(){ S.deposit.step=1; go('deposit-status') });
+    var adv=$('#advance'); if (adv) adv.addEventListener('click', function(){ S.deposit.step++; if(S.deposit.step===3){ var a=parseFloat(S.deposit.amount)*FX; S.usdt+=a; S.balance+=a; } render(true) });
+    view.querySelectorAll('[data-wasset]').forEach(function(b){ b.addEventListener('click', function(){ S.withdraw.asset=b.dataset.wasset; render(true) }) });
+    var ab=view.querySelector('[data-addbank]'); if (ab) ab.addEventListener('click', function(){ toast('New bank accounts must be verified before they can receive USD') });
+    var ws=$('#wsubmit'); if (ws) ws.addEventListener('click', function(){ var w=S.withdraw, a=parseFloat(w.amount); if(w.asset==='USDT') S.usdt-=a; else S.usdc-=a; S.balance-=a; w.step=1; go('withdraw-status') });
+    var wadv=$('#wadvance'); if (wadv) wadv.addEventListener('click', function(){ S.withdraw.step++; render(true) });
+  }
+
+  // Delegated navigation for the phone and the side panel
+  document.addEventListener('click', function(e){
+    var g = e.target.closest('[data-go]');
+    if (g){
+      var to = g.dataset.go;
+      if (g.closest('#flows') && window.innerWidth < 900) document.querySelector('.device-wrap').scrollIntoView({behavior:'smooth'});
+      if (to==='deposit-usd' && S.deposit.step>0 && S.deposit.step<3 && g.closest('#flows')) to='deposit-status';
+      if (to==='withdraw' && S.withdraw.step>0 && g.closest('#flows')) { S.withdraw = {asset:'USDT', amount:'', step:0}; }
+      if (to==='deposit-usd' && S.deposit.step>=3) S.deposit = {amount:'', step:0, ref:'AUR-' + Math.floor(100000 + Math.random()*899999)};
+      go(to); return;
+    }
+    var s = e.target.closest('[data-soon]');
+    if (s) toast(s.dataset.soon+' is not part of this prototype');
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

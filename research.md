@@ -110,6 +110,7 @@ description: "How Tracy Le finds and validates customer problems before building
       <div><dt>Decision</dt><dd>Build an interactive chatbot that helps sellers with set-up and answers reporting questions directly. A seller can ask "What is my profit trend over the week?" and get the report in the chat, instead of going to the reporting section. We built it as a RAG (retrieval-augmented generation) model over our app knowledge and customer-success chat history.</dd></div>
       <div><dt>Result</dt><dd>We wrote about 100 use-case chats and tested 30 of them, with a 90% accuracy bar before release. We then A/B tested, launched to active users and kept improving it from their feedback.</dd></div>
     </dl>
+    <p><a class="text-link" href="{{ '/prototypes/trueprofit/' | relative_url }}">Try the TrueProfit for TikTok Shop prototype, including the assistant <span aria-hidden="true">→</span></a></p>
   </article>
 
   <article class="story-card" id="aura">

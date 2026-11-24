@@ -39,7 +39,10 @@ description: "Tracy Le, fintech product manager: case studies from Aura, TCBS an
       <li>On / off-ramp</li>
       <li>Platform migration</li>
     </ul>
-    <a class="button-link" href="{{ '/work/aura/' | relative_url }}">Explore the Aura case study <span aria-hidden="true">↗</span></a>
+    <div class="about-actions">
+      <a class="button-link" href="{{ '/work/aura/' | relative_url }}">Explore the Aura case study <span aria-hidden="true">↗</span></a>
+      <a class="text-link" href="{{ '/prototypes/aura/' | relative_url }}">Try the prototype <span aria-hidden="true">→</span></a>
+    </div>
   </div>
   <div class="featured-phones" aria-label="Aura product screens">
     <figure class="device device-back"><img src="{{ '/assets/img/aura/earn-marketplace.webp' | relative_url }}" alt="Aura Earn marketplace screen" loading="eager"></figure>
@@ -74,7 +77,8 @@ description: "Tracy Le, fintech product manager: case studies from Aura, TCBS an
   <div class="tcbs-card trueprofit-card">
     <div>
       <p class="case-tagline">Net-profit analytics for Shopify &amp; TikTok Shop sellers, plus an AI assistant. I improved the existing Shopify app, built a TrueProfit app for TikTok Shop sellers and built an AI chatbot.</p>
-      <a class="text-link" href="{{ '/research/' | relative_url }}#trueprofit-tiktok">Read the TrueProfit research stories <span aria-hidden="true">→</span></a>
+      <a class="text-link" href="{{ '/research/' | relative_url }}#trueprofit-tiktok">Read the TrueProfit research stories <span aria-hidden="true">→</span></a><br>
+      <a class="text-link" href="{{ '/prototypes/trueprofit/' | relative_url }}">Try the TikTok Shop app prototype <span aria-hidden="true">→</span></a>
     </div>
     <dl class="impact-grid">
       <div><dt>Customers</dt><dd>SMB sellers</dd></div>
