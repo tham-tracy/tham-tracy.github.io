@@ -16,6 +16,7 @@ description: "Tracy Le, fintech product manager: case studies from Aura, TCBS an
   <div class="about-actions">
     <a class="button-link" href="{{ '/about/' | relative_url }}">About me <span aria-hidden="true">→</span></a>
     <a class="text-link" href="#work">See my work <span aria-hidden="true">↓</span></a>
+    <a class="text-link" href="#prototypes">Try the prototypes <span aria-hidden="true">↓</span></a>
   </div>
 </section>
 
@@ -86,6 +87,18 @@ description: "Tracy Le, fintech product manager: case studies from Aura, TCBS an
       <div><dt>New products</dt><dd>TikTok Shop app &amp; AI chatbot</dd></div>
     </dl>
   </div>
+</section>
+
+<section class="portfolio-section" id="prototypes">
+  <div class="section-heading">
+    <p class="eyebrow">Try the products</p>
+    <h2>Interactive prototypes</h2>
+  </div>
+  <div class="feature-grid two-up">
+    <article><p class="eyebrow">Hex Trust · Mobile</p><h3>Aura</h3><p>Click through Earn, Convert, Spot orders and the USD on/off-ramp, with a note on the product decision behind each screen.</p><a class="text-link" href="{{ '/prototypes/aura/' | relative_url }}">Open the Aura prototype <span aria-hidden="true">↗</span></a></article>
+    <article><p class="eyebrow">FireGroup · Web app</p><h3>TrueProfit for TikTok Shop</h3><p>Onboard a demo shop, filter net profit by date, adjust product, shipping and ad costs, and ask the AI assistant about profit.</p><a class="text-link" href="{{ '/prototypes/trueprofit/' | relative_url }}">Open the TrueProfit prototype <span aria-hidden="true">↗</span></a></article>
+  </div>
+  <p class="muted-note">Rebuilt for this portfolio with demo data.</p>
 </section>
 
 <section class="portfolio-section">
