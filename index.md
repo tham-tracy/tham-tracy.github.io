@@ -1,15 +1,15 @@
 ---
 layout: summary
-title: "Tracy Le · Fintech Product Manager"
-description: "Tracy Le, fintech product manager: case studies from Aura, TCBS and TrueProfit, a research method and digital-asset domain notes."
+title: "Tham (Tracy) Le · Fintech Product Manager"
+description: "Tham (Tracy) Le, fintech product manager: case studies from Aura, TCBS and TrueProfit, a research method and digital-asset domain notes."
 ---
 
 <section class="portfolio-hero">
-  <p class="eyebrow">Tracy Le · Product Manager</p>
+  <p class="eyebrow">Tham (Tracy) Le · Product Manager</p>
   <h1>Products that move money,<br><span>and earn trust.</span></h1>
   <p class="lede">I build wealth, investment and digital-asset products - from the customer experience to the operational systems behind it. Here is the work, how I research it, and what I know about the domain.</p>
   <div class="hero-proof" aria-label="Portfolio highlights">
-    <span><strong>3</strong> companies</span>
+    <span><strong>7+ years</strong> in product</span>
     <span><strong>4 months</strong> Aura initial launch</span>
     <span><strong>≈900K</strong> TCBS customers migrated</span>
   </div>

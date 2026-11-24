@@ -2,7 +2,7 @@
 layout: summary
 title: "How I research"
 permalink: /research/
-description: "How Tracy Le finds and validates customer problems before building, with examples from TrueProfit, Aura and TCBS."
+description: "How Tham (Tracy) Le finds and validates customer problems before building, with examples from TrueProfit, Aura and TCBS."
 ---
 
 <section class="portfolio-hero">
