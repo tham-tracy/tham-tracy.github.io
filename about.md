@@ -2,11 +2,11 @@
 layout: summary
 title: "About"
 permalink: /about/
-description: "Tracy Le, product manager for wealth, investment and digital-asset products, based in Ho Chi Minh City."
+description: "Tham (Tracy) Le, product manager for wealth, investment and digital-asset products, based in Ho Chi Minh City."
 ---
 
 <section class="portfolio-hero about-hero">
-  <p class="eyebrow">About · Tracy Le</p>
+  <p class="eyebrow">About · Tham (Tracy) Le</p>
   <h1>Product Manager for wealth, investment<br><span>&amp; digital-asset products.</span></h1>
   <p class="lede">I turn customer evidence into financial products people trust with their money - from the client-facing journey to the operational systems and service teams behind it.</p>
   <div class="hero-proof" aria-label="At a glance">

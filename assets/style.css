@@ -295,7 +295,7 @@ td { background: var(--white); color: var(--ink-2); font-size: .94rem; }
 .tcbs-wireframes figcaption strong { color: var(--ink); }
 
 @media (max-width: 64rem) {
-  .featured-case, .case-visual-aura, .case-visual-tcbs { grid-template-columns: 1fr; }
+  .featured-case, .case-visual-aura, .case-visual-tcbs { grid-template-columns: minmax(0, 1fr); }
   .featured-copy { z-index: 2; }
   .featured-phones { min-height: 27rem; }
   .cs-body { grid-template-columns: 1fr; }
